@@ -2,8 +2,13 @@ import Filter from "./Filter";
 import { fetchGames } from "../util/api";
 import GameInfo from "./GameInfo";
 import { Oval } from "react-loader-spinner";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
+import { ConfigProvider, FloatButton } from "antd";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch } from "react-redux";
+import { setSideMenuOpen } from "../slices/mobileMenuSlice";
 
 function Content() {
   const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } =
@@ -12,7 +17,13 @@ function Content() {
       queryFn: fetchGames,
       getNextPageParam: (lastPage, pages) => lastPage.next,
     });
+
   console.log(data);
+
+  const dispatch = useDispatch();
+  const sideMenuOpen = () => {
+    dispatch(setSideMenuOpen(true));
+  };
 
   useEffect(() => {
     let fetching = false;
@@ -40,15 +51,15 @@ function Content() {
       <p className="mt-1.5 text-center text-white">
         Based on player counts and release date
       </p>
-      <div className="mb-6 flex justify-center gap-2">
-        <Filter>
+      <div className="mb-6 mt-9 flex flex-wrap justify-center gap-2">
+        <Filter className=" rounded-lg bg-second-color px-4 py-2 font-semibold text-white">
           <option value="relevance">Relevance</option>
           <option value="dateAdded">Date added</option>
           <option value="name">Name</option>
           <option value="releaseDate">Release date</option>
           <option value="averageRating">Average rating</option>
         </Filter>
-        <Filter>
+        <Filter className=" rounded-lg bg-second-color px-4 py-2 font-semibold text-white">
           <option value="all">All platforms</option>
           <option value="pc">PC</option>
           <option value="playStation">PlatStation</option>
@@ -74,7 +85,6 @@ function Content() {
           />
         </div>
       )}
-
       {data?.pages.map((group, i) => (
         <div key={i}>
           {group.results?.map((game) => (
@@ -85,6 +95,8 @@ function Content() {
               meta={game.metacritic}
               add={game.added}
               platforms={game.platforms.map((game) => game.platform.name)}
+              releasedDate={game.released}
+              genres={game.genres.map((genre) => genre.name)}
             />
           ))}
         </div>
@@ -103,6 +115,21 @@ function Content() {
           />
         </div>
       )}
+      <ConfigProvider
+        theme={{
+          components: {
+            FloatButton: {
+              colorText: "white",
+              colorBgElevated: "black",
+            },
+          },
+        }}
+      >
+        <FloatButton
+          icon={<FontAwesomeIcon icon={faBars} />}
+          onClick={sideMenuOpen}
+        />
+      </ConfigProvider>
     </main>
   );
 }

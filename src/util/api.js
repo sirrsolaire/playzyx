@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const API_KEY = "63d5c2dccbc445d98efd4b090ae7a78a";
+// https://api.rawg.io/api/games/{id}/movies
 
 export const fetchGames = async ({ pageParam = 1 }) => {
   const response = await axios.get(

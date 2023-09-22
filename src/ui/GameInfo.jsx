@@ -4,13 +4,29 @@ import {
   faWindows,
   faXbox,
 } from "@fortawesome/free-brands-svg-icons";
-import { faEllipsis, faGift, faPlus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChevronRight,
+  faEllipsis,
+  faGift,
+  faPlus,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 import { SiNintendoswitch } from "react-icons/si";
 
-function GameInfo({ name, image, meta, add, platforms }) {
+function GameInfo({ name, image, meta, add, platforms, releasedDate, genres }) {
+  const [open, setOpen] = useState(false);
+
+  function handleOpen() {
+    setOpen(!open);
+  }
+
+  const desiredDate = new Date(releasedDate);
+  const options = { year: "numeric", month: "short", day: "numeric" };
+  const formattedDate = desiredDate.toLocaleDateString(undefined, options);
+
   return (
-    <div className="bg-game-info mb-3 rounded-xl">
+    <div className="mb-3 rounded-xl bg-game-info">
       <img
         src={image}
         alt=""
@@ -18,7 +34,7 @@ function GameInfo({ name, image, meta, add, platforms }) {
       />
       <div className="px-4 py-3">
         <div className="mb-1 flex items-center justify-between">
-          <div className="mb-2 flex gap-2">
+          <div className=" flex gap-2">
             {platforms.includes("Xbox One") && (
               <FontAwesomeIcon
                 icon={faXbox}
@@ -47,9 +63,9 @@ function GameInfo({ name, image, meta, add, platforms }) {
               />
             )}
           </div>
-          <span className="rounded-[0.3rem] border-[1px] border-solid border-green-500 px-1 font-semibold text-green-500">
-            {meta}
-          </span>
+          <div className="flex h-full items-center justify-center rounded-[0.3rem] border-[1px] border-solid border-green-500 px-2 font-semibold text-green-500">
+            <span>{meta}</span>
+          </div>
         </div>
         <span className="block text-2xl font-bold text-white">{name}</span>
         <div className="mt-2 flex items-center gap-1">
@@ -63,6 +79,37 @@ function GameInfo({ name, image, meta, add, platforms }) {
             <FontAwesomeIcon icon={faEllipsis} className="text-white" />
           </span>
         </div>
+        {open && (
+          <div className="mt-5  flex flex-col  text-sm text-white ">
+            <div className="border-border-color flex items-center justify-between border-b-[1px] py-3">
+              <span className="text-info-color">Release date:</span>
+              <span className="text-xs">{formattedDate}</span>
+            </div>
+            <div className="border-border-color flex items-center justify-between border-b-[1px] py-3">
+              <span className="text-info-color">Genres:</span>
+              <span className="text-xs ">{genres.join(", ")}</span>
+            </div>
+            <div className="border-border-color flex items-center justify-between border-b-[1px] py-3">
+              <span className="text-info-color">Chart:</span>
+              <span className="text-xs">#5 Top 2023</span>
+            </div>
+          </div>
+        )}
+        <p
+          className="mt-4 cursor-pointer text-center text-xs text-white underline underline-offset-2"
+          onClick={handleOpen}
+        >
+          {!open ? "View More" : "View Less"}
+        </p>
+        {open && (
+          <p className="bg-border-color mt-4 flex cursor-pointer items-center justify-between rounded-lg px-4 py-2.5 text-sm font-semibold tracking-normal text-white">
+            Show more like this
+            <FontAwesomeIcon
+              icon={faChevronRight}
+              className="text-info-color text-xl opacity-60"
+            />
+          </p>
+        )}
       </div>
     </div>
   );

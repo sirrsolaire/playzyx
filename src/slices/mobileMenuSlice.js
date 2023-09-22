@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   open: false,
+  sideMenuOpen: false,
 };
 
 export const menuSlice = createSlice({
@@ -11,8 +12,11 @@ export const menuSlice = createSlice({
     setOpen: (state, action) => {
       state.open = action.payload;
     },
+    setSideMenuOpen: (state, action) => {
+      state.sideMenuOpen = action.payload;
+    },
   },
 });
 
-export const { setOpen } = menuSlice.actions;
+export const { setOpen, setSideMenuOpen } = menuSlice.actions;
 export default menuSlice.reducer;

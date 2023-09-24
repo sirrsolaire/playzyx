@@ -34,15 +34,15 @@ const MobileMenu = () => {
             <h2 className="mt-2 text-2xl font-semibold">REVIEWS</h2>
             <h2 className="mt-2 text-2xl font-semibold">BROWSE</h2>
             <ul className="text-lg font-semibold">
-              <li className="ml-4">Reviews</li>
-              <li>Collections</li>
-              <li>Platforms</li>
-              <li>Stores</li>
-              <li>Genres</li>
-              <li>Creators</li>
-              <li>Tags</li>
-              <li>Developers</li>
-              <li>Publishers</li>
+              <li className="mobileList">Reviews</li>
+              <li className="mobileList">Collections</li>
+              <li className="mobileList">Platforms</li>
+              <li className="mobileList">Stores</li>
+              <li className="mobileList">Genres</li>
+              <li className="mobileList">Creators</li>
+              <li className="mobileList">Tags</li>
+              <li className="mobileList">Developers</li>
+              <li className="mobileList">Publishers</li>
             </ul>
           </div>
           <div className="flex flex-col items-center gap-4">

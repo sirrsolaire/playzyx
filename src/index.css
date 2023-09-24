@@ -3,16 +3,35 @@
 @tailwind utilities;
 
 @layer base {
-  li {
-    @apply ml-4  text-lg font-semibold;
-  }
+    .mobileList {
+        @apply ml-4 text-lg font-semibold;
+    }
 }
+
 @layer base {
-  option {
-    @apply bg-[#202020];
-  }
+    .filterList {
+        @apply flex items-center gap-2;
+    }
+}
+
+@layer utilities {
+    .icon {
+        @apply rounded-md bg-[#202020] p-1;
+    }
+}
+
+@layer base {
+    option {
+        @apply bg-[#202020];
+    }
+}
+
+@layer base {
+    ul img {
+        @apply w-[24px] h-[24px];
+    }
 }
 
 body {
-  background-color: #151515;
+    background-color: #151515;
 }

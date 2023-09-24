@@ -97,6 +97,7 @@ function Content() {
               platforms={game.platforms.map((game) => game.platform.name)}
               releasedDate={game.released}
               genres={game.genres.map((genre) => genre.name)}
+              rating={game.rating}
             />
           ))}
         </div>

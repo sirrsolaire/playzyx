@@ -1,8 +1,10 @@
-import { Drawer } from "antd";
+import { ConfigProvider, Drawer, FloatButton } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { setSideMenuOpen } from "../slices/mobileMenuSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
+import SideMenuContent from "./SideMenuContent";
+
 const SideMenu = () => {
   const sideMenuDrawerOpen = useSelector((state) => state.menu.sideMenuOpen);
   const dispatch = useDispatch();
@@ -17,18 +19,30 @@ const SideMenu = () => {
         title="Basic Drawer"
         placement="top"
         className=" text-white"
-        bodyStyle={{ backgroundColor: "#202020" }}
+        bodyStyle={{ backgroundColor: "black" }}
         onClose={sideMenuClose}
         open={sideMenuDrawerOpen}
         headerStyle={{ display: "none" }}
         height={"100vh"}
       >
         <div className="relative h-full">
-          <FontAwesomeIcon
-            icon={faX}
-            onClick={sideMenuClose}
-            className="absolute bottom-0 right-0 h-6 w-6 cursor-pointer rounded-full  bg-white px-2 py-2 text-black"
-          />
+          <SideMenuContent />
+
+          <ConfigProvider
+            theme={{
+              components: {
+                FloatButton: {
+                  colorText: "black",
+                  colorBgElevated: "white",
+                },
+              },
+            }}
+          >
+            <FloatButton
+              icon={<FontAwesomeIcon icon={faX} />}
+              onClick={sideMenuClose}
+            />
+          </ConfigProvider>
         </div>
       </Drawer>
     </>

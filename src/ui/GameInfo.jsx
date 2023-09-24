@@ -14,7 +14,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { SiNintendoswitch } from "react-icons/si";
 
-function GameInfo({ name, image, meta, add, platforms, releasedDate, genres }) {
+function GameInfo({
+  name,
+  image,
+  meta,
+  add,
+  platforms,
+  releasedDate,
+  genres,
+  rating,
+}) {
   const [open, setOpen] = useState(false);
 
   function handleOpen() {
@@ -81,17 +90,17 @@ function GameInfo({ name, image, meta, add, platforms, releasedDate, genres }) {
         </div>
         {open && (
           <div className="mt-5  flex flex-col  text-sm text-white ">
-            <div className="border-border-color flex items-center justify-between border-b-[1px] py-3">
+            <div className="flex items-center justify-between border-b-[1px] border-border-color py-3">
               <span className="text-info-color">Release date:</span>
               <span className="text-xs">{formattedDate}</span>
             </div>
-            <div className="border-border-color flex items-center justify-between border-b-[1px] py-3">
+            <div className="flex items-center justify-between border-b-[1px] border-border-color py-3">
               <span className="text-info-color">Genres:</span>
               <span className="text-xs ">{genres.join(", ")}</span>
             </div>
-            <div className="border-border-color flex items-center justify-between border-b-[1px] py-3">
-              <span className="text-info-color">Chart:</span>
-              <span className="text-xs">#5 Top 2023</span>
+            <div className="flex items-center justify-between border-b-[1px] border-border-color py-3">
+              <span className="text-info-color">Rating:</span>
+              <span className="text-xs">{rating}</span>
             </div>
           </div>
         )}
@@ -102,11 +111,11 @@ function GameInfo({ name, image, meta, add, platforms, releasedDate, genres }) {
           {!open ? "View More" : "View Less"}
         </p>
         {open && (
-          <p className="bg-border-color mt-4 flex cursor-pointer items-center justify-between rounded-lg px-4 py-2.5 text-sm font-semibold tracking-normal text-white">
+          <p className="mt-4 flex cursor-pointer items-center justify-between rounded-lg bg-border-color px-4 py-2.5 text-sm font-semibold tracking-normal text-white">
             Show more like this
             <FontAwesomeIcon
               icon={faChevronRight}
-              className="text-info-color text-xl opacity-60"
+              className="text-xl text-info-color opacity-60"
             />
           </p>
         )}

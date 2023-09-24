@@ -6,12 +6,17 @@ export default {
       fontFamily: {
         roboto: ["Roboto", "sans"],
       },
+
       colors: {
         "body-color": "#151515",
         "game-info": "#202020",
         "second-color": "hsla(0,0%,100%,.16)",
         "info-color": "hsla(0,0%,100%,.4)",
         "border-color": " hsla(0,0%,100%,.07)",
+      },
+
+      screens: {
+        tablet: "980px",
       },
     },
   },

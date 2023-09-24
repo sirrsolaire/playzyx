@@ -35,11 +35,11 @@ function GameInfo({
   const formattedDate = desiredDate.toLocaleDateString(undefined, options);
 
   return (
-    <div className="mb-3 rounded-xl bg-game-info">
+    <div className="m-auto mb-3 max-w-[500px] rounded-xl bg-game-info">
       <img
         src={image}
         alt=""
-        className="h-52 w-full rounded-t-xl object-cover object-center"
+        className="h-250px rounded-t-xl object-cover object-center"
       />
       <div className="px-4 py-3">
         <div className="mb-1 flex items-center justify-between">

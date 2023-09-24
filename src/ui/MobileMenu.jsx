@@ -19,7 +19,7 @@ const MobileMenu = () => {
   return (
     <>
       <Drawer
-        className=" text-white"
+        className="  text-white"
         bodyStyle={{ backgroundColor: "#202020" }}
         title="Basic Drawer"
         placement="right"

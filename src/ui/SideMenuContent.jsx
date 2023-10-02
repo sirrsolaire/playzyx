@@ -23,21 +23,42 @@ import Xbox from "../assets/svg/Xbox.jsx";
 import Nintendo from "../assets/svg/Nintendo.jsx";
 import Ios from "../assets/svg/Ios.jsx";
 import Android from "../assets/svg/Android.jsx";
+import { NavLink } from "react-router-dom";
 
 function SideMenuContent() {
   const [hide, setHide] = useState(false);
   const [platformHide, setPlatformHide] = useState(false);
   const [genresHide, setGenresHide] = useState(false);
+
   return (
     <div className="pb-5">
-      <div className="mb-4 mr-2 flex justify-between">
-        <h1 className="text-lg font-bold">Home</h1>
-        <h1 className=" mr-16 text-lg font-bold">Reviews</h1>
+      <div className="mb-4 mr-2 flex justify-between tablet:flex-col tablet:gap-5">
+        <NavLink to="/">
+          <h1
+            className="cursor-pointer text-lg font-bold tablet:text-2xl tablet:transition-all
+         tablet:duration-300 tablet:hover:opacity-50 "
+          >
+            Home
+          </h1>
+        </NavLink>
+        <NavLink to="/reviews">
+          <h1
+            className=" mr-16 cursor-pointer text-lg font-bold tablet:text-2xl tablet:transition-all
+         tablet:duration-300 tablet:hover:opacity-50"
+          >
+            Reviews
+          </h1>
+        </NavLink>
       </div>
-      <div className="flex gap-14">
+      <div className="flex gap-14 tablet:flex-col tablet:gap-4">
         <div className="flex flex-col">
           <div>
-            <h1 className="mb-1 text-lg font-bold">New Releases</h1>
+            <h1
+              className="mb-1 text-lg font-bold tablet:mb-4 tablet:text-2xl
+            "
+            >
+              New Releases
+            </h1>
             <ul className="space-y-2">
               <li className="filterList">
                 <span className="icon">
@@ -67,8 +88,18 @@ function SideMenuContent() {
           </div>
           <div className="mt-5 flex ">
             <div>
-              <h1 className="mb-1 text-lg font-bold">All Games</h1>
-              <h1 className="mb-1 mt-4 text-lg font-bold">Platforms</h1>
+              <h1
+                className="mb-1 cursor-pointer text-lg font-bold tablet:mb-4 tablet:text-2xl
+         tablet:transition-all tablet:duration-300 tablet:hover:opacity-50 "
+              >
+                All Games
+              </h1>
+              <h1
+                className="mb-1 mt-4 text-lg font-bold tablet:mb-4 tablet:text-2xl
+              "
+              >
+                Platforms
+              </h1>
               <ul className="space-y-2">
                 <li className="filterList">
                   <span className="icon">
@@ -137,7 +168,9 @@ function SideMenuContent() {
             </div>
           </div>
           <div>
-            <h1 className="mb-1 mt-5 text-lg font-bold">Genres</h1>
+            <h1 className="mb-1 mt-5 text-lg font-bold tablet:mb-4 tablet:text-2xl">
+              Genres
+            </h1>
             <ul className="space-y-2">
               <li className="filterList">
                 <img src="/action.png" alt="" />
@@ -204,7 +237,9 @@ function SideMenuContent() {
 
         <div>
           <div>
-            <h1 className="mb-1 text-lg font-bold">Top</h1>
+            <h1 className="mb-1 text-lg font-bold tablet:mb-4 tablet:text-2xl">
+              Top
+            </h1>
             <ul className="space-y-2">
               <li className="filterList">
                 <span className="icon">
@@ -226,7 +261,9 @@ function SideMenuContent() {
               </li>
             </ul>
           </div>
-          <h1 className="mb-1 mt-5 text-lg font-bold">Browse</h1>
+          <h1 className="mb-1 mt-5 text-lg font-bold tablet:mb-4 tablet:text-2xl">
+            Browse
+          </h1>
           <ul className="space-y-2">
             <li className="filterList">
               <span className="icon">

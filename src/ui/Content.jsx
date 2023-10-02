@@ -1,137 +1,80 @@
-import Filter from "./Filter";
-import { fetchGames } from "../util/api";
-import GameInfo from "./GameInfo";
-import { Oval } from "react-loader-spinner";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
-import { ConfigProvider, FloatButton } from "antd";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { useDispatch } from "react-redux";
-import { setSideMenuOpen } from "../slices/mobileMenuSlice";
+import { useDispatch, useSelector } from "react-redux";
+import GameInfo from "./GameInfo.jsx";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { Spinner } from "./Spinner.jsx";
+import { PlatformsFilter } from "./PlatformsFilter.jsx";
+import { OrderFilter } from "./OrderFilter.jsx";
+import useGames from "../hooks/useGames.js";
+import { LayoutView } from "./LayoutView.jsx";
+import { setLayout } from "../slices/layoutSlice.js";
 
 function Content() {
-  const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } =
-    useInfiniteQuery({
-      queryKey: ["games"],
-      queryFn: fetchGames,
-      getNextPageParam: (lastPage, pages) => lastPage.next,
-    });
-
-  console.log(data);
-
   const dispatch = useDispatch();
-  const sideMenuOpen = () => {
-    dispatch(setSideMenuOpen(true));
-  };
+  const layout = useSelector((state) => state.layout.layout);
+  const firstSelectValue = useSelector((state) => state.filtering.firstSelect);
+  const platform = useSelector((state) => state.filtering.platform);
+  const {
+    data: platformData,
+    isLoading,
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+  } = useGames({ firstSelectValue, platform });
 
-  useEffect(() => {
-    let fetching = false;
-    const handleScroll = async (e) => {
-      const { scrollHeight, scrollTop, clientHeight } =
-        e.target.scrollingElement;
-      if (!fetching && scrollHeight - scrollTop <= clientHeight * 1.2) {
-        fetching = true;
-        if (hasNextPage) await fetchNextPage();
-
-        fetching = false;
-      }
-    };
-    document.addEventListener("scroll", handleScroll);
-    return () => {
-      document.removeEventListener("scroll", handleScroll);
-    };
-  }, [fetchNextPage, hasNextPage]);
+  const dataLength =
+    platformData?.pages.reduce(
+      (total, page) => total + page.results.length,
+      0,
+    ) || 0;
 
   return (
-    <main className="px-4">
-      <h1 className="text-center text-4xl font-bold text-white">
-        New and trending
-      </h1>
-      <p className="mt-1.5 text-center text-white">
-        Based on player counts and release date
-      </p>
-      <div className="mb-6 mt-9 flex flex-wrap justify-center gap-2">
-        <Filter className=" rounded-lg bg-second-color px-4 py-2 font-semibold text-white">
-          <option value="relevance">Relevance</option>
-          <option value="dateAdded">Date added</option>
-          <option value="name">Name</option>
-          <option value="releaseDate">Release date</option>
-          <option value="averageRating">Average rating</option>
-        </Filter>
-        <Filter className=" rounded-lg bg-second-color px-4 py-2 font-semibold text-white">
-          <option value="all">All platforms</option>
-          <option value="pc">PC</option>
-          <option value="playStation">PlatStation</option>
-          <option value="xbox">Xbox</option>
-          <option value="iOS">iOS</option>
-          <option value="android">Android</option>
-          <option value="appleMacintosh">Apple Macintosh</option>
-          <option value="linux">Linux</option>
-          <option value="nintendo">Nintendo</option>
-        </Filter>
-      </div>
-      {isLoading && (
-        <div className="flex justify-center">
-          <Oval
-            height={80}
-            width={80}
-            color="#4fa94d"
-            visible={true}
-            ariaLabel="oval-loading"
-            secondaryColor="#4fa94d"
-            strokeWidth={2}
-            strokeWidthSecondary={2}
-          />
+    <section className="flex-col px-4 tablet:mt-6 tablet:flex tablet:w-full tablet:px-0">
+      <div className="mb-6 mt-9 flex flex-wrap justify-center gap-2 tablet:mt-4 tablet:justify-between">
+        <div className="flex gap-1 tablet:gap-2">
+          <OrderFilter />
+          <PlatformsFilter />
         </div>
-      )}
-      {data?.pages.map((group, i) => (
-        <div key={i}>
-          {group.results?.map((game) => (
-            <GameInfo
-              key={game.id}
-              name={game.name}
-              image={game.background_image}
-              meta={game.metacritic}
-              add={game.added}
-              platforms={game.platforms.map((game) => game.platform.name)}
-              releasedDate={game.released}
-              genres={game.genres.map((genre) => genre.name)}
-              rating={game.rating}
-            />
-          ))}
-        </div>
-      ))}
-      {isFetchingNextPage && (
-        <div className="flex justify-center">
-          <Oval
-            height={80}
-            width={80}
-            color="#4fa94d"
-            visible={true}
-            ariaLabel="oval-loading"
-            secondaryColor="#4fa94d"
-            strokeWidth={2}
-            strokeWidthSecondary={2}
-          />
-        </div>
-      )}
-      <ConfigProvider
-        theme={{
-          components: {
-            FloatButton: {
-              colorText: "white",
-              colorBgElevated: "black",
-            },
-          },
-        }}
-      >
-        <FloatButton
-          icon={<FontAwesomeIcon icon={faBars} />}
-          onClick={sideMenuOpen}
+        <LayoutView
+          onGrid={() => dispatch(setLayout("grid"))}
+          onBox={() => dispatch(setLayout("box"))}
         />
-      </ConfigProvider>
-    </main>
+      </div>
+      <InfiniteScroll
+        style={{}}
+        dataLength={dataLength}
+        next={fetchNextPage}
+        hasMore={hasNextPage}
+        loader={isFetchingNextPage && <Spinner />}
+      >
+        {isLoading && <Spinner />}
+        {platformData?.pages.map((page, i) => (
+          <div
+            key={i}
+            className={` mb-4 gap-6 tablet:grid tablet:px-2 tablet:py-2 ${
+              layout === "box"
+                ? "grid-cols-1"
+                : "grid-cols-2  tablet:h-fit desktopFirst:grid-cols-3 desktopSecond:grid-cols-4 desktopThird:grid-cols-5"
+            }`}
+          >
+            {page?.results.map((game, i) => (
+              <GameInfo
+                slug={game.slug}
+                key={i}
+                id={game.id}
+                name={game.name}
+                image={game.background_image}
+                meta={game.metacritic}
+                add={game.added}
+                platforms={game.platforms.map((game) => game.platform.name)}
+                releasedDate={game.released}
+                genres={game.genres.map((genre) => genre.name)}
+                rating={game.rating}
+              />
+            ))}
+          </div>
+        ))}
+      </InfiniteScroll>
+    </section>
   );
 }
 

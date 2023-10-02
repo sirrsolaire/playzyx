@@ -10,13 +10,28 @@
 
 @layer base {
     .filterList {
-        @apply flex items-center gap-2;
+        @apply flex items-center gap-2 cursor-pointer ;
     }
 }
 
 @layer utilities {
-    .icon {
-        @apply rounded-md bg-[#202020] p-1;
+    .iconWrapper {
+        @apply rounded-md bg-[#202020] w-7 h-7 flex items-center justify-center text-lg tablet:hover:bg-white transition-colors duration-200;
+    }
+}
+@layer utilities {
+    .filterList:hover .icon {
+        @apply tablet:text-black transition-colors duration-200;
+    }
+}@layer utilities {
+    .filterList:hover .iconWrapper {
+        @apply tablet:bg-white transition-colors duration-200;
+    }
+}
+
+@layer utilities {
+    .svg {
+        @apply tablet:h-5 tablet:w-5 tablet:hover:text-black;
     }
 }
 
@@ -28,7 +43,7 @@
 
 @layer base {
     ul img {
-        @apply w-[24px] h-[24px];
+        @apply w-[24px] h-[24px] tablet:w-8 tablet:h-8;
     }
 }
 

@@ -4,14 +4,21 @@ import { setSideMenuOpen } from "../slices/mobileMenuSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import SideMenuContent from "./SideMenuContent";
+import { useLocation } from "react-router";
+import { useEffect } from "react";
 
 const SideMenu = () => {
   const sideMenuDrawerOpen = useSelector((state) => state.menu.sideMenuOpen);
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const sideMenuClose = () => {
     dispatch(setSideMenuOpen(false));
   };
+
+  useEffect(() => {
+    sideMenuClose();
+  }, [location.pathname]);
 
   return (
     <>

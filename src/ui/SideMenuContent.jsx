@@ -30,7 +30,6 @@ function SideMenuContent() {
   const [platformHide, setPlatformHide] = useState(false);
   const [genresHide, setGenresHide] = useState(false);
 
-  const activeLink = "text-blue-700 font-bold";
   return (
     <div className="pb-5">
       <div className="mb-4 mr-2 flex justify-between tablet:flex-col tablet:gap-5">
@@ -64,7 +63,9 @@ function SideMenuContent() {
               <NavLink
                 to="/last-30-days"
                 className={({ isActive }) =>
-                  isActive && "font-bold underline underline-offset-2"
+                  isActive
+                    ? "font-bold underline underline-offset-2"
+                    : undefined
                 }
               >
                 <li className="filterList">
@@ -77,7 +78,9 @@ function SideMenuContent() {
               <NavLink
                 to="/this-week"
                 className={({ isActive }) =>
-                  isActive && "font-bold underline underline-offset-2"
+                  isActive
+                    ? "font-bold underline underline-offset-2"
+                    : undefined
                 }
               >
                 <li className="filterList">
@@ -90,7 +93,9 @@ function SideMenuContent() {
               <NavLink
                 to="/next-week"
                 className={({ isActive }) =>
-                  isActive && "font-bold underline underline-offset-2"
+                  isActive
+                    ? "font-bold underline underline-offset-2"
+                    : undefined
                 }
               >
                 <li className="filterList">
@@ -103,7 +108,9 @@ function SideMenuContent() {
               <NavLink
                 to="/release-calendar"
                 className={({ isActive }) =>
-                  isActive && "font-bold underline underline-offset-2"
+                  isActive
+                    ? "font-bold underline underline-offset-2"
+                    : undefined
                 }
               >
                 <li className="filterList">

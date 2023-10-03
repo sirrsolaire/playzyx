@@ -28,7 +28,7 @@ const SideMenu = () => {
         placement="top"
         className=" text-white"
         bodyStyle={{ backgroundColor: "black" }}
-        onClose={dispatch(setSideMenuOpen(false))}
+        onClose={() => dispatch(setSideMenuOpen(false))}
         open={sideMenuDrawerOpen}
         headerStyle={{ display: "none" }}
         height={"100vh"}
@@ -48,7 +48,7 @@ const SideMenu = () => {
           >
             <FloatButton
               icon={<FontAwesomeIcon icon={faX} />}
-              onClick={dispatch(setSideMenuOpen(false))}
+              onClick={() => dispatch(setSideMenuOpen(false))}
             />
           </ConfigProvider>
         </div>

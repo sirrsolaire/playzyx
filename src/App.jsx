@@ -5,6 +5,8 @@ import { LastThirtyGames } from "./pages/LastThirtyGames.jsx";
 import { ThisWeekGames } from "./pages/ThisWeekGames.jsx";
 import { NextWeekGames } from "./pages/NextWeekGames.jsx";
 import { ReleaseCalendar } from "./pages/ReleaseCalendar.jsx";
+import { AllGames } from "./pages/AllGames.jsx";
+import GamesByMonth from "./ui/GamesByMonth.jsx";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +16,10 @@ const router = createBrowserRouter([
   {
     path: "/reviews",
     element: <Reviews />,
+  },
+  {
+    path: "/games",
+    element: <AllGames />,
   },
   {
     path: "/last-30-days",
@@ -30,6 +36,12 @@ const router = createBrowserRouter([
   {
     path: "/release-calendar",
     element: <ReleaseCalendar />,
+    children: [
+      {
+        path: "/release-calendar/:month", // :month captures the month parameter
+        element: <GamesByMonth />,
+      },
+    ],
   },
   {
     path: "*",

@@ -13,7 +13,7 @@ const items = [
     label: "Name",
   },
   {
-    key: "-release",
+    key: "-released",
     label: "Release date",
   },
   {
@@ -26,27 +26,26 @@ const items = [
   },
 ];
 export const OrderFilter = () => {
-    const dispatch = useDispatch();
-    const order = useSelector(state => state.filtering.firstSelect)
- 
+  const dispatch = useDispatch();
+  const order = useSelector((state) => state.filtering.firstSelect);
 
-    const onClick = ({ key }) => {
-        dispatch(setFirstSelect(key))
-    };
+  const onClick = ({ key }) => {
+    dispatch(setFirstSelect(key));
+  };
 
-    const ordering = () => {
-      if (order === "-release") {
-        return "Release Date"
-      } else if (order === "") {
-        return "Relevance"
-      } else if (order === "name" ) {
-        return "Name"
-      } else if (order === "-rating") {
-        return "Popularity"
-      } else if (order === "-metacritic") {
-        return "Metacritic"
-      }
+  const ordering = () => {
+    if (order === "-release") {
+      return "Release Date";
+    } else if (order === "") {
+      return "Relevance";
+    } else if (order === "name") {
+      return "Name";
+    } else if (order === "-rating") {
+      return "Popularity";
+    } else if (order === "-metacritic") {
+      return "Metacritic";
     }
+  };
 
   return (
     <ConfigProvider
@@ -56,14 +55,15 @@ export const OrderFilter = () => {
             colorText: "white",
             colorBgElevated: "#202020",
             colorTextDescription: "white",
-            controlItemBgHover: "#393e46"
+            controlItemBgHover: "#393e46",
           },
         },
       }}
     >
       <Dropdown
         menu={{
-          items, onClick
+          items,
+          onClick,
         }}
         className="cursor-pointer"
         trigger="click"
@@ -73,12 +73,9 @@ export const OrderFilter = () => {
             e.preventDefault();
           }}
         >
-          <Space className="border-2 py-2 px-3 tablet:w-48 flex justify-between rounded-xl border-gray-5 hover:border-red-5 w-44">
+          <Space className="flex w-44 justify-between rounded-xl border-2 border-gray-5 px-3 py-2 hover:border-red-5 tablet:w-48">
             <div className="flex items-center gap-1">
-              <span className="text-sm hidden tablet:flex">
-
-              Order:
-              </span>
+              <span className="hidden text-sm tablet:flex">Order:</span>
               <span className="font-semibold">{ordering()}</span>
             </div>
             <DownOutlined />

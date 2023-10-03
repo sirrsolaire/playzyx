@@ -6,10 +6,11 @@ import SideMenu from "../ui/SideMenu.jsx";
 import { DesktopSideMenu } from "../ui/DesktopSideMenu.jsx";
 import { FloatSideMenu } from "../ui/FloatButton.jsx";
 import { LayoutView } from "../ui/LayoutView.jsx";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setPostLayout } from "../slices/layoutSlice.js";
 
 export const Reviews = () => {
+  const postLayout = useSelector((state) => state.layout.postLayout);
   const { data } = useGame();
   const dispatch = useDispatch();
   return (
@@ -23,6 +24,12 @@ export const Reviews = () => {
             onGrid={() => dispatch(setPostLayout("grid"))}
             onBox={() => dispatch(setPostLayout("box"))}
             addClass="smallTb:flex"
+            classNameGrid={`cursor-pointer rounded-md bg-second-color px-2 py-1 text-3xl text-white opacity-50 transition-all duration-200 hover:opacity-100 ${
+              postLayout === "grid" && "smallTb:opacity-100"
+            }`}
+            classNameBox={`cursor-pointer rounded-md bg-second-color px-2 py-1 text-3xl text-white opacity-50 transition-all duration-200 hover:opacity-100 ${
+              postLayout === "box" && "smallTb:opacity-100"
+            }`}
           />
           {data?.map((game, i) => (
             <ReviewsContent

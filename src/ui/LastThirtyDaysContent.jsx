@@ -1,28 +1,28 @@
 import { useDispatch, useSelector } from "react-redux";
-import GameInfo from "./GameInfo.jsx";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { Spinner } from "./Spinner.jsx";
 import { PlatformsFilter } from "./PlatformsFilter.jsx";
 import { OrderFilter } from "./OrderFilter.jsx";
-import useGames from "../hooks/useGames.js";
 import { LayoutView } from "./LayoutView.jsx";
 import { setLayout } from "../slices/layoutSlice.js";
+import useLastThirty from "../hooks/useLastThirty.js";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { Spinner } from "./Spinner.jsx";
+import GameInfo from "./GameInfo.jsx";
 
-function Content() {
+function LastThirtyDaysContent() {
   const dispatch = useDispatch();
   const layout = useSelector((state) => state.layout.layout);
   const firstSelectValue = useSelector((state) => state.filtering.firstSelect);
   const platform = useSelector((state) => state.filtering.platform);
   const {
-    data: platformData,
+    data: lastThirtyData,
     isLoading,
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
-  } = useGames({ firstSelectValue, platform });
+  } = useLastThirty({ firstSelectValue, platform });
 
   const dataLength =
-    platformData?.pages.reduce(
+    lastThirtyData?.pages.reduce(
       (total, page) => total + page.results.length,
       0,
     ) || 0;
@@ -53,7 +53,7 @@ function Content() {
         loader={isFetchingNextPage && <Spinner />}
       >
         {isLoading && <Spinner />}
-        {platformData?.pages.map((page, i) => (
+        {lastThirtyData?.pages.map((page, i) => (
           <div
             key={i}
             className={` mb-4 gap-6 tablet:grid tablet:px-2 tablet:py-2 ${
@@ -62,7 +62,7 @@ function Content() {
                 : "grid-cols-2  tablet:h-fit desktopFirst:grid-cols-3 desktopSecond:grid-cols-4 desktopThird:grid-cols-5"
             }`}
           >
-            {page?.results.map((game, i) => (
+            {page.results?.map((game, i) => (
               <GameInfo
                 slug={game.slug}
                 key={i}
@@ -71,7 +71,7 @@ function Content() {
                 image={game.background_image}
                 meta={game.metacritic}
                 add={game.added}
-                platforms={game.platforms.map((game) => game.platform.name)}
+                platforms={game.platforms?.map((game) => game.platform.name)}
                 releasedDate={game.released}
                 genres={game.genres.map((genre) => genre.name)}
                 rating={game.rating}
@@ -84,4 +84,4 @@ function Content() {
   );
 }
 
-export default Content;
+export default LastThirtyDaysContent;

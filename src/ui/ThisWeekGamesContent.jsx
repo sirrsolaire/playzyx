@@ -4,25 +4,25 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { Spinner } from "./Spinner.jsx";
 import { PlatformsFilter } from "./PlatformsFilter.jsx";
 import { OrderFilter } from "./OrderFilter.jsx";
-import useGames from "../hooks/useGames.js";
 import { LayoutView } from "./LayoutView.jsx";
 import { setLayout } from "../slices/layoutSlice.js";
+import useThisWeek from "../hooks/useThisWeek.js";
 
-function Content() {
+function ThisWeekGamesContent() {
   const dispatch = useDispatch();
   const layout = useSelector((state) => state.layout.layout);
   const firstSelectValue = useSelector((state) => state.filtering.firstSelect);
   const platform = useSelector((state) => state.filtering.platform);
   const {
-    data: platformData,
+    data: thisWeekData,
     isLoading,
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
-  } = useGames({ firstSelectValue, platform });
+  } = useThisWeek({ firstSelectValue, platform });
 
   const dataLength =
-    platformData?.pages.reduce(
+    thisWeekData?.pages.reduce(
       (total, page) => total + page.results.length,
       0,
     ) || 0;
@@ -53,7 +53,7 @@ function Content() {
         loader={isFetchingNextPage && <Spinner />}
       >
         {isLoading && <Spinner />}
-        {platformData?.pages.map((page, i) => (
+        {thisWeekData?.pages.map((page, i) => (
           <div
             key={i}
             className={` mb-4 gap-6 tablet:grid tablet:px-2 tablet:py-2 ${
@@ -84,4 +84,4 @@ function Content() {
   );
 }
 
-export default Content;
+export default ThisWeekGamesContent;

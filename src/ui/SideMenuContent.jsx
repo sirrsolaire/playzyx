@@ -30,6 +30,7 @@ function SideMenuContent() {
   const [platformHide, setPlatformHide] = useState(false);
   const [genresHide, setGenresHide] = useState(false);
 
+  const activeLink = "text-blue-700 font-bold";
   return (
     <div className="pb-5">
       <div className="mb-4 mr-2 flex justify-between tablet:flex-col tablet:gap-5">
@@ -44,7 +45,7 @@ function SideMenuContent() {
         <NavLink to="/reviews">
           <h1
             className=" mr-16 cursor-pointer text-lg font-bold tablet:text-2xl tablet:transition-all
-         tablet:duration-300 tablet:hover:opacity-50"
+            tablet:duration-300 tablet:hover:opacity-50"
           >
             Reviews
           </h1>
@@ -59,41 +60,71 @@ function SideMenuContent() {
             >
               New Releases
             </h1>
-            <ul className="space-y-2">
-              <li className="filterList">
-                <span className="icon">
-                  <Star />
-                </span>
-                <span>Last 30 days</span>
-              </li>
-              <li className="filterList">
-                <span className="icon">
-                  <Fire />
-                </span>
-                <span>This week</span>
-              </li>
-              <li className="filterList">
-                <span className="icon">
-                  <Next />
-                </span>
-                <span>Next week</span>
-              </li>
-              <li className="filterList">
-                <span className="icon">
-                  <Calendar />
-                </span>
-                <span>Release calendar</span>
-              </li>
+            <ul className="flex flex-col gap-2">
+              <NavLink
+                to="/last-30-days"
+                className={({ isActive }) =>
+                  isActive && "font-bold underline underline-offset-2"
+                }
+              >
+                <li className="filterList">
+                  <span className="icon">
+                    <Star />
+                  </span>
+                  <span>Last 30 days</span>
+                </li>
+              </NavLink>
+              <NavLink
+                to="/this-week"
+                className={({ isActive }) =>
+                  isActive && "font-bold underline underline-offset-2"
+                }
+              >
+                <li className="filterList">
+                  <span className="icon">
+                    <Fire />
+                  </span>
+                  <span>This week</span>
+                </li>
+              </NavLink>
+              <NavLink
+                to="/next-week"
+                className={({ isActive }) =>
+                  isActive && "font-bold underline underline-offset-2"
+                }
+              >
+                <li className="filterList">
+                  <span className="icon">
+                    <Next />
+                  </span>
+                  <span>Next week</span>
+                </li>
+              </NavLink>
+              <NavLink
+                to="/release-calendar"
+                className={({ isActive }) =>
+                  isActive && "font-bold underline underline-offset-2"
+                }
+              >
+                <li className="filterList">
+                  <span className="icon">
+                    <Calendar />
+                  </span>
+                  <span>Release calendar</span>
+                </li>
+              </NavLink>
             </ul>
           </div>
           <div className="mt-5 flex ">
             <div>
-              <h1
-                className="mb-1 cursor-pointer text-lg font-bold tablet:mb-4 tablet:text-2xl
+              <NavLink to="/games">
+                <h1
+                  className="mb-1 cursor-pointer text-lg font-bold tablet:mb-4 tablet:text-2xl
          tablet:transition-all tablet:duration-300 tablet:hover:opacity-50 "
-              >
-                All Games
-              </h1>
+                >
+                  All Games
+                </h1>
+              </NavLink>
               <h1
                 className="mb-1 mt-4 text-lg font-bold tablet:mb-4 tablet:text-2xl
               "

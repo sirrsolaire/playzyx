@@ -6,7 +6,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-import { Platfroms } from "./Platfroms.jsx";
+import { Platform } from "./Platform.jsx";
 import { useSelector } from "react-redux";
 
 function GameInfo({
@@ -48,7 +48,7 @@ function GameInfo({
 
       <div className="px-4 py-3">
         <div className="mb-1 flex items-center justify-between">
-          <Platfroms
+          <Platform
             platforms={platforms}
             className="text-base text-white opacity-40"
           />

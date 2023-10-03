@@ -63,36 +63,35 @@ export const PlatformsFilter = () => {
   const dispatch = useDispatch();
   const platform = useSelector((state) => state.filtering.platform);
 
-
   const onClick = ({ key }) => {
-        dispatch(setChildPlatform(key))
-    };
+    dispatch(setChildPlatform(key));
+  };
 
   const filteredPlatform = () => {
     if (platform === 4) {
-      return "PC"
+      return "PC";
     } else if (platform === 18) {
-      return "PlayStation 4"
-    } else if (platform === 16 ) {
-      return "PlayStation 3"
+      return "PlayStation 4";
+    } else if (platform === 16) {
+      return "PlayStation 3";
     } else if (platform === 1) {
-      return "Xbox One"
+      return "Xbox One";
     } else if (platform === 14) {
-      return "Xbox 360"
+      return "Xbox 360";
     } else if (platform === 186) {
-      return "Xbox Series S/X"
-    } else if ( platform === 3) {
-      return "iOS"
+      return "Xbox Series S/X";
+    } else if (platform === 3) {
+      return "iOS";
     } else if (platform === 8) {
-      return "Android"
+      return "Android";
     } else if (platform === 5) {
-      return "Mac"
+      return "Mac";
     } else if (platform === 6) {
-      return "Linux"
+      return "Linux";
     } else if (platform === 7) {
-      return "Nintendo"
+      return "Nintendo";
     }
-  }
+  };
 
   return (
     <ConfigProvider
@@ -102,8 +101,7 @@ export const PlatformsFilter = () => {
             colorText: "white",
             colorBgElevated: "#202020",
             colorTextDescription: "white",
-            controlItemBgHover: "#393e46"
-            
+            controlItemBgHover: "#393e46",
           },
         },
       }}
@@ -115,16 +113,15 @@ export const PlatformsFilter = () => {
         }}
         className="cursor-pointer"
         trigger="click"
-        
       >
         <a
           onClick={(e) => {
             e.preventDefault();
           }}
         >
-          <Space className="w-44 flex tablet:w-56 justify-between rounded-xl border-2 border-gray-5 px-3 py-2 hover:border-red-5">
+          <Space className="flex w-44 justify-between rounded-xl border-2 border-gray-5 px-3 py-2 hover:border-red-5 tablet:w-60">
             <div className="flex items-center gap-1">
-              <span className="text-sm  hidden tablet:flex">Platform:</span>
+              <span className="hidden  text-sm tablet:flex">Platform:</span>
               <span className="font-semibold">{filteredPlatform()}</span>
             </div>
             <DownOutlined />

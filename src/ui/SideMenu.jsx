@@ -6,19 +6,20 @@ import { faX } from "@fortawesome/free-solid-svg-icons";
 import SideMenuContent from "./SideMenuContent";
 import { useLocation } from "react-router";
 import { useEffect } from "react";
+import { setChildPlatform, setFirstSelect } from "../slices/filterSlice.js";
+import { setLayout } from "../slices/layoutSlice.js";
 
 const SideMenu = () => {
   const sideMenuDrawerOpen = useSelector((state) => state.menu.sideMenuOpen);
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const sideMenuClose = () => {
-    dispatch(setSideMenuOpen(false));
-  };
-
   useEffect(() => {
-    sideMenuClose();
-  }, [location.pathname]);
+    dispatch(setSideMenuOpen(false));
+    dispatch(setFirstSelect(""));
+    dispatch(setChildPlatform(4));
+    dispatch(setLayout("grid"));
+  }, [location.pathname, dispatch]);
 
   return (
     <>
@@ -27,7 +28,7 @@ const SideMenu = () => {
         placement="top"
         className=" text-white"
         bodyStyle={{ backgroundColor: "black" }}
-        onClose={sideMenuClose}
+        onClose={dispatch(setSideMenuOpen(false))}
         open={sideMenuDrawerOpen}
         headerStyle={{ display: "none" }}
         height={"100vh"}
@@ -47,7 +48,7 @@ const SideMenu = () => {
           >
             <FloatButton
               icon={<FontAwesomeIcon icon={faX} />}
-              onClick={sideMenuClose}
+              onClick={dispatch(setSideMenuOpen(false))}
             />
           </ConfigProvider>
         </div>

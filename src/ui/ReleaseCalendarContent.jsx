@@ -8,7 +8,7 @@ import useGames from "../hooks/useGames.js";
 import { LayoutView } from "./LayoutView.jsx";
 import { setLayout } from "../slices/layoutSlice.js";
 
-function Content() {
+function ReleaseCalendarContent() {
   const dispatch = useDispatch();
   const layout = useSelector((state) => state.layout.layout);
   const firstSelectValue = useSelector((state) => state.filtering.firstSelect);
@@ -84,4 +84,4 @@ function Content() {
   );
 }
 
-export default Content;
+export default ReleaseCalendarContent;

@@ -13,7 +13,7 @@ const items = [
     label: "Name",
   },
   {
-    key: "-released",
+    key: "released",
     label: "Release date",
   },
   {
@@ -34,7 +34,7 @@ export const OrderFilter = () => {
   };
 
   const ordering = () => {
-    if (order === "-release") {
+    if (order === "released") {
       return "Release Date";
     } else if (order === "") {
       return "Relevance";

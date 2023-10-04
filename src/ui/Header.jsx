@@ -101,9 +101,6 @@ function Header() {
         <li className="cursor-pointer decoration-2 hover:underline hover:underline-offset-4">
           SIGN UP
         </li>
-        <li className="cursor-pointer decoration-2 hover:underline hover:underline-offset-4">
-          API
-        </li>
         <li className="flex items-center">
           <Popover content={content} minWidth="20" placement="bottomLeft">
             <FontAwesomeIcon icon={faEllipsis} className="mt-0.5 text-lg" />

@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { ColorRing } from "react-loader-spinner";
 import useSearch from "../hooks/useSearch.js";
+import { Platform } from "./Platform.jsx";
 
 export const SearchResults = () => {
   const query = useSelector((state) => state.query.query);
@@ -36,10 +37,10 @@ export const SearchResults = () => {
               className="h-14 w-10 rounded-lg object-cover object-center"
             />
             <div className="flex flex-col gap-1">
-              {/*<Platform*/}
-              {/*  platforms={game.platforms?.map((game) => game.platform.name)}*/}
-              {/*  className="text-xs"*/}
-              {/*/>*/}
+              <Platform
+                platforms={game.platforms?.map((game) => game.platform.name)}
+                className="text-xs"
+              />
               <span>{game.name}</span>
             </div>
           </li>

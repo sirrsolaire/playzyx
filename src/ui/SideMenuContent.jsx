@@ -17,12 +17,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Best from "../assets/svg/Best.jsx";
 import Popular from "../assets/svg/Popular.jsx";
 import Top from "../assets/svg/Top.jsx";
-import Pc from "../assets/svg/Pc.jsx";
-import Ps4 from "../assets/svg/Ps4.jsx";
-import Xbox from "../assets/svg/Xbox.jsx";
-import Nintendo from "../assets/svg/Nintendo.jsx";
-import Ios from "../assets/svg/Ios.jsx";
-import Android from "../assets/svg/Android.jsx";
 import { NavLink } from "react-router-dom";
 
 function SideMenuContent() {
@@ -132,118 +126,134 @@ function SideMenuContent() {
                   All Games
                 </h1>
               </NavLink>
-              <h1
-                className="mb-1 mt-4 text-lg font-bold tablet:mb-4 tablet:text-2xl
-              "
-              >
-                Platforms
-              </h1>
-              <ul className="space-y-2">
-                <li className="filterList">
-                  <span className="icon">
-                    <Pc />
-                  </span>
-                  <span>PC</span>
-                </li>
-                <li className="filterList">
-                  <span className="icon">
-                    <Ps4 />
-                  </span>
-                  <span>PlayStation 4</span>
-                </li>
-                <li className="filterList">
-                  <span className="icon">
-                    <Xbox />
-                  </span>
-                  <span>Xbox One</span>
-                </li>
-                {platformHide && (
-                  <>
-                    <li className="filterList">
-                      <span className="icon">
-                        <Nintendo />
-                      </span>
-                      <span>Nintendo Switch</span>
-                    </li>
-                    <li className="filterList">
-                      <span className="icon">
-                        <Ios />
-                      </span>
-                      <span>iOS</span>
-                    </li>
-                    <li className="filterList">
-                      <span className="icon">
-                        <Android />
-                      </span>
-                      <span>Android</span>
-                    </li>
-                  </>
-                )}
-                <span
-                  className="flex cursor-pointer items-center gap-1  text-info-color"
-                  onClick={() => setPlatformHide(!platformHide)}
-                >
-                  <span className="flex">
-                    {platformHide ? (
-                      <FontAwesomeIcon
-                        icon={faChevronUp}
-                        className="text-base
-              "
-                      />
-                    ) : (
-                      <FontAwesomeIcon
-                        icon={faChevronDown}
-                        className="text-base
-                  "
-                      />
-                    )}
-                  </span>
-                  <span className="text-sm">
-                    {!platformHide ? "Show All" : "Hide"}
-                  </span>
-                </span>
-              </ul>
+              {/*<h1*/}
+              {/*  className="mb-1 mt-4 text-lg font-bold tablet:mb-4 tablet:text-2xl*/}
+              {/*"*/}
+              {/*>*/}
+              {/*  Platforms*/}
+              {/*</h1>*/}
+              {/*<ul className="space-y-2">*/}
+              {/*  <li className="filterList">*/}
+              {/*    <span className="icon">*/}
+              {/*      <Pc />*/}
+              {/*    </span>*/}
+              {/*    <span>PC</span>*/}
+              {/*  </li>*/}
+              {/*  <li className="filterList">*/}
+              {/*    <span className="icon">*/}
+              {/*      <Ps4 />*/}
+              {/*    </span>*/}
+              {/*    <span>PlayStation 4</span>*/}
+              {/*  </li>*/}
+              {/*  <li className="filterList">*/}
+              {/*    <span className="icon">*/}
+              {/*      <Xbox />*/}
+              {/*    </span>*/}
+              {/*    <span>Xbox One</span>*/}
+              {/*  </li>*/}
+              {/*  {platformHide && (*/}
+              {/*    <>*/}
+              {/*      <li className="filterList">*/}
+              {/*        <span className="icon">*/}
+              {/*          <Nintendo />*/}
+              {/*        </span>*/}
+              {/*        <span>Nintendo Switch</span>*/}
+              {/*      </li>*/}
+              {/*      <li className="filterList">*/}
+              {/*        <span className="icon">*/}
+              {/*          <Ios />*/}
+              {/*        </span>*/}
+              {/*        <span>iOS</span>*/}
+              {/*      </li>*/}
+              {/*      <li className="filterList">*/}
+              {/*        <span className="icon">*/}
+              {/*          <Android />*/}
+              {/*        </span>*/}
+              {/*        <span>Android</span>*/}
+              {/*      </li>*/}
+              {/*    </>*/}
+              {/*  )}*/}
+              {/*  <span*/}
+              {/*    className="flex cursor-pointer items-center gap-1  text-info-color"*/}
+              {/*    onClick={() => setPlatformHide(!platformHide)}*/}
+              {/*  >*/}
+              {/*    <span className="flex">*/}
+              {/*      {platformHide ? (*/}
+              {/*        <FontAwesomeIcon*/}
+              {/*          icon={faChevronUp}*/}
+              {/*          className="text-base*/}
+              {/*"*/}
+              {/*        />*/}
+              {/*      ) : (*/}
+              {/*        <FontAwesomeIcon*/}
+              {/*          icon={faChevronDown}*/}
+              {/*          className="text-base*/}
+              {/*    "*/}
+              {/*        />*/}
+              {/*      )}*/}
+              {/*    </span>*/}
+              {/*    <span className="text-sm">*/}
+              {/*      {!platformHide ? "Show All" : "Hide"}*/}
+              {/*    </span>*/}
+              {/*  </span>*/}
+              {/*</ul>*/}
             </div>
           </div>
           <div>
-            <h1 className="mb-1 mt-5 text-lg font-bold tablet:mb-4 tablet:text-2xl">
+            <h1 className="mb-1  text-lg font-bold tablet:mb-4 tablet:text-2xl">
               Genres
             </h1>
-            <ul className="space-y-2">
-              <li className="filterList">
-                <img src="/action.png" alt="" />
-                <span>Action</span>
-              </li>
-              <li className="filterList">
-                <img src="/strategy.png" alt="" />
-                <span>Strategy</span>
-              </li>
-              <li className="filterList">
-                <img src="/rpg.png" alt="" />
-                <span>RPG</span>
-              </li>
+            <ul className="flex flex-col gap-2">
+              <NavLink to="/games/action">
+                <li className="filterList">
+                  <img src="/action.png" alt="" />
+                  <span>Action</span>
+                </li>
+              </NavLink>
+              <NavLink to="/games/strategy">
+                <li className="filterList">
+                  <img src="/strategy.png" alt="" />
+                  <span>Strategy</span>
+                </li>
+              </NavLink>
+              <NavLink to="/games/rpg">
+                <li className="filterList">
+                  <img src="/rpg.png" alt="" />
+                  <span>RPG</span>
+                </li>
+              </NavLink>
               {genresHide && (
                 <>
-                  <li className="filterList">
-                    <img src="/shooter.png" alt="" />
-                    <span>Shooter</span>
-                  </li>
-                  <li className="filterList">
-                    <img src="/adventure.png" alt="" />
-                    <span>Adventure</span>
-                  </li>
-                  <li className="filterList">
-                    <img src="/puzzle.png" alt="" />
-                    <span>Puzzle</span>
-                  </li>
-                  <li className="filterList">
-                    <img src="/racing.png" alt="" />
-                    <span>Racing</span>
-                  </li>
-                  <li className="filterList">
-                    <img src="/sports.png" alt="" />
-                    <span>Sports</span>
-                  </li>
+                  <NavLink to="/games/shooter">
+                    <li className="filterList">
+                      <img src="/shooter.png" alt="" />
+                      <span>Shooter</span>
+                    </li>
+                  </NavLink>
+                  <NavLink to="/games/adventure">
+                    <li className="filterList">
+                      <img src="/adventure.png" alt="" />
+                      <span>Adventure</span>
+                    </li>
+                  </NavLink>
+                  <NavLink to="/games/puzzle">
+                    <li className="filterList">
+                      <img src="/puzzle.png" alt="" />
+                      <span>Puzzle</span>
+                    </li>
+                  </NavLink>
+                  <NavLink to="/games/racing">
+                    <li className="filterList">
+                      <img src="/racing.png" alt="" />
+                      <span>Racing</span>
+                    </li>
+                  </NavLink>
+                  <NavLink to="/games/sports">
+                    <li className="filterList">
+                      <img src="/sports.png" alt="" />
+                      <span>Sports</span>
+                    </li>
+                  </NavLink>
                 </>
               )}
             </ul>

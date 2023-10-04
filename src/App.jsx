@@ -7,6 +7,14 @@ import { NextWeekGames } from "./pages/NextWeekGames.jsx";
 import { ReleaseCalendar } from "./pages/ReleaseCalendar.jsx";
 import { AllGames } from "./pages/AllGames.jsx";
 import GamesByMonth from "./ui/GamesByMonth.jsx";
+import { ActionGenre } from "./pages/ActionGenre.jsx";
+import { StrategyGenre } from "./pages/StrategyGenre.jsx";
+import { RpgGenre } from "./pages/RpgGenre.jsx";
+import { ShooterGenre } from "./pages/ShooterGenre.jsx";
+import { AdventureGenre } from "./pages/AdventureGenre.jsx";
+import { PuzzleGenre } from "./pages/PuzzleGenre.jsx";
+import { RacingGenre } from "./pages/RacingGenre.jsx";
+import { SportsGenre } from "./pages/SportsGenre.jsx";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +50,38 @@ const router = createBrowserRouter([
         element: <GamesByMonth />,
       },
     ],
+  },
+  {
+    path: "/games/action",
+    element: <ActionGenre />,
+  },
+  {
+    path: "/games/strategy",
+    element: <StrategyGenre />,
+  },
+  {
+    path: "/games/rpg",
+    element: <RpgGenre />,
+  },
+  {
+    path: "/games/shooter",
+    element: <ShooterGenre />,
+  },
+  {
+    path: "/games/adventure",
+    element: <AdventureGenre />,
+  },
+  {
+    path: "/games/puzzle",
+    element: <PuzzleGenre />,
+  },
+  {
+    path: "/games/racing",
+    element: <RacingGenre />,
+  },
+  {
+    path: "/games/sports",
+    element: <SportsGenre />,
   },
   {
     path: "*",

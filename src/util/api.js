@@ -85,3 +85,24 @@ export const fetchNextWeek = async (order, childPlatform, pageParam) => {
   );
   return response.data;
 };
+
+export const fetchByGenre = async (
+  order,
+  childPlatform,
+  pageParam,
+  genre,
+  tag,
+) => {
+  const response = await axios.get(
+    `https://api.rawg.io/api/games?&genres=${genre}&tags=${tag}&page=${pageParam}&page_size=20&ordering=${order}&platforms=${childPlatform}&key=${API_KEY}
+`,
+  );
+  return response.data;
+};
+
+export const fetchTags = async () => {
+  const response = await axios.get(
+    `https://api.rawg.io/api/tags?page_size=20&key=${API_KEY}`,
+  );
+  return response.data.results;
+};

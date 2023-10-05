@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 import GameInfo from "./GameInfo.jsx";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Spinner } from "./Spinner.jsx";
-import { PlatformsFilter } from "./PlatformsFilter.jsx";
 import { OrderFilter } from "./OrderFilter.jsx";
 import { LayoutView } from "./LayoutView.jsx";
 import { setLayout } from "../slices/layoutSlice.js";
@@ -12,9 +11,9 @@ function PageParamsContent() {
   const dispatch = useDispatch();
   const layout = useSelector((state) => state.layout.layout);
   const firstSelectValue = useSelector((state) => state.filtering.firstSelect);
-  const platform = useSelector((state) => state.filtering.platform);
   const tag = useSelector((state) => state.filtering.tag);
   const storeId = useSelector((state) => state.store.store);
+  const platform = useSelector((state) => state.store.platform);
 
   const {
     data: storeData,
@@ -33,7 +32,7 @@ function PageParamsContent() {
       <div className="mb-6 mt-9 flex flex-wrap justify-center gap-2 tablet:mt-4 tablet:justify-between">
         <div className="flex gap-1 tablet:gap-2">
           <OrderFilter />
-          <PlatformsFilter />
+          {/*<PlatformsFilter />*/}
         </div>
         <LayoutView
           onGrid={() => dispatch(setLayout("grid"))}

@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   store: 1,
   platformName: "PC",
+  platform: 4,
 };
 
 export const storeSlice = createSlice({
@@ -15,8 +16,12 @@ export const storeSlice = createSlice({
     setPlatformName: (state, action) => {
       state.platformName = action.payload;
     },
+    setBrowsePlatform: (state, action) => {
+      state.platform = action.payload;
+    },
   },
 });
 
-export const { setStore, setPlatformName } = storeSlice.actions;
+export const { setStore, setPlatformName, setBrowsePlatform } =
+  storeSlice.actions;
 export default storeSlice.reducer;

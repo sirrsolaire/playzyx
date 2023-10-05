@@ -3,7 +3,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setPlatformName, setStore } from "../../slices/storeTypeSlice.js";
+import {
+  setBrowsePlatform,
+  setPlatformName,
+  setStore,
+} from "../../slices/browseSlice.js";
 
 export const BrowseContentItem = ({
   name,
@@ -30,6 +34,7 @@ export const BrowseContentItem = ({
           onClick={() => {
             dispatch(setStore(id));
             dispatch(setPlatformName(name));
+            dispatch(setBrowsePlatform(id));
           }}
         >
           {name}

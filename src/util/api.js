@@ -128,15 +128,9 @@ export const fetchStoreID = async () => {
   return response.data.results;
 };
 
-export const fetchStore = async (
-  order,
-  childPlatform,
-  pageParam,
-  tag,
-  storeId,
-) => {
+export const fetchStore = async (order, platform, pageParam, tag, storeId) => {
   const response = await axios.get(
-    `https://api.rawg.io/api/games?&tags=${tag}&page=${pageParam}&page_size=20&ordering=${order}&platforms=${childPlatform}&stores=${storeId}&key=${API_KEY}
+    `https://api.rawg.io/api/games?&tags=${tag}&page=${pageParam}&page_size=20&ordering=${order}&platforms=${platform}&key=${API_KEY}
 `,
   );
   return response.data;

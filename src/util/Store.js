@@ -4,7 +4,7 @@ import filterReducer from "../slices/filterSlice.js";
 import queryReducer from "../slices/querySlice.js";
 import layoutReducer from "../slices/layoutSlice.js";
 import monthReducer from "../slices/calendarSlice.js";
-import storeReducer from "../slices/storeTypeSlice.js";
+import storeReducer from "../slices/browseSlice.js";
 
 export const store = configureStore({
   reducer: {

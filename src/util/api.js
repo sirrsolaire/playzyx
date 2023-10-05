@@ -106,3 +106,38 @@ export const fetchTags = async () => {
   );
   return response.data.results;
 };
+
+export const fetchBrowsePlatforms = async (pageParam, type) => {
+  const response = await axios.get(
+    `https://api.rawg.io/api/${type}?page=${pageParam}&page_size=20&key=1a1a6d04d6e44a42a6cba36022b9c8fb`,
+  );
+  return response.data;
+};
+
+export const fetchCreators = async (pageParam) => {
+  const response = await axios.get(
+    `https://api.rawg.io/api/creators?page=${pageParam}&page_size=20&key=1a1a6d04d6e44a42a6cba36022b9c8fb`,
+  );
+  return response.data;
+};
+
+export const fetchStoreID = async () => {
+  const response = await axios.get(
+    `https://api.rawg.io/api/stores?&page_size=30&key=1a1a6d04d6e44a42a6cba36022b9c8fb`,
+  );
+  return response.data.results;
+};
+
+export const fetchStore = async (
+  order,
+  childPlatform,
+  pageParam,
+  tag,
+  storeId,
+) => {
+  const response = await axios.get(
+    `https://api.rawg.io/api/games?&tags=${tag}&page=${pageParam}&page_size=20&ordering=${order}&platforms=${childPlatform}&stores=${storeId}&key=${API_KEY}
+`,
+  );
+  return response.data;
+};

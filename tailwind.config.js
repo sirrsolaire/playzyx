@@ -20,6 +20,7 @@ export default {
         "second-color": "hsla(0,0%,100%,.16)",
         "info-color": "hsla(0,0%,100%,.4)",
         "border-color": " hsla(0,0%,100%,.07)",
+        "button-color": "hsla(0,0%,100%,.1)",
       },
 
       screens: {

@@ -15,6 +15,14 @@ import { AdventureGenre } from "./pages/AdventureGenre.jsx";
 import { PuzzleGenre } from "./pages/PuzzleGenre.jsx";
 import { RacingGenre } from "./pages/RacingGenre.jsx";
 import { SportsGenre } from "./pages/SportsGenre.jsx";
+import { Platforms } from "./pages/Browse/Platforms.jsx";
+import { Stores } from "./pages/Browse/Stores.jsx";
+import { Genres } from "./pages/Browse/Genres.jsx";
+import { Creators } from "./pages/Browse/Creators.jsx";
+import { Tags } from "./pages/Browse/Tags.jsx";
+import { Developers } from "./pages/Browse/Developers.jsx";
+import { Publishers } from "./pages/Browse/Publishers.jsx";
+import { PageParam } from "./ui/Browse/PageParam.jsx";
 
 const router = createBrowserRouter([
   {
@@ -82,6 +90,44 @@ const router = createBrowserRouter([
   {
     path: "/games/sports",
     element: <SportsGenre />,
+  },
+  {
+    path: "/platforms",
+    element: <Platforms />,
+  },
+  {
+    path: "/stores",
+    element: <Stores />,
+  },
+  {
+    path: "/genres",
+    element: <Genres />,
+  },
+  {
+    path: "/creators",
+    element: <Creators />,
+  },
+  {
+    path: "/tags",
+    element: <Tags />,
+  },
+  {
+    path: "/developers",
+    element: <Developers />,
+  },
+  {
+    path: "/publishers",
+    element: <Publishers />,
+    children: [
+      {
+        path: "/publishers/:name",
+        element: <GamesByMonth />,
+      },
+    ],
+  },
+  {
+    path: "/games/:slug",
+    element: <PageParam />,
   },
   {
     path: "*",

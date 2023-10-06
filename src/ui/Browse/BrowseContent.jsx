@@ -2,21 +2,21 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { Spinner } from "../Spinner.jsx";
 import useBrowse from "../../hooks/useBrowse.js";
 import { BrowseContentItem } from "./BrowseContentItem.jsx";
+import { useSelector } from "react-redux";
 
-function BrowseContent({ type }) {
+function BrowseContent() {
+  const browseType = useSelector((state) => state.store.browseType);
   const {
-    data: platformsData,
+    data: browseData,
     isLoading,
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
-  } = useBrowse(type);
+  } = useBrowse(browseType);
 
   const dataLength =
-    platformsData?.pages.reduce(
-      (total, page) => total + page.results.length,
-      0,
-    ) || 0;
+    browseData?.pages.reduce((total, page) => total + page.results.length, 0) ||
+    0;
 
   return (
     <section className="flex-col px-4 tablet:mt-6 tablet:flex tablet:w-full tablet:px-0">
@@ -28,7 +28,7 @@ function BrowseContent({ type }) {
         loader={isFetchingNextPage && <Spinner />}
       >
         {isLoading && <Spinner />}
-        {platformsData?.pages.map((page, i) => (
+        {browseData?.pages.map((page, i) => (
           <div
             key={i}
             className="mb-6 flex flex-col gap-6 smallTb:grid smallTb:grid-cols-2 smallTb:px-2 smallTb:py-2 tablet:grid-cols-3 desktopSecond:grid-cols-4 desktopThird:grid-cols-5"

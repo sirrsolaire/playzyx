@@ -58,7 +58,9 @@ function GameInfo({
             </div>
           ) : null}
         </div>
-        <span className="block text-2xl font-bold text-white">{name}</span>
+        <span className="block truncate text-2xl font-bold text-white">
+          {name}
+        </span>
         <div className="mt-2 flex items-center gap-1">
           <span className="flex items-center gap-1 rounded-[0.3rem] bg-second-color px-2 font-semibold text-white">
             <FontAwesomeIcon icon={faPlus} className="text-xs" /> {add}

@@ -107,9 +107,9 @@ export const fetchTags = async () => {
   return response.data.results;
 };
 
-export const fetchBrowsePlatforms = async (pageParam, type) => {
+export const fetchBrowsePlatforms = async (pageParam, browseType) => {
   const response = await axios.get(
-    `https://api.rawg.io/api/${type}?page=${pageParam}&page_size=20&key=1a1a6d04d6e44a42a6cba36022b9c8fb`,
+    `https://api.rawg.io/api/${browseType}?page=${pageParam}&page_size=20&key=1a1a6d04d6e44a42a6cba36022b9c8fb`,
   );
   return response.data;
 };
@@ -128,10 +128,23 @@ export const fetchStoreID = async () => {
   return response.data.results;
 };
 
-export const fetchStore = async (order, platform, pageParam, tag, storeId) => {
-  const response = await axios.get(
-    `https://api.rawg.io/api/games?&tags=${tag}&page=${pageParam}&page_size=20&ordering=${order}&platforms=${platform}&key=${API_KEY}
-`,
-  );
+export const fetchStore = async (order, pageParam, tag, itemId, browseType) => {
+  let url = `https://api.rawg.io/api/games?&tags=${tag}&page=${pageParam}&page_size=20&ordering=${order}&key=${API_KEY}`;
+
+  if (browseType === "platforms") {
+    url += `&platforms=${itemId}`;
+  } else if (browseType === "stores") {
+    url += `&stores=${itemId}`;
+  } else if (browseType === "genres") {
+    url += `&genres=${itemId}`;
+  } else if (browseType === "tags") {
+    url += `&tags=${itemId}`;
+  } else if (browseType === "developers") {
+    url += `&developers=${itemId}`;
+  } else if (browseType === "publishers") {
+    url += `&publishers=${itemId}`;
+  }
+
+  const response = await axios.get(url);
   return response.data;
 };

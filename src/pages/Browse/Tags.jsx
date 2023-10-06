@@ -13,7 +13,7 @@ export const Tags = () => {
         <DesktopSideMenu />
         <section className="flex-col px-0 tablet:mt-6 tablet:flex tablet:w-full tablet:px-0">
           <Title title="Tags" subTitle="" />
-          <BrowseContent type="tags" />
+          <BrowseContent />
         </section>
         <SideMenu />
         <FloatSideMenu />

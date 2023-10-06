@@ -13,7 +13,7 @@ export const Developers = () => {
         <DesktopSideMenu />
         <section className="flex-col px-0 tablet:mt-6 tablet:flex tablet:w-full tablet:px-0">
           <Title title="Developers" subTitle="" />
-          <BrowseContent type="developers" />
+          <BrowseContent />
         </section>
         <SideMenu />
         <FloatSideMenu />

@@ -14,11 +14,14 @@ import User from "../assets/svg/User.jsx";
 import Tag from "../assets/svg/Tag.jsx";
 import Doc from "../assets/svg/Doc.jsx";
 import Code from "../assets/svg/Code.jsx";
+import { useDispatch } from "react-redux";
+import { setBrowserType } from "../slices/browseSlice.js";
 
 function SideMenuContent() {
   const [hide, setHide] = useState(false);
   const [platformHide, setPlatformHide] = useState(false);
   const [genresHide, setGenresHide] = useState(false);
+  const dispatch = useDispatch();
 
   return (
     <div className="pb-5">
@@ -370,6 +373,7 @@ function SideMenuContent() {
               className={({ isActive }) =>
                 isActive ? "font-bold underline underline-offset-2" : undefined
               }
+              onClick={() => dispatch(setBrowserType("platforms"))}
             >
               <li className="filterList">
                 <span className="icon">
@@ -383,6 +387,7 @@ function SideMenuContent() {
               className={({ isActive }) =>
                 isActive ? "font-bold underline underline-offset-2" : undefined
               }
+              onClick={() => dispatch(setBrowserType("stores"))}
             >
               <li className="filterList">
                 <span className="icon">
@@ -396,6 +401,7 @@ function SideMenuContent() {
               className={({ isActive }) =>
                 isActive ? "font-bold underline underline-offset-2" : undefined
               }
+              onClick={() => dispatch(setBrowserType("reviews"))}
             >
               <li className="filterList">
                 <span className="icon">
@@ -413,6 +419,7 @@ function SideMenuContent() {
                       ? "font-bold underline underline-offset-2"
                       : undefined
                   }
+                  onClick={() => dispatch(setBrowserType("genres"))}
                 >
                   <li className="filterList">
                     <span className="icon">
@@ -428,6 +435,7 @@ function SideMenuContent() {
                       ? "font-bold underline underline-offset-2"
                       : undefined
                   }
+                  onClick={() => dispatch(setBrowserType("creators"))}
                 >
                   <li className="filterList">
                     <span className="icon">
@@ -443,6 +451,7 @@ function SideMenuContent() {
                       ? "font-bold underline underline-offset-2"
                       : undefined
                   }
+                  onClick={() => dispatch(setBrowserType("tags"))}
                 >
                   <li className="filterList">
                     <span className="icon">
@@ -458,6 +467,7 @@ function SideMenuContent() {
                       ? "font-bold underline underline-offset-2"
                       : undefined
                   }
+                  onClick={() => dispatch(setBrowserType("developers"))}
                 >
                   <li className="filterList">
                     <span className="icon">
@@ -473,6 +483,7 @@ function SideMenuContent() {
                       ? "font-bold underline underline-offset-2"
                       : undefined
                   }
+                  onClick={() => dispatch(setBrowserType("publishers"))}
                 >
                   <li className="filterList">
                     <span className="icon">

@@ -28,7 +28,7 @@ export const BrowseContentItem = ({
       className="flex h-fit flex-col items-center gap-4 bg-cover bg-center px-5 py-8 "
       style={containerStyle}
     >
-      <NavLink to={`/games/${slug}`}>
+      <NavLink to={`/games/${slug}`} className="text-center">
         <span
           className="cursor-pointer text-center text-2xl font-bold underline underline-offset-4 transition-colors duration-200 hover:text-gray-400"
           onClick={() => {
@@ -40,10 +40,10 @@ export const BrowseContentItem = ({
           {name}
         </span>
       </NavLink>
-      <button className="bg-button-color rounded px-8 py-2 text-base text-white transition-colors duration-200 hover:bg-slate-100 hover:text-black">
+      <button className="rounded bg-button-color px-8 py-2 text-base text-white transition-colors duration-200 hover:bg-slate-100 hover:text-black">
         Follow
       </button>
-      <h2 className="border-button-color flex w-full justify-between border-b-[1px] pb-2">
+      <h2 className="flex w-full justify-between border-b-[1px] border-button-color pb-2">
         <span className="font-bold">Popular Items</span>
         <span className="text-sm text-info-color">
           {formattedNumber(gamesCount)}

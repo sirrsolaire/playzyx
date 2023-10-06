@@ -6,22 +6,31 @@ import { OrderFilter } from "./OrderFilter.jsx";
 import { LayoutView } from "./LayoutView.jsx";
 import { setLayout } from "../slices/layoutSlice.js";
 import useStore from "../hooks/useStore.js";
+import { useLocation } from "react-router";
+import useAllPlatforms from "../hooks/useAllPlatforms.js";
+import { BrowsePlatformFilter } from "./Browse/BrowesePlatformFilter.jsx";
 
 function PageParamsContent() {
   const dispatch = useDispatch();
   const layout = useSelector((state) => state.layout.layout);
   const firstSelectValue = useSelector((state) => state.filtering.firstSelect);
   const tag = useSelector((state) => state.filtering.tag);
-  const storeId = useSelector((state) => state.store.store);
-  const platform = useSelector((state) => state.store.platform);
-
+  const itemId = useSelector((state) => state.store.store);
+  const browseType = useSelector((state) => state.store.browseType);
   const {
     data: storeData,
     isLoading,
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
-  } = useStore({ firstSelectValue, platform, tag, storeId });
+  } = useStore({ firstSelectValue, tag, itemId, browseType });
+  const { data: platforms } = useAllPlatforms();
+  const location = useLocation();
+
+  const urlsToHideComponent = platforms?.map(
+    (platform) => `/games/${platform.slug}`,
+  );
+  const showComponent = urlsToHideComponent?.includes(location.pathname);
 
   const dataLength =
     storeData?.pages.reduce((total, page) => total + page.results.length, 0) ||
@@ -32,7 +41,7 @@ function PageParamsContent() {
       <div className="mb-6 mt-9 flex flex-wrap justify-center gap-2 tablet:mt-4 tablet:justify-between">
         <div className="flex gap-1 tablet:gap-2">
           <OrderFilter />
-          {/*<PlatformsFilter />*/}
+          {showComponent && <BrowsePlatformFilter />}
         </div>
         <LayoutView
           onGrid={() => dispatch(setLayout("grid"))}

@@ -4,7 +4,6 @@ import Next from "../assets/svg/Next";
 import Calendar from "../assets/svg/Calendar";
 import GamePad from "../assets/svg/GamePad.jsx";
 import DownArrow from "../assets/svg/DownArrow.jsx";
-import Comment from "../assets/svg/Comment.jsx";
 import Ghost from "../assets/svg/Ghost.jsx";
 import { useState } from "react";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
@@ -19,7 +18,6 @@ import { setBrowserType } from "../slices/browseSlice.js";
 
 function SideMenuContent() {
   const [hide, setHide] = useState(false);
-  const [platformHide, setPlatformHide] = useState(false);
   const [genresHide, setGenresHide] = useState(false);
   const dispatch = useDispatch();
 
@@ -34,14 +32,14 @@ function SideMenuContent() {
             Home
           </h1>
         </NavLink>
-        <NavLink to="/reviews">
-          <h1
-            className=" mr-16 cursor-pointer text-lg font-bold tablet:text-2xl tablet:transition-all
-            tablet:duration-300 tablet:hover:opacity-50"
-          >
-            Reviews
-          </h1>
-        </NavLink>
+        {/*<NavLink to="/reviews">*/}
+        {/*  <h1*/}
+        {/*    className=" mr-16 cursor-pointer text-lg font-bold tablet:text-2xl tablet:transition-all*/}
+        {/*    tablet:duration-300 tablet:hover:opacity-50"*/}
+        {/*  >*/}
+        {/*    Reviews*/}
+        {/*  </h1>*/}
+        {/*</NavLink>*/}
       </div>
       <div className="flex gap-14 tablet:flex-col tablet:gap-4">
         <div className="flex flex-col">
@@ -396,20 +394,20 @@ function SideMenuContent() {
                 <span>Stores</span>
               </li>
             </NavLink>
-            <NavLink
-              to="/reviews"
-              className={({ isActive }) =>
-                isActive ? "font-bold underline underline-offset-2" : undefined
-              }
-              onClick={() => dispatch(setBrowserType("reviews"))}
-            >
-              <li className="filterList">
-                <span className="icon">
-                  <Comment />
-                </span>
-                <span>Reviews</span>
-              </li>
-            </NavLink>
+            {/*<NavLink*/}
+            {/*  to="/reviews"*/}
+            {/*  className={({ isActive }) =>*/}
+            {/*    isActive ? "font-bold underline underline-offset-2" : undefined*/}
+            {/*  }*/}
+            {/*  onClick={() => dispatch(setBrowserType("reviews"))}*/}
+            {/*>*/}
+            {/*  <li className="filterList">*/}
+            {/*    <span className="icon">*/}
+            {/*      <Comment />*/}
+            {/*    </span>*/}
+            {/*    <span>Reviews</span>*/}
+            {/*  </li>*/}
+            {/*</NavLink>*/}
             {!hide && (
               <>
                 <NavLink

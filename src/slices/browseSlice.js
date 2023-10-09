@@ -18,7 +18,7 @@ export const storeSlice = createSlice({
       state.platformName = action.payload;
     },
     setBrowsePlatform: (state, action) => {
-      state.platform = action.payload;
+      state.platform = Number(action.payload);
     },
     setBrowserType: (state, action) => {
       state.browseType = action.payload;

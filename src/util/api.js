@@ -38,11 +38,11 @@ export const fetchGame = async () => {
   return response.data.results;
 };
 
-export const fetchReviews = async (gameId) => {
+export const fetchReviews = async (gameId, pageParam) => {
   const response = await axios.get(
-    `https://api.rawg.io/api/games/${gameId}/reddit?key=${API_KEY}`,
+    `https://api.rawg.io/api/games/${gameId}/reddit?page=${pageParam}&page_size=20&key=${API_KEY}`,
   );
-  return response.data.results;
+  return response.data;
 };
 
 export const fetchLast30Games = async (order, childPlatform, pageParam) => {
@@ -146,5 +146,19 @@ export const fetchStore = async (order, pageParam, tag, itemId, browseType) => {
   }
 
   const response = await axios.get(url);
+  return response.data;
+};
+
+export const fetchByCreatorId = async (id) => {
+  const response = await axios.get(
+    `https://api.rawg.io/api/creators/${id}?&key=1a1a6d04d6e44a42a6cba36022b9c8fb`,
+  );
+  return response.data;
+};
+
+export const fetchCreatorGames = async (order, id, pageParam) => {
+  const response = await axios.get(
+    `https://api.rawg.io/api/games?&creators=${id}&page=${pageParam}&page_size=20&ordering=${order}&key=${API_KEY}`,
+  );
   return response.data;
 };

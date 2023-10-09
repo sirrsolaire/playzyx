@@ -4,33 +4,57 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRedditAlien } from "@fortawesome/free-brands-svg-icons";
 import { useSelector } from "react-redux";
 import { useState } from "react";
+import { Spinner } from "./Spinner.jsx";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 export const ReviewsContent = ({ gameId, gameName, gameImage }) => {
   const postLayout = useSelector((state) => state.layout.postLayout);
-  const { data: postData } = useReview(gameId);
+  const {
+    data: postData,
+    isLoading,
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+  } = useReview(gameId);
+
+  const dataLength =
+    postData?.pages.reduce((total, page) => total + page.results.length, 0) ||
+    0;
   return (
-    <div
-      className={`${
-        postLayout === "grid"
-          ? "smallTb:grid smallTb:grid-cols-2 desktopFirst:grid-cols-3 desktopSecond:grid-cols-4 desktopThird:grid-cols-5"
-          : ""
-      } flex flex-col items-start gap-3 px-4 py-2`}
+    <InfiniteScroll
+      style={{}}
+      dataLength={dataLength}
+      next={fetchNextPage}
+      hasMore={hasNextPage}
+      loader={isFetchingNextPage && <Spinner />}
     >
-      {postData?.map((post, i) => (
-        <RedditPost
+      {isLoading && <Spinner />}
+      {postData?.pages.map((page, i) => (
+        <div
           key={i}
-          title={post.name}
-          comment={post.text}
-          image={post.image}
-          username={post.username}
-          usernameUrl={post.username_url}
-          created={post.created}
-          gameImage={gameImage}
-          gameName={gameName}
-          postUrl={post.url}
-        />
+          className={`${
+            postLayout === "grid"
+              ? "smallTb:grid smallTb:grid-cols-2 desktopFirst:grid-cols-3 desktopSecond:grid-cols-4 desktopThird:grid-cols-5"
+              : ""
+          } flex flex-col items-start gap-3 px-4 py-2`}
+        >
+          {page?.results.map((post, i) => (
+            <RedditPost
+              key={i}
+              title={post.name}
+              comment={post.text}
+              image={post.image}
+              username={post.username}
+              usernameUrl={post.username_url}
+              created={post.created}
+              gameImage={gameImage}
+              gameName={gameName}
+              postUrl={post.url}
+            />
+          ))}
+        </div>
       ))}
-    </div>
+    </InfiniteScroll>
   );
 };
 

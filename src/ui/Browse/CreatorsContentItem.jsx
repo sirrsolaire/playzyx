@@ -1,6 +1,7 @@
 import { formattedNumber } from "../../helpers/numberFormatter.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
+import { NavLink } from "react-router-dom";
 
 export const CreatorsContentItem = ({
   name,
@@ -9,6 +10,7 @@ export const CreatorsContentItem = ({
   games,
   avatar,
   positions,
+  id,
 }) => {
   const containerStyle = {
     backgroundImage: `linear-gradient(rgba(32, 32, 32, 0.5), rgb(32, 32, 32) 70%), url(${image})`,
@@ -27,9 +29,11 @@ export const CreatorsContentItem = ({
           avatar && "h-32 w-32 rounded-full object-cover object-center"
         }  h-32 w-32 rounded-full bg-transparent`}
       />
-      <span className="cursor-pointer text-2xl font-bold underline underline-offset-4 transition-colors duration-200 hover:text-gray-400">
-        {name}
-      </span>
+      <NavLink to={`/creators/${id}`}>
+        <span className="cursor-pointer text-2xl font-bold underline underline-offset-4 transition-colors duration-200 hover:text-gray-400">
+          {name}
+        </span>
+      </NavLink>
       <ul className="-mt-3 flex items-center gap-1 font-semibold">
         {positions.map((position, index) => (
           <li key={position.id} className="text-xs">
@@ -38,10 +42,10 @@ export const CreatorsContentItem = ({
           </li>
         ))}
       </ul>
-      <button className="bg-button-color rounded px-8 py-2 text-base text-white transition-colors duration-200 hover:bg-slate-100 hover:text-black">
+      <button className="rounded bg-button-color px-8 py-2 text-base text-white transition-colors duration-200 hover:bg-slate-100 hover:text-black">
         Follow
       </button>
-      <h2 className="border-button-color flex w-full justify-between border-b-[1px] pb-2">
+      <h2 className="flex w-full justify-between border-b-[1px] border-button-color pb-2">
         <span className="font-bold">Known for</span>
         <span className="text-sm text-info-color">
           {formattedNumber(gamesCount)}

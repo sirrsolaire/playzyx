@@ -4,7 +4,7 @@ import { Title } from "../Title.jsx";
 import Tags from "../Tags.jsx";
 import SideMenu from "../SideMenu.jsx";
 import { FloatSideMenu } from "../FloatButton.jsx";
-import PageParamsContent from "../PageParamsContent.jsx";
+import PageParamsContent from "./PageParamsContent.jsx";
 import { useParams } from "react-router";
 import { formattedSlug } from "../../helpers/platformFilterLetterConvertor.js";
 

@@ -1,14 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
-import GameInfo from "./GameInfo.jsx";
+import GameInfo from "../GameInfo.jsx";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Spinner } from "./Spinner.jsx";
-import { OrderFilter } from "./OrderFilter.jsx";
-import { LayoutView } from "./LayoutView.jsx";
-import { setLayout } from "../slices/layoutSlice.js";
-import useStore from "../hooks/useStore.js";
-import { useLocation } from "react-router";
-import useAllPlatforms from "../hooks/useAllPlatforms.js";
-import { BrowsePlatformFilter } from "./Browse/BrowesePlatformFilter.jsx";
+import { Spinner } from "../Spinner.jsx";
+import { OrderFilter } from "../OrderFilter.jsx";
+import { LayoutView } from "../LayoutView.jsx";
+import { setLayout } from "../../slices/layoutSlice.js";
+import useStore from "../../hooks/useStore.js";
 
 function PageParamsContent() {
   const dispatch = useDispatch();
@@ -24,13 +21,14 @@ function PageParamsContent() {
     fetchNextPage,
     isFetchingNextPage,
   } = useStore({ firstSelectValue, tag, itemId, browseType });
-  const { data: platforms } = useAllPlatforms();
-  const location = useLocation();
 
-  const urlsToHideComponent = platforms?.map(
-    (platform) => `/games/${platform.slug}`,
-  );
-  const showComponent = urlsToHideComponent?.includes(location.pathname);
+  // const { data: platforms } = useAllPlatforms();
+  // const location = useLocation();
+  // const urlsToHideComponent = platforms?.map(
+  //   (platform) => `/games/${platform.slug}`,
+  // );
+  // const showComponent = urlsToHideComponent?.includes(location.pathname);
+  //
 
   const dataLength =
     storeData?.pages.reduce((total, page) => total + page.results.length, 0) ||
@@ -41,7 +39,7 @@ function PageParamsContent() {
       <div className="mb-6 mt-9 flex flex-wrap justify-center gap-2 tablet:mt-4 tablet:justify-between">
         <div className="flex gap-1 tablet:gap-2">
           <OrderFilter />
-          {showComponent && <BrowsePlatformFilter />}
+          {/*{showComponent && <BrowsePlatformFilter />}*/}
         </div>
         <LayoutView
           onGrid={() => dispatch(setLayout("grid"))}

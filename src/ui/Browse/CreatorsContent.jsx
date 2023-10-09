@@ -42,6 +42,8 @@ function CreatorsContent() {
                 games={creator.games.slice(0, 3)}
                 avatar={creator.image}
                 positions={creator.positions}
+                slug={creator.slug}
+                id={creator.id}
               />
             ))}
           </div>

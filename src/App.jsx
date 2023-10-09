@@ -1,6 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { HomePage } from "./pages/HomePage.jsx";
-import { Reviews } from "./pages/Reviews.jsx";
 import { LastThirtyGames } from "./pages/LastThirtyGames.jsx";
 import { ThisWeekGames } from "./pages/ThisWeekGames.jsx";
 import { NextWeekGames } from "./pages/NextWeekGames.jsx";
@@ -23,6 +22,8 @@ import { Tags } from "./pages/Browse/Tags.jsx";
 import { Developers } from "./pages/Browse/Developers.jsx";
 import { Publishers } from "./pages/Browse/Publishers.jsx";
 import { PageParam } from "./ui/Browse/PageParam.jsx";
+import { CreatorsParam } from "./ui/Browse/CreatorsParam.jsx";
+import { Reviews } from "./pages/Reviews.jsx";
 
 const router = createBrowserRouter([
   {
@@ -128,6 +129,10 @@ const router = createBrowserRouter([
   {
     path: "/games/:slug",
     element: <PageParam />,
+  },
+  {
+    path: "/creators/:id",
+    element: <CreatorsParam />,
   },
   {
     path: "*",

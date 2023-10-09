@@ -24,6 +24,7 @@ import { Publishers } from "./pages/Browse/Publishers.jsx";
 import { PageParam } from "./ui/Browse/PageParam.jsx";
 import { CreatorsParam } from "./ui/Browse/CreatorsParam.jsx";
 import { Reviews } from "./pages/Reviews.jsx";
+import { DetailedGamePage } from "./pages/DetailedGamePage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -133,6 +134,10 @@ const router = createBrowserRouter([
   {
     path: "/creators/:id",
     element: <CreatorsParam />,
+  },
+  {
+    path: "/games/details/:slug",
+    element: <DetailedGamePage />,
   },
   {
     path: "*",

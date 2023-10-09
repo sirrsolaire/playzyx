@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { Platform } from "./Platform.jsx";
 import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 
 function GameInfo({
   name,
@@ -18,6 +19,7 @@ function GameInfo({
   releasedDate,
   genres,
   rating,
+  slug,
 }) {
   const layout = useSelector((state) => state.layout.layout);
   const [open, setOpen] = useState(false);
@@ -58,9 +60,11 @@ function GameInfo({
             </div>
           ) : null}
         </div>
-        <span className="block truncate text-2xl font-bold text-white">
-          {name}
-        </span>
+        <NavLink to={`/games/details/${slug}`}>
+          <span className="block truncate text-2xl font-bold text-white">
+            {name}
+          </span>
+        </NavLink>
         <div className="mt-2 flex items-center gap-1">
           <span className="flex items-center gap-1 rounded-[0.3rem] bg-second-color px-2 font-semibold text-white">
             <FontAwesomeIcon icon={faPlus} className="text-xs" /> {add}

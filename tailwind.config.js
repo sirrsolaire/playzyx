@@ -12,6 +12,10 @@ export default {
           "linear-gradient(45deg, rgba(47,48,54,1) 0%, rgba(32,32,32,1) 100%)",
         "mask-image":
           "linear-gradient(#000 calc(100% - 60px),transparent calc(100% - 4px))",
+        exceptional: "linear-gradient(180deg,#b4ec51,#429321)",
+        recommended: "linear-gradient(0deg,#4354b9,#649bff)",
+        meh: "linear-gradient(180deg,#fad961,#f76b1c)",
+        skip: "linear-gradient(180deg,#ff5764,#f11a2a)",
       },
 
       colors: {
@@ -21,6 +25,7 @@ export default {
         "info-color": "hsla(0,0%,100%,.4)",
         "border-color": " hsla(0,0%,100%,.07)",
         "button-color": "hsla(0,0%,100%,.1)",
+        "mobile-comment": "hsla(0,0%,100%,.5)",
       },
 
       screens: {

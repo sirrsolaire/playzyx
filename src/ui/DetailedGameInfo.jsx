@@ -218,7 +218,7 @@ export const DetailedGameInfo = () => {
           <div className="flex flex-col gap-0.5">
             <span className="text-sm opacity-50">Metascore</span>
             <span className="w-fit rounded border-[1px] border-green-500 px-1 font-semibold text-green-500">
-              {data?.metacritic ? "data?.metacritic" : "Soon"}
+              {data?.metacritic ? data?.metacritic : "Soon"}
             </span>
           </div>
         </div>

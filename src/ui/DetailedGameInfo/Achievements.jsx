@@ -3,7 +3,7 @@ import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 
 export const Achievements = ({ data, achievementData }) => {
   return (
-    <div className="mt-10">
+    <div className="mt-10 ">
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-semibold underline underline-offset-2">
           {data?.name} achievements

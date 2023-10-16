@@ -34,6 +34,7 @@ export default {
         smallTb: "550px",
         tablet: "980px",
         desktopFirst: "1055px",
+        desktopFirstHalf: "1200px",
         desktopSecond: "1440px",
         desktopThird: "1800px",
       },

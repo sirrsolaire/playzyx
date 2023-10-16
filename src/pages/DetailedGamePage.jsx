@@ -9,10 +9,10 @@ export const DetailedGamePage = () => {
     <>
       <Header />
       <div className="px-5 tablet:flex tablet:px-10">
-        <div className="hidden desktopSecond:block">
+        <div className="desktopFirstHalf:block hidden h-fit">
           <DesktopSideMenu />
         </div>
-        <section className="max-w-[1100px] pb-36">
+        <section className="pb-36 ">
           <DesktopDetailedGameInfo />
         </section>
         <SideMenu />

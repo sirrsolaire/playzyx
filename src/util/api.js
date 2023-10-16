@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const API_KEY = "1a1a6d04d6e44a42a6cba36022b9c8fb";
+export const API_KEY = "500f230bf4154293b1c465edcedc36f9";
 
 export const fetchGamesQuery = async (value) => {
   const response = await axios.get(
@@ -52,7 +52,7 @@ export const fetchLast30Games = async (order, childPlatform, pageParam) => {
   const thirtyDaysAgoStr = thirtyDaysAgo.toISOString().split("T")[0];
 
   const response = await axios.get(
-    `https://api.rawg.io/api/games?dates=${thirtyDaysAgoStr},${currentDateStr}&key=1a1a6d04d6e44a42a6cba36022b9c8fb&page=${pageParam}&page_size=20&ordering=${order}&platforms=${childPlatform}`,
+    `https://api.rawg.io/api/games?dates=${thirtyDaysAgoStr},${currentDateStr}&key=${API_KEY}&page=${pageParam}&page_size=20&ordering=${order}&platforms=${childPlatform}`,
   );
   return response.data;
 };
@@ -64,7 +64,7 @@ export const fetchLastWeek = async (order, childPlatform, pageParam) => {
   const oneWeekAgoStr = oneWeekAgo.toISOString().split("T")[0];
 
   const response = await axios.get(
-    `https://api.rawg.io/api/games?dates=${oneWeekAgoStr},${currentDateStr}&key=1a1a6d04d6e44a42a6cba36022b9c8fb&page=${pageParam}&page_size=20&ordering=${order}&platforms=${childPlatform}`,
+    `https://api.rawg.io/api/games?dates=${oneWeekAgoStr},${currentDateStr}&key=${API_KEY}&page=${pageParam}&page_size=20&ordering=${order}&platforms=${childPlatform}`,
   );
   return response.data;
 };
@@ -81,7 +81,7 @@ export const fetchNextWeek = async (order, childPlatform, pageParam) => {
   const nextWeekEndDateStr = nextWeekEndDate.toISOString().split("T")[0];
 
   const response = await axios.get(
-    `https://api.rawg.io/api/games?dates=${nextWeekStartDateStr},${nextWeekEndDateStr}&key=1a1a6d04d6e44a42a6cba36022b9c8fb&page=${pageParam}&page_size=20&ordering=${order}&platforms=${childPlatform}`,
+    `https://api.rawg.io/api/games?dates=${nextWeekStartDateStr},${nextWeekEndDateStr}&key=${API_KEY}&page=${pageParam}&page_size=20&ordering=${order}&platforms=${childPlatform}`,
   );
   return response.data;
 };
@@ -109,21 +109,21 @@ export const fetchTags = async () => {
 
 export const fetchBrowsePlatforms = async (pageParam, browseType) => {
   const response = await axios.get(
-    `https://api.rawg.io/api/${browseType}?page=${pageParam}&page_size=20&key=1a1a6d04d6e44a42a6cba36022b9c8fb`,
+    `https://api.rawg.io/api/${browseType}?page=${pageParam}&page_size=20&key=${API_KEY}`,
   );
   return response.data;
 };
 
 export const fetchCreators = async (pageParam) => {
   const response = await axios.get(
-    `https://api.rawg.io/api/creators?page=${pageParam}&page_size=20&key=1a1a6d04d6e44a42a6cba36022b9c8fb`,
+    `https://api.rawg.io/api/creators?page=${pageParam}&page_size=20&key=${API_KEY}`,
   );
   return response.data;
 };
 
 export const fetchStoreID = async () => {
   const response = await axios.get(
-    `https://api.rawg.io/api/stores?&page_size=30&key=1a1a6d04d6e44a42a6cba36022b9c8fb`,
+    `https://api.rawg.io/api/stores?&page_size=30&key=${API_KEY}`,
   );
   return response.data.results;
 };
@@ -151,7 +151,7 @@ export const fetchStore = async (order, pageParam, tag, itemId, browseType) => {
 
 export const fetchByCreatorId = async (id) => {
   const response = await axios.get(
-    `https://api.rawg.io/api/creators/${id}?&key=1a1a6d04d6e44a42a6cba36022b9c8fb`,
+    `https://api.rawg.io/api/creators/${id}?&key=${API_KEY}`,
   );
   return response.data;
 };

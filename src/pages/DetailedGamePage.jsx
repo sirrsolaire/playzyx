@@ -2,16 +2,18 @@ import Header from "../ui/Header.jsx";
 import { DesktopSideMenu } from "../ui/DesktopSideMenu.jsx";
 import SideMenu from "../ui/SideMenu.jsx";
 import { FloatSideMenu } from "../ui/FloatButton.jsx";
-import { DetailedGameInfo } from "../ui/DetailedGameInfo.jsx";
+import { DesktopDetailedGameInfo } from "../ui/DesktopDetailedGameInfo.jsx";
 
 export const DetailedGamePage = () => {
   return (
     <>
       <Header />
-      <div className="tablet:flex tablet:px-10">
-        <DesktopSideMenu />
-        <section className="flex-col px-2 pb-36 tablet:mt-6 tablet:flex tablet:w-full tablet:px-0">
-          <DetailedGameInfo />
+      <div className="px-5 tablet:flex tablet:px-10">
+        <div className="hidden desktopSecond:block">
+          <DesktopSideMenu />
+        </div>
+        <section className="max-w-[1100px] pb-36">
+          <DesktopDetailedGameInfo />
         </section>
         <SideMenu />
         <FloatSideMenu />

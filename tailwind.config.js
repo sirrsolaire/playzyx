@@ -26,6 +26,8 @@ export default {
         "border-color": " hsla(0,0%,100%,.07)",
         "button-color": "hsla(0,0%,100%,.1)",
         "mobile-comment": "hsla(0,0%,100%,.5)",
+        "show-more": "rgba(44,44,44,.5)",
+        "tag-color": "rgba(16, 117, 124, 0.1)",
       },
 
       screens: {

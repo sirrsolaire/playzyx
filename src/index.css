@@ -41,6 +41,12 @@
     }
 }
 
+@layer utilities {
+    .tab {
+        @apply cursor-pointer hover:decoration-2 hover:underline-offset-8 opacity-50 hover:underline text-xl transition-all duration-200 hover:ease-in-out;
+    }
+}
+
 @layer base {
     option {
         @apply bg-[#202020];

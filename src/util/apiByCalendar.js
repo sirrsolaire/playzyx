@@ -1,4 +1,5 @@
 import axios from "axios";
+import { API_KEY } from "./api.js";
 
 export const fetchByMonth = async (order, childPlatform, pageParam, month) => {
   const currentYear = new Date().getFullYear();
@@ -18,7 +19,7 @@ export const fetchByMonth = async (order, childPlatform, pageParam, month) => {
   const endDateStr = endDate.toISOString().split("T")[0];
 
   const response = await axios.get(
-    `https://api.rawg.io/api/games?dates=${startDateStr},${endDateStr}&key=1a1a6d04d6e44a42a6cba36022b9c8fb&page=${pageParam}&page_size=20&ordering=${order}&platforms=${childPlatform}`,
+    `https://api.rawg.io/api/games?dates=${startDateStr},${endDateStr}&key=${API_KEY}&page=${pageParam}&page_size=20&ordering=${order}&platforms=${childPlatform}`,
   );
   return response.data;
 };

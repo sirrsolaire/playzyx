@@ -53,7 +53,7 @@ export const ParentPlatformsIcon = ({ id }) => {
 
   return (
     <div className="">
-      <FontAwesomeIcon icon={selectIcon(id)} className="" />
+      <FontAwesomeIcon icon={selectIcon(id)} className="tablet:text-lg" />
     </div>
   );
 };

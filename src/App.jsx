@@ -25,6 +25,11 @@ import { PageParam } from "./ui/Browse/PageParam.jsx";
 import { CreatorsParam } from "./ui/Browse/CreatorsParam.jsx";
 import { Reviews } from "./pages/Reviews.jsx";
 import { DetailedGamePage } from "./pages/DetailedGamePage.jsx";
+import { ToastContainer } from "react-toastify";
+import Login from "./pages/Login.jsx";
+import Register from "./pages/Register.jsx";
+import Profile from "./pages/Profile.jsx";
+import ProtectedRoute from "./pages/ProtectedRoute.jsx";
 
 const router = createBrowserRouter([
   {
@@ -140,13 +145,34 @@ const router = createBrowserRouter([
     element: <DetailedGamePage />,
   },
   {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
+  },
+  {
+    element: <ProtectedRoute />,
+    children: [
+      {
+        path: "/profile/:username",
+        element: <Profile />,
+      },
+    ],
+  },
+  {
     path: "*",
     element: <h1>Page Not Found!!</h1>,
   },
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router} /> <ToastContainer />
+    </>
+  );
 }
 
 export default App;

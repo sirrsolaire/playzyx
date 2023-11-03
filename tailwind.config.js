@@ -23,11 +23,15 @@ export default {
         "game-info": "#202020",
         "second-color": "hsla(0,0%,100%,.16)",
         "info-color": "hsla(0,0%,100%,.4)",
-        "border-color": " hsla(0,0%,100%,.07)",
+        "border-color": "hsla(0,0%,100%,.07)",
         "button-color": "hsla(0,0%,100%,.1)",
         "mobile-comment": "hsla(0,0%,100%,.5)",
         "show-more": "rgba(44,44,44,.5)",
         "tag-color": "rgba(16, 117, 124, 0.1)",
+        "input-color": "rgba(0,0,0,.5)",
+      },
+      boxShadow: {
+        "modal-button": "0 0 20px 0 hsla(0,0%,100%,.2)",
       },
 
       screens: {

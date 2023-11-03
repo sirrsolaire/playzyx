@@ -1,23 +1,32 @@
-import {
-  faBars,
-  faEllipsis,
-  faSearch,
-  faX,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBars, faSearch, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import { setOpen } from "../slices/mobileMenuSlice.js";
-import { Popover } from "antd";
 import { useEffect, useRef, useState } from "react";
 import { setQuery } from "../slices/querySlice.js";
 import MobileMenu from "./MobileMenu.jsx";
 import { SearchResults } from "./SearchResults.jsx";
+import { UserModal } from "./UserModal.jsx";
+import { useGetUser } from "../hooks/Auth/useGetUser.js";
+import { useLogOut } from "../hooks/Auth/useLogOut.js";
+import { NavLink } from "react-router-dom";
+import UserDropDown from "./UserDropDrown.jsx";
+import defaultUser from "../../public/default-user.png";
 
 function Header() {
   const [onEnter, setOnEnter] = useState(false);
   const [showSearchResults, setShowSearchResults] = useState(false); // State to control search results visibility
   const query = useSelector((state) => state.query.query);
   const dispatch = useDispatch();
+  const { logoutMutate } = useLogOut();
+  const { data: user } = useGetUser();
+  const authenticatedUser = user?.role === "authenticated";
+  const avatar = user?.user_metadata.avatar_image;
+  const username = user?.user_metadata.username;
+
+  const handleLogout = () => {
+    logoutMutate();
+  };
 
   function showDrawer() {
     dispatch(setOpen(true));
@@ -40,18 +49,8 @@ function Header() {
     };
   }, []);
 
-  const content = (
-    <div>
-      <p className="cursor-pointer">Leaderboard</p>
-      <p className="cursor-pointer">Discord</p>
-      <p className="cursor-pointer">Twitter</p>
-      <p className="cursor-pointer">Instagram</p>
-      <p className="cursor-pointer">Facebook</p>
-    </div>
-  );
-
   return (
-    <nav className="flex items-center gap-4 px-7 py-4 tablet:mt-3 tablet:px-10">
+    <nav className="z-40 flex w-full items-center gap-4 px-7 py-4 tablet:px-10">
       <h1 className="text-xl font-black tracking-[0.2rem] text-white">
         PLAYZYX
       </h1>
@@ -94,19 +93,44 @@ function Header() {
         onClick={showDrawer}
       />
       <MobileMenu />
-      <ul className=" hidden items-center gap-3 font-semibold text-white tablet:flex tablet:w-[290px] tablet:justify-end desktopFirst:w-[290px] desktopSecond:w-[255px]">
-        <li className="cursor-pointer decoration-2 hover:underline hover:underline-offset-4">
-          LOG IN
-        </li>
-        <li className="cursor-pointer decoration-2 hover:underline hover:underline-offset-4">
-          SIGN UP
-        </li>
-        <li className="flex items-center">
-          <Popover content={content} minWidth="20" placement="bottomLeft">
-            <FontAwesomeIcon icon={faEllipsis} className="mt-0.5 text-lg" />
-          </Popover>
-        </li>
+
+      <ul className=" hidden items-center gap-3 font-semibold text-white tablet:flex ">
+        {!authenticatedUser ? (
+          <>
+            <NavLink to={"/login"}>
+              <li
+                className="cursor-pointer decoration-2 hover:underline hover:underline-offset-4"
+                // onClick={handleLoginModal}
+              >
+                LOG IN
+              </li>
+            </NavLink>
+            <NavLink to={"/register"}>
+              <li
+                className="cursor-pointer decoration-2 hover:underline hover:underline-offset-4"
+                // onClick={handleRegisterModal}
+              >
+                SIGN UP
+              </li>
+            </NavLink>
+          </>
+        ) : (
+          <div className="flex  items-center justify-between">
+            <div className="flex items-center gap-3">
+              <img
+                src={avatar || defaultUser}
+                alt="User Avatar"
+                className="h-10 w-10 cursor-pointer"
+              />
+              <span className="cursor-pointer truncate text-lg decoration-2 hover:underline hover:underline-offset-4">
+                {username}
+              </span>
+            </div>
+            <UserDropDown handleLogout={handleLogout} username={username} />
+          </div>
+        )}
       </ul>
+      <UserModal />
     </nav>
   );
 }

@@ -21,6 +21,7 @@
     .iconWrapper {
         @apply rounded-md bg-[#202020] w-7 h-7 flex items-center justify-center text-lg tablet:hover:bg-white transition-colors duration-200;
     }
+
 }
 
 @layer utilities {
@@ -56,6 +57,18 @@
 @layer base {
     ul img {
         @apply w-[24px] h-[24px] tablet:w-8 tablet:h-8;
+    }
+}
+
+@layer base {
+    input {
+        @apply bg-input-color block w-full rounded-md border-0 px-2 py-3 font-medium text-white shadow-sm focus:outline-none sm:text-base sm:leading-6;
+    }
+}
+
+@layer utilities {
+    .inputButton{
+        @apply flex w-full cursor-pointer justify-center rounded-md bg-white px-3 py-1.5 text-base font-semibold leading-6 text-black shadow-modal-button transition-all duration-200 ease-out hover:shadow-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2;
     }
 }
 

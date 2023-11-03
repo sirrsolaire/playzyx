@@ -7,6 +7,7 @@ import {
   faUserPlus,
   faX,
 } from "@fortawesome/free-solid-svg-icons";
+import { setIsModalOpen, setModalType } from "../slices/modalSlice.js";
 
 const MobileMenu = () => {
   const menuOpen = useSelector((state) => state.menu.open);
@@ -14,6 +15,16 @@ const MobileMenu = () => {
 
   const onClose = () => {
     dispatch(setOpen(false));
+  };
+
+  const handleLoginModal = () => {
+    dispatch(setModalType("login"));
+    dispatch(setIsModalOpen(true));
+  };
+
+  const handleRegisterModal = () => {
+    dispatch(setModalType("register"));
+    dispatch(setIsModalOpen(true));
   };
 
   return (
@@ -52,11 +63,23 @@ const MobileMenu = () => {
               onClick={onClose}
             />
             <div className="flex flex-col items-center">
-              <div className="mt-6 flex h-16 w-16 items-center justify-center rounded-full bg-second-color">
+              <div
+                className="mt-6 flex h-16 w-16 items-center justify-center rounded-full bg-second-color"
+                onClick={() => {
+                  onClose();
+                  handleLoginModal();
+                }}
+              >
                 <FontAwesomeIcon icon={faRightToBracket} className="text-3xl" />
               </div>
               <span className="mt-1 font-semibold">Log in</span>
-              <div className="mt-3 flex h-16 w-16 items-center justify-center rounded-full bg-second-color">
+              <div
+                className="mt-3 flex h-16 w-16 items-center justify-center rounded-full bg-second-color"
+                onClick={() => {
+                  onClose();
+                  handleRegisterModal();
+                }}
+              >
                 <FontAwesomeIcon icon={faUserPlus} className="text-3xl" />
               </div>
               <span className="mt-1 font-semibold">Sign up</span>

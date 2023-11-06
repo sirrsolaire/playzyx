@@ -1,14 +1,14 @@
 import { faBars, faSearch, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
-import { setOpen } from "../slices/mobileMenuSlice.js";
+import { setOpen } from "../reducers/mobileMenuSlice.js";
 import { useEffect, useRef, useState } from "react";
-import { setQuery } from "../slices/querySlice.js";
+import { setQuery } from "../reducers/querySlice.js";
 import MobileMenu from "./MobileMenu.jsx";
 import { SearchResults } from "./SearchResults.jsx";
 import { UserModal } from "./UserModal.jsx";
-import { useGetUser } from "../hooks/Auth/useGetUser.js";
-import { useLogOut } from "../hooks/Auth/useLogOut.js";
+import { useGetUser } from "../hooks/authentication/useGetUser.js";
+import { useLogOut } from "../hooks/authentication/useLogOut.js";
 import { NavLink } from "react-router-dom";
 import UserDropDown from "./UserDropDrown.jsx";
 import defaultUser from "../../public/default-user.png";
@@ -94,7 +94,7 @@ function Header() {
       />
       <MobileMenu />
 
-      <ul className=" hidden items-center gap-3 font-semibold text-white tablet:flex ">
+      <ul className=" hidden items-center gap-3 whitespace-nowrap font-semibold text-white tablet:flex">
         {!authenticatedUser ? (
           <>
             <NavLink to={"/login"}>
@@ -122,9 +122,12 @@ function Header() {
                 alt="User Avatar"
                 className="h-10 w-10 cursor-pointer"
               />
-              <span className="cursor-pointer truncate text-lg decoration-2 hover:underline hover:underline-offset-4">
+              <NavLink
+                to={`/profile/${username}`}
+                className="cursor-pointer truncate text-lg decoration-2 hover:underline hover:underline-offset-4"
+              >
                 {username}
-              </span>
+              </NavLink>
             </div>
             <UserDropDown handleLogout={handleLogout} username={username} />
           </div>

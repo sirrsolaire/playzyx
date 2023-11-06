@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setModalType } from "../slices/modalSlice.js";
+import { setModalType } from "../reducers/modalSlice.js";
 import { Link } from "react-router-dom";
-import { useRegister } from "../hooks/Auth/useRegister.js";
+import { useRegister } from "../hooks/authentication/useRegister.js";
 import { useNavigate } from "react-router";
 import { generalError, registerNotify } from "../helpers/toaster/toast.js";
 import SmallSpinner from "./SmallSpinner.jsx";
@@ -9,7 +9,7 @@ import {
   setRegisterEmail,
   setRegisterPassword,
   setRegisterUsername,
-} from "../slices/authSlice.js";
+} from "../reducers/authSlice.js";
 
 const RegisterForm = () => {
   const registerUsername = useSelector((state) => state.auth.registerUsername);

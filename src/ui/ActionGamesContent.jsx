@@ -5,7 +5,7 @@ import { Spinner } from "./Spinner.jsx";
 import { PlatformsFilter } from "./PlatformsFilter.jsx";
 import { OrderFilter } from "./OrderFilter.jsx";
 import { LayoutView } from "./LayoutView.jsx";
-import { setLayout } from "../slices/layoutSlice.js";
+import { setLayout } from "../reducers/layoutSlice.js";
 import useGenres from "../hooks/useGenres.js";
 
 function ActionGamesContent({ genreId }) {

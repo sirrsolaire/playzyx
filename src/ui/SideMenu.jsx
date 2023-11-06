@@ -1,13 +1,13 @@
 import { ConfigProvider, Drawer, FloatButton } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { setSideMenuOpen } from "../slices/mobileMenuSlice";
+import { setSideMenuOpen } from "../reducers/mobileMenuSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import SideMenuContent from "./SideMenuContent";
 import { useLocation } from "react-router";
 import { useEffect } from "react";
-import { setChildPlatform, setFirstSelect } from "../slices/filterSlice.js";
-import { setLayout } from "../slices/layoutSlice.js";
+import { setChildPlatform, setFirstSelect } from "../reducers/filterSlice.js";
+import { setLayout } from "../reducers/layoutSlice.js";
 
 const SideMenu = () => {
   const sideMenuDrawerOpen = useSelector((state) => state.menu.sideMenuOpen);

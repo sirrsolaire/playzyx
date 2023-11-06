@@ -7,7 +7,7 @@ import { DesktopSideMenu } from "../ui/DesktopSideMenu.jsx";
 import { FloatSideMenu } from "../ui/FloatButton.jsx";
 import { LayoutView } from "../ui/LayoutView.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { setPostLayout } from "../slices/layoutSlice.js";
+import { setPostLayout } from "../reducers/layoutSlice.js";
 
 export const Reviews = () => {
   const postLayout = useSelector((state) => state.layout.postLayout);

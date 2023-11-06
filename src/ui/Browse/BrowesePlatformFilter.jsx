@@ -3,7 +3,7 @@ import { DownOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import useAllPlatforms from "../../hooks/useAllPlatforms.js";
 import "../../assets/styles/DropDownMenu.css";
-import { setBrowsePlatform } from "../../slices/browseSlice.js";
+import { setBrowsePlatform } from "../../reducers/browseSlice.js";
 import { NavLink } from "react-router-dom";
 import { useParams } from "react-router";
 import { formattedSlug } from "../../helpers/platformFilterLetterConvertor.js";

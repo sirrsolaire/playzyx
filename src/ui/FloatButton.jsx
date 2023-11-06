@@ -2,7 +2,7 @@ import { ConfigProvider, FloatButton } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
-import { setSideMenuOpen } from "../slices/mobileMenuSlice.js";
+import { setSideMenuOpen } from "../reducers/mobileMenuSlice.js";
 
 export const FloatSideMenu = () => {
   const dispatch = useDispatch();

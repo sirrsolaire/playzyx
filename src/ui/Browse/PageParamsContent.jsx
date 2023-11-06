@@ -4,7 +4,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { Spinner } from "../Spinner.jsx";
 import { OrderFilter } from "../OrderFilter.jsx";
 import { LayoutView } from "../LayoutView.jsx";
-import { setLayout } from "../../slices/layoutSlice.js";
+import { setLayout } from "../../reducers/layoutSlice.js";
 import useStore from "../../hooks/useStore.js";
 
 function PageParamsContent() {

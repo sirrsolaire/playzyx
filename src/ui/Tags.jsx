@@ -1,7 +1,7 @@
 import { ConfigProvider, Space, Tag } from "antd";
 import useTags from "../hooks/useTags.js";
 import { useDispatch, useSelector } from "react-redux";
-import { setTag } from "../slices/filterSlice.js";
+import { setTag } from "../reducers/filterSlice.js";
 
 const Tags = () => {
   const selectedTag = useSelector((state) => state.filtering.tag);

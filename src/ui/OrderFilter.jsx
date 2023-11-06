@@ -1,6 +1,6 @@
 import { ConfigProvider, Dropdown, Space } from "antd";
 import { DownOutlined } from "@ant-design/icons";
-import { setFirstSelect } from "../slices/filterSlice.js";
+import { setFirstSelect } from "../reducers/filterSlice.js";
 import { useDispatch, useSelector } from "react-redux";
 
 const items = [

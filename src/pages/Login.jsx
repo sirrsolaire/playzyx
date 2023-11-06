@@ -1,7 +1,7 @@
 import Header from "../ui/Header.jsx";
 import LoginForm from "../ui/LoginForm.jsx";
 import loginBG from "../../public/login-bg.jpg";
-import { useGetUser } from "../hooks/Auth/useGetUser.js";
+import { useGetUser } from "../hooks/authentication/useGetUser.js";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import PageLoadSpinner from "../ui/PageLoadSpinner.jsx";

@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { setMonth } from "../slices/calendarSlice.js";
+import { setMonth } from "../reducers/calendarSlice.js";
 import { NavLink } from "react-router-dom";
 
 export const Calendar = () => {

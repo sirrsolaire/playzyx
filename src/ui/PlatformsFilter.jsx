@@ -1,7 +1,7 @@
 import { ConfigProvider, Dropdown, Space } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { setChildPlatform } from "../slices/filterSlice.js";
+import { setChildPlatform } from "../reducers/filterSlice.js";
 
 const items = [
   {

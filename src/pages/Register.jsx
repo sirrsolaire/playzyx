@@ -1,7 +1,7 @@
 import Header from "../ui/Header.jsx";
 import RegisterForm from "../ui/ResgisterForm.jsx";
 import signUp from "../../public/register-bg.jpg";
-import { useGetUser } from "../hooks/Auth/useGetUser.js";
+import { useGetUser } from "../hooks/authentication/useGetUser.js";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import PageLoadSpinner from "../ui/PageLoadSpinner.jsx";

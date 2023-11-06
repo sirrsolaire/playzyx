@@ -16,6 +16,7 @@ export default {
         recommended: "linear-gradient(0deg,#4354b9,#649bff)",
         meh: "linear-gradient(180deg,#fad961,#f76b1c)",
         skip: "linear-gradient(180deg,#ff5764,#f11a2a)",
+        "default-profile-avatar": "linear-gradient(0deg,#3023ae,#c86dd7)",
       },
 
       colors: {
@@ -38,7 +39,7 @@ export default {
         smallTb: "550px",
         tablet: "980px",
         desktopFirst: "1055px",
-        desktopFirstHalf: "1200px",
+        desktopFirstHalf: "1280px",
         desktopSecond: "1440px",
         desktopThird: "1800px",
       },

@@ -6,7 +6,7 @@ import { PlatformsFilter } from "./PlatformsFilter.jsx";
 import { OrderFilter } from "./OrderFilter.jsx";
 import useGames from "../hooks/useGames.js";
 import { LayoutView } from "./LayoutView.jsx";
-import { setLayout } from "../slices/layoutSlice.js";
+import { setLayout } from "../reducers/layoutSlice.js";
 
 function Content() {
   const dispatch = useDispatch();

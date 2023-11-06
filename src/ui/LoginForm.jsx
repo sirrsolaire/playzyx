@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setIsModalOpen, setModalType } from "../slices/modalSlice.js";
-import { useLogin } from "../hooks/Auth/useLogin.js";
-import { setPassword, setUsername } from "../slices/authSlice.js";
+import { setIsModalOpen, setModalType } from "../reducers/modalSlice.js";
+import { useLogin } from "../hooks/authentication/useLogin.js";
+import { setPassword, setUsername } from "../reducers/authSlice.js";
 import { useNavigate } from "react-router";
 import "react-toastify/dist/ReactToastify.css";
 import { errorNotify, successNotify } from "../helpers/toaster/toast.js";

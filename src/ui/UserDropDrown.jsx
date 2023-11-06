@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const UserDropDown = ({ handleLogout, username }) => {
   const items = [
     {
-      label: <Link to={`/profile/${username}`}>Profile</Link>,
+      label: <Link to={`/profile/${username}/overview`}>Profile</Link>,
       key: "0",
     },
     {

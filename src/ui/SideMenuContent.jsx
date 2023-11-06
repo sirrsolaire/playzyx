@@ -14,7 +14,7 @@ import Tag from "../assets/svg/Tag.jsx";
 import Doc from "../assets/svg/Doc.jsx";
 import Code from "../assets/svg/Code.jsx";
 import { useDispatch } from "react-redux";
-import { setBrowserType } from "../slices/browseSlice.js";
+import { setBrowserType } from "../reducers/browseSlice.js";
 
 function SideMenuContent() {
   const [hide, setHide] = useState(false);

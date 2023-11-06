@@ -1,13 +1,13 @@
 import { Drawer } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { setOpen } from "../slices/mobileMenuSlice";
+import { setOpen } from "../reducers/mobileMenuSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faRightToBracket,
   faUserPlus,
   faX,
 } from "@fortawesome/free-solid-svg-icons";
-import { setIsModalOpen, setModalType } from "../slices/modalSlice.js";
+import { setIsModalOpen, setModalType } from "../reducers/modalSlice.js";
 
 const MobileMenu = () => {
   const menuOpen = useSelector((state) => state.menu.open);

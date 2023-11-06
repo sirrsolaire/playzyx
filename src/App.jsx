@@ -30,6 +30,10 @@ import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import Profile from "./pages/Profile.jsx";
 import ProtectedRoute from "./pages/ProtectedRoute.jsx";
+import Library from "./pages/Library.jsx";
+import Wishlist from "./pages/Wishlist.jsx";
+import ProfileReviews from "./pages/ProfileReviews.jsx";
+import Overview from "./pages/Overview.jsx";
 
 const router = createBrowserRouter([
   {
@@ -158,6 +162,24 @@ const router = createBrowserRouter([
       {
         path: "/profile/:username",
         element: <Profile />,
+        children: [
+          {
+            path: "/profile/:username/overview",
+            element: <Overview />,
+          },
+          {
+            path: "/profile/:username/library",
+            element: <Library />,
+          },
+          {
+            path: "/profile/:username/wishlist",
+            element: <Wishlist />,
+          },
+          {
+            path: "/profile/:username/reviews",
+            element: <ProfileReviews />,
+          },
+        ],
       },
     ],
   },

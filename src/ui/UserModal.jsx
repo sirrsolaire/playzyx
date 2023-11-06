@@ -1,6 +1,6 @@
 import { ConfigProvider, Modal } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsModalOpen } from "../slices/modalSlice.js";
+import { setIsModalOpen } from "../reducers/modalSlice.js";
 import { LoginModal } from "./LoginModal.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";

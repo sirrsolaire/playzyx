@@ -7,7 +7,7 @@ import {
   setBrowsePlatform,
   setPlatformName,
   setStore,
-} from "../../slices/browseSlice.js";
+} from "../../reducers/browseSlice.js";
 
 export const BrowseContentItem = ({
   name,

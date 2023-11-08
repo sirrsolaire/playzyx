@@ -1,4 +1,4 @@
-import { supabase } from "../../supabase.js";
+import { supabase, supabaseUrl } from "../../supabase.js";
 
 export const login = async (loginEmail, loginPassword) => {
   const { error } = await supabase.auth.signInWithPassword({
@@ -18,7 +18,7 @@ export const register = async (registerPayload) => {
     options: {
       data: {
         username: registerPayload.username,
-        avatar_image: "",
+        fullName: registerPayload.fullName,
       },
     },
   });
@@ -43,4 +43,46 @@ export async function logOut() {
   if (error) {
     throw new Error(error.message);
   }
+}
+
+export async function updateUser({ fullName, bio, avatar }) {
+  const { data, error } = await supabase.auth.updateUser({
+    data: { fullName, bio },
+  });
+
+  if (error) throw new Error(error.message);
+  if (!avatar) return data;
+
+  const fileName = `avatar-${data.user.id}-${Math.random()}`;
+
+  const { error: storageError } = await supabase.storage
+    .from("avatar")
+    .upload(fileName, avatar);
+
+  if (storageError) throw new Error(storageError.message);
+
+  const { data: updatedUser, error: error2 } = await supabase.auth.updateUser({
+    data: {
+      avatar: `${supabaseUrl}/storage/v1/object/public/avatar/${fileName}`,
+    },
+  });
+
+  if (error2) throw new Error(error2.message);
+  return updatedUser;
+}
+
+export async function updatePassword({ newPassword }) {
+  const { data, error } = await supabase.auth.updateUser({
+    password: newPassword,
+  });
+
+  if (error) throw new Error(error.message);
+}
+
+export async function updateEmail({ newEmail }) {
+  const { error } = await supabase.auth.updateUser({
+    email: newEmail,
+  });
+
+  if (error) throw new Error(error.message);
 }

@@ -1,10 +1,12 @@
 import CollapseLibrary from "../ui/CollapseLibrary.jsx";
 import { ConfigProvider } from "antd";
 import { Icon } from "@iconify/react";
+import ProfileInputFilter from "../ui/ProfileInputFilter.jsx";
 
 const Library = () => {
   return (
-    <div>
+    <div className="px-1">
+      <ProfileInputFilter placeholder="Search my library" />
       <ConfigProvider
         theme={{
           components: {
@@ -12,6 +14,7 @@ const Library = () => {
               colorBgContainer: "transparent",
               colorText: "rgb(114, 114, 114)",
               colorTextHeading: "rgb(114, 114, 114)",
+              padding: 0,
             },
           },
         }}

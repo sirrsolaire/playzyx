@@ -21,7 +21,7 @@ function Header() {
   const { logoutMutate } = useLogOut();
   const { data: user } = useGetUser();
   const authenticatedUser = user?.role === "authenticated";
-  const avatar = user?.user_metadata.avatar_image;
+  const userAvatar = user?.user_metadata.avatar;
   const username = user?.user_metadata.username;
 
   const handleLogout = () => {
@@ -118,9 +118,9 @@ function Header() {
           <div className="flex  items-center justify-between">
             <div className="flex items-center gap-3">
               <img
-                src={avatar || defaultUser}
+                src={userAvatar || defaultUser}
                 alt="User Avatar"
-                className="h-10 w-10 cursor-pointer"
+                className="h-10 w-10 cursor-pointer rounded-full"
               />
               <NavLink
                 to={`/profile/${username}`}

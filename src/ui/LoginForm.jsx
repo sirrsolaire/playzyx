@@ -17,6 +17,9 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
+  const notifyMessage = "You have logged in!";
+  const errorMessage = "Invalid username or password!";
+
   const handleLoginSubmit = (e) => {
     e.preventDefault();
 
@@ -26,14 +29,14 @@ const LoginForm = () => {
         onSuccess() {
           navigate("/", { replace: true });
           dispatch(setIsModalOpen(false));
-          successNotify();
+          successNotify(notifyMessage);
           dispatch(setUsername(""));
           dispatch(setPassword(""));
           queryClient.invalidateQueries({ queryKey: ["user"] });
         },
         onError(err) {
           console.log(err.message);
-          errorNotify();
+          errorNotify(errorMessage);
           dispatch(setUsername(""));
           dispatch(setPassword(""));
         },
@@ -64,6 +67,7 @@ const LoginForm = () => {
                 type="email"
                 autoComplete="email"
                 required
+                className="formInput"
               />
             </div>
           </div>
@@ -94,6 +98,7 @@ const LoginForm = () => {
                 type="password"
                 autoComplete="current-password"
                 required
+                className="formInput"
               />
             </div>
           </div>

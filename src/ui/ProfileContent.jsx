@@ -28,8 +28,9 @@ const list = [
 
 const ProfileContent = () => {
   const { data: user } = useGetUser();
-  const avatar = user?.user_metadata.avatar_image;
+  const userAvatar = user?.user_metadata.avatar;
   const username = user?.user_metadata.username;
+  const bio = user?.user_metadata.bio;
   const getFirstLetter = username.charAt(0).toUpperCase();
 
   const truncatedUsername =
@@ -37,23 +38,25 @@ const ProfileContent = () => {
 
   return (
     <div className="mt-5 flex flex-col items-center gap-3 px-2 tablet:mt-14  tablet:px-0">
-      <div className="flex flex-col items-center gap-8 tablet:w-full tablet:flex-row tablet:justify-between">
+      <div className="mb-2 flex flex-col items-center gap-8 tablet:w-full tablet:flex-row tablet:justify-between">
         <div className="flex flex-col items-center gap-4 tablet:flex-row-reverse tablet:gap-7">
-          {!avatar ? (
+          {!userAvatar ? (
             <div className="flex h-[86px] w-[86px] items-center justify-center rounded-full bg-default-profile-avatar">
               <span className="text-[43px]  font-bold ">{getFirstLetter}</span>
             </div>
           ) : (
-            <img src={avatar} alt="" className="w-20" />
+            <img src={userAvatar} alt="" className="h-20 w-20" />
           )}
           <h2 className="text-3xl font-bold text-white tablet:self-start tablet:text-7xl">
             {truncatedUsername}
           </h2>
         </div>
         <div className="flex gap-2">
-          <button className="rounded-md bg-white px-5 py-3 text-black shadow-modal-button transition-all duration-200 hover:bg-opacity-80 tablet:flex-1 tablet:text-lg">
-            Settings
-          </button>
+          <NavLink to={`/profile/${username}/settings/user`}>
+            <button className="rounded-md bg-white px-5 py-3 text-black shadow-modal-button transition-all duration-200 hover:bg-opacity-80 tablet:flex-1 tablet:text-lg">
+              Settings
+            </button>
+          </NavLink>
           <button className="rounded-md bg-white px-5 py-3 text-black shadow-modal-button transition-all duration-200 hover:bg-opacity-80 tablet:flex-1">
             <Icon
               icon="akar-icons:arrow-forward-thick-fill"
@@ -62,6 +65,26 @@ const ProfileContent = () => {
           </button>
         </div>
       </div>
+
+      {!bio ? (
+        <NavLink
+          to={`/profile/${username}/settings/user`}
+          className="tablet:self-start"
+        >
+          <div
+            className=" flex cursor-pointer items-center gap-2 rounded-lg bg-button-color px-5 py-3 transition-all duration-200 hover:bg-second-color
+      "
+          >
+            <Icon
+              icon="mingcute:add-fill"
+              className="text-xl text-mobile-comment"
+            />
+            <span className="text-xl text-mobile-comment">Add Bio</span>
+          </div>
+        </NavLink>
+      ) : (
+        <p className="tablet:self-start">{bio}</p>
+      )}
 
       <ul className="mt-4 flex gap-5 tablet:mt-8 tablet:gap-10 tablet:self-start">
         {list.map((list) => (

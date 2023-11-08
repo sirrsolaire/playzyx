@@ -34,6 +34,10 @@ import Library from "./pages/Library.jsx";
 import Wishlist from "./pages/Wishlist.jsx";
 import ProfileReviews from "./pages/ProfileReviews.jsx";
 import Overview from "./pages/Overview.jsx";
+import Settings from "./pages/Settings.jsx";
+import SettingsProfile from "./pages/SettingsProfile.jsx";
+import SettingsMyPassword from "./pages/SettingsMyPassword.jsx";
+import SettingsMyEmail from "./pages/SettingsMyEmail.jsx";
 
 const router = createBrowserRouter([
   {
@@ -178,6 +182,24 @@ const router = createBrowserRouter([
           {
             path: "/profile/:username/reviews",
             element: <ProfileReviews />,
+          },
+        ],
+      },
+      {
+        path: "/profile/:username/settings",
+        element: <Settings />,
+        children: [
+          {
+            path: "/profile/:username/settings/user",
+            element: <SettingsProfile />,
+          },
+          {
+            path: "/profile/:username/settings/my-password",
+            element: <SettingsMyPassword />,
+          },
+          {
+            path: "/profile/:username/settings/my-email",
+            element: <SettingsMyEmail />,
           },
         ],
       },

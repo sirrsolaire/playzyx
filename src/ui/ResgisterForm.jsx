@@ -3,10 +3,11 @@ import { setModalType } from "../reducers/modalSlice.js";
 import { Link } from "react-router-dom";
 import { useRegister } from "../hooks/authentication/useRegister.js";
 import { useNavigate } from "react-router";
-import { generalError, registerNotify } from "../helpers/toaster/toast.js";
+import { generalError, successNotify } from "../helpers/toaster/toast.js";
 import SmallSpinner from "./SmallSpinner.jsx";
 import {
   setRegisterEmail,
+  setRegisterFullName,
   setRegisterPassword,
   setRegisterUsername,
 } from "../reducers/authSlice.js";
@@ -15,14 +16,18 @@ const RegisterForm = () => {
   const registerUsername = useSelector((state) => state.auth.registerUsername);
   const registerEmail = useSelector((state) => state.auth.registerEmail);
   const registerPassword = useSelector((state) => state.auth.registerPassword);
+  const registerFullName = useSelector((state) => state.auth.registerFullName);
   const registerPayload = {
     username: registerUsername,
     email: registerEmail,
     password: registerPassword,
+    fullName: registerFullName,
   };
   const { registerMutate, registerLoading } = useRegister(registerPayload);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const notifyMessage = "You have successfully created an account";
 
   const handleRegisterSubmit = (e) => {
     e.preventDefault();
@@ -31,7 +36,7 @@ const RegisterForm = () => {
       {
         onSuccess: () => {
           navigate("/login", { replace: true });
-          registerNotify();
+          successNotify(notifyMessage);
           dispatch(setRegisterUsername(""));
           dispatch(setRegisterEmail(""));
           dispatch(setRegisterPassword(""));
@@ -60,6 +65,26 @@ const RegisterForm = () => {
         >
           <div>
             <label
+              htmlFor="fullName"
+              className="block text-base font-medium leading-6 tracking-wide text-white"
+            >
+              Full name
+            </label>
+            <div className="mt-2">
+              <input
+                value={registerFullName}
+                onChange={(e) => dispatch(setRegisterFullName(e.target.value))}
+                id="fullName"
+                name="text"
+                type="text"
+                autoComplete="text"
+                required
+                className="formInput"
+              />
+            </div>
+          </div>
+          <div>
+            <label
               htmlFor="text"
               className="block text-base font-medium leading-6 tracking-wide text-white"
             >
@@ -74,6 +99,7 @@ const RegisterForm = () => {
                 type="text"
                 autoComplete="text"
                 required
+                className="formInput"
               />
             </div>
           </div>
@@ -94,6 +120,7 @@ const RegisterForm = () => {
                 type="email"
                 autoComplete="email"
                 required
+                className="formInput"
               />
             </div>
           </div>
@@ -116,6 +143,7 @@ const RegisterForm = () => {
                 type="password"
                 autoComplete="current-password"
                 required
+                className="formInput"
               />
             </div>
           </div>

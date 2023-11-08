@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   email: "",
   password: "",
+  registerFullName: "",
   registerUsername: "",
   registerEmail: "",
   registerPassword: "",
@@ -29,6 +30,9 @@ export const authSlice = createSlice({
     setRegisterPassword: (state, action) => {
       state.registerPassword = action.payload;
     },
+    setRegisterFullName: (state, action) => {
+      state.registerFullName = action.payload;
+    },
     setLoginInvalid: (state, action) => {
       state.invalid = action.payload;
     },
@@ -46,5 +50,6 @@ export const {
   setRegisterPassword,
   setLoginInvalid,
   setShowContent,
+  setRegisterFullName,
 } = authSlice.actions;
 export default authSlice.reducer;

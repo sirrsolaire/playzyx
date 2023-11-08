@@ -35,7 +35,7 @@ import useAchievements from "../hooks/useAchievements.js";
 import useRedditPosts from "../hooks/useRedditPosts.js";
 import CommentDropDown from "./CommentDropDown.jsx";
 import fakeCommentData from "../Data/fakeComments.json";
-import "../assets/styles/slicslider.css";
+import "../assets/styles/antd.css";
 
 export const DetailedGameInfo = () => {
   const [readMore, setReadMore] = useState(false);

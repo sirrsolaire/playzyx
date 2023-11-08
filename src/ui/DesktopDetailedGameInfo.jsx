@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import useSameSeries from "../hooks/useSameSeries.js";
 import useAchievements from "../hooks/useAchievements.js";
 import useRedditPosts from "../hooks/useRedditPosts.js";
-import "../assets/styles/slicslider.css";
+import "../assets/styles/antd.css";
 import useEachGameShop from "../hooks/useEacHGameShop.js";
 import { WhereToBuy } from "./DetailedGameInfo/WhereToBuy.jsx";
 import { WriteReviewComment } from "./DetailedGameInfo/WriteReviewComment.jsx";

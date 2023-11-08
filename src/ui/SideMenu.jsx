@@ -25,7 +25,7 @@ const SideMenu = () => {
     <>
       <Drawer
         title="Basic Drawer"
-        placement="top"
+        placement="right"
         className=" text-white"
         bodyStyle={{ backgroundColor: "black" }}
         onClose={() => dispatch(setSideMenuOpen(false))}

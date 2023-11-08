@@ -30,6 +30,7 @@ export default {
         "show-more": "rgba(44,44,44,.5)",
         "tag-color": "rgba(16, 117, 124, 0.1)",
         "input-color": "rgba(0,0,0,.5)",
+        "input-border": "hsla(0,0%,100%,.2)",
       },
       boxShadow: {
         "modal-button": "0 0 20px 0 hsla(0,0%,100%,.2)",

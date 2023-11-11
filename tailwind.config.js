@@ -31,6 +31,7 @@ export default {
         "tag-color": "rgba(16, 117, 124, 0.1)",
         "input-color": "rgba(0,0,0,.5)",
         "input-border": "hsla(0,0%,100%,.2)",
+        "favourite-bg": "rgba(0,0,0,.7)",
       },
       boxShadow: {
         "modal-button": "0 0 20px 0 hsla(0,0%,100%,.2)",

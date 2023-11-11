@@ -3,8 +3,12 @@ import { DesktopSideMenu } from "../ui/DesktopSideMenu.jsx";
 import SideMenu from "../ui/SideMenu.jsx";
 import { FloatSideMenu } from "../ui/FloatButton.jsx";
 import ProfileContent from "../ui/ProfileContent.jsx";
+import AddGameModal from "../ui/AddGameModal.jsx";
+import { useSelector } from "react-redux";
 
 const Profile = () => {
+  const isOpen = useSelector((state) => state.modal.searchModalOpen);
+
   return (
     <>
       <Header />
@@ -18,6 +22,7 @@ const Profile = () => {
         <SideMenu />
         <FloatSideMenu />
       </div>
+      {isOpen && <AddGameModal />}
     </>
   );
 };

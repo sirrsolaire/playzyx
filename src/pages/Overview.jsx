@@ -4,6 +4,8 @@ import "slick-carousel/slick/slick-theme.css";
 import SliderNextArrow from "../ui/SliderNextArrow.jsx";
 import SliderPrevArrow from "../ui/SliderPrevArrow.jsx";
 import FavoriteGame from "../ui/FavoriteGame.jsx";
+import { useGetFavourite } from "../hooks/favouriteGames/useGetFavourite.js";
+import { Spinner } from "../ui/Spinner.jsx";
 
 const settings = {
   dots: false,
@@ -54,6 +56,17 @@ const settings = {
 };
 
 const Overview = () => {
+  const { favouriteLoading, favouriteGames } = useGetFavourite();
+
+  const firstGame = favouriteGames?.at(0);
+  const secondGame = favouriteGames?.at(1);
+  const thirdGame = favouriteGames?.at(2);
+  const forthGame = favouriteGames?.at(3);
+  const fifthGame = favouriteGames?.at(4);
+  const sixthGame = favouriteGames?.at(5);
+
+  if (favouriteLoading) return <Spinner />;
+
   return (
     <div className="">
       <h2 className="mb-4 text-center text-2xl font-semibold tablet:text-left tablet:text-4xl">
@@ -61,12 +74,12 @@ const Overview = () => {
       </h2>
       <div className="mx-auto max-w-[400px] tablet:mx-0 tablet:max-w-full">
         <Slider {...settings}>
-          <FavoriteGame />
-          <FavoriteGame />
-          <FavoriteGame />
-          <FavoriteGame />
-          <FavoriteGame />
-          <FavoriteGame />
+          <FavoriteGame game={firstGame} />
+          <FavoriteGame game={secondGame} />
+          <FavoriteGame game={thirdGame} />
+          <FavoriteGame game={forthGame} />
+          <FavoriteGame game={fifthGame} />
+          <FavoriteGame game={sixthGame} />
         </Slider>
       </div>
       <div className="mx-auto mt-20 max-w-[400px] divide-y-[1px] divide-second-color px-4 tablet:grid tablet:max-w-full tablet:grid-cols-3 tablet:divide-x-[1px] tablet:divide-y-0 tablet:text-center">

@@ -21,8 +21,8 @@ function Header() {
   const { logoutMutate } = useLogOut();
   const { data: user } = useGetUser();
   const authenticatedUser = user?.role === "authenticated";
-  const userAvatar = user?.user_metadata.avatar;
-  const username = user?.user_metadata.username;
+  const userAvatar = user?.user_metadata?.avatar;
+  const username = user?.user_metadata?.username;
 
   const handleLogout = () => {
     logoutMutate();

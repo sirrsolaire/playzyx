@@ -8,12 +8,14 @@ import { errorNotify, successNotify } from "../helpers/toaster/toast.js";
 import { useQueryClient } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import SmallSpinner from "./SmallSpinner.jsx";
+import { useGetFavourite } from "../hooks/favouriteGames/useGetFavourite.js";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
   const loginEmail = useSelector((state) => state.auth.email);
   const loginPassword = useSelector((state) => state.auth.password);
   const { loginLoading, loginMutate } = useLogin(loginEmail, loginPassword);
+  const { favouriteGames } = useGetFavourite();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
@@ -26,12 +28,13 @@ const LoginForm = () => {
     loginMutate(
       { loginEmail, loginPassword },
       {
-        onSuccess() {
+        onSuccess(user) {
           navigate("/", { replace: true });
           dispatch(setIsModalOpen(false));
           successNotify(notifyMessage);
           dispatch(setUsername(""));
           dispatch(setPassword(""));
+          // queryClient.setQueryData(["user"], user.user);
           queryClient.invalidateQueries({ queryKey: ["user"] });
         },
         onError(err) {

@@ -2,13 +2,11 @@ import { useSelector } from "react-redux";
 import { ColorRing } from "react-loader-spinner";
 import useSearch from "../hooks/useSearch.js";
 import { Platform } from "./Platform.jsx";
-import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 
 export const SearchResults = () => {
   const query = useSelector((state) => state.query.query);
   const { data, isLoading } = useSearch({ query });
-  const { slug } = useParams();
 
   if (query.length === 0) return;
 

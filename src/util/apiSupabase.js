@@ -86,3 +86,33 @@ export async function updateEmail({ newEmail }) {
 
   if (error) throw new Error(error.message);
 }
+
+export async function postFavouriteGames(data) {
+  const { error } = await supabase
+    .from("favourite")
+    .insert([
+      {
+        name: data.name,
+        image: data.image,
+        meta: data.meta,
+        added: data.added,
+        platforms: data.platforms,
+      },
+    ])
+    .select();
+
+  if (error) throw new Error(error.message);
+}
+
+export async function getFavouriteGames(id) {
+  let { data: favourite, error } = await supabase
+    .from("favourite")
+    .select("*")
+    .eq("account_id", id);
+
+  if (!error) {
+    return favourite;
+  }
+
+  if (error) throw new Error(error.message);
+}

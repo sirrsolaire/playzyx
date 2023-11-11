@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isModalOpen: false,
   modalType: "",
+  searchModalOpen: false,
+  addGameQuery: "",
 };
 
 export const modalSlice = createSlice({
@@ -15,8 +17,15 @@ export const modalSlice = createSlice({
     setModalType: (state, action) => {
       state.modalType = action.payload;
     },
+    setSearchModal: (state, action) => {
+      state.searchModalOpen = action.payload;
+    },
+    setGameQuery: (state, action) => {
+      state.addGameQuery = action.payload;
+    },
   },
 });
 
-export const { setModalType, setIsModalOpen } = modalSlice.actions;
+export const { setModalType, setIsModalOpen, setSearchModal, setGameQuery } =
+  modalSlice.actions;
 export default modalSlice.reducer;

@@ -1,11 +1,6 @@
 import { Collapse } from "antd";
 
-const CollapseLibrary = ({ icon, title }) => {
-  const text = `
-  A dog is a type of domesticated animal.
-  Known for its loyalty and faithfulness,
-  it can be found as a welcome guest in many households across the world.
-`;
+const CollapseLibrary = ({ icon, title, children, categoryCounts }) => {
   return (
     <Collapse
       expandIconPosition="end"
@@ -17,9 +12,14 @@ const CollapseLibrary = ({ icon, title }) => {
             <div className="flex items-center gap-3">
               {icon}
               <span className="text-xl">{title}</span>
+              <span>{categoryCounts || 0}</span>
             </div>
           ),
-          children: <p>{text}</p>,
+          children: (
+            <div className="grid grid-cols-1 gap-3 smallTb:grid-cols-2 tablet:grid-cols-3">
+              {children}
+            </div>
+          ),
         },
       ]}
     />

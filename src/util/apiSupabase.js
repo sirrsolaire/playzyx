@@ -116,3 +116,52 @@ export async function getFavouriteGames(id) {
 
   if (error) throw new Error(error.message);
 }
+
+/////////////////////////////////////////////////////////
+
+export async function postAllGames(data) {
+  const { error } = await supabase
+    .from("games")
+    .insert([
+      {
+        id: data.id,
+        name: data.name,
+        image: data.image,
+        meta: data.meta,
+        added: data.added,
+        platforms: data.platforms,
+        status: data.status,
+      },
+    ])
+    .select();
+
+  if (error) throw new Error(error.message);
+}
+
+export async function getAllGames() {
+  let { data: allGames, error } = await supabase.from("games").select("*");
+
+  if (error) throw new Error(error.message);
+
+  if (!error) {
+    return allGames;
+  }
+}
+
+export async function updateGames(data) {
+  const { error } = await supabase
+    .from("games")
+    .update({ status: data.status })
+    .eq("id", data.id)
+    .select();
+
+  if (error) throw new Error(error.message);
+}
+
+export async function deleteGame(data) {
+  const { error } = await supabase.from("games").delete().eq("id", data.id);
+
+  if (error) throw new Error(error.message);
+}
+
+/////////////////////////////////////////////////////////

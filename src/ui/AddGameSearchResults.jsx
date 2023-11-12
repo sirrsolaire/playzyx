@@ -5,7 +5,7 @@ import { Platform } from "./Platform.jsx";
 import { Icon } from "@iconify/react";
 import { usePostFavourite } from "../hooks/favouriteGames/usePostFavourite.js";
 import { useQueryClient } from "@tanstack/react-query";
-import { setSearchModal } from "../reducers/modalSlice.js";
+import { setGameQuery, setSearchModal } from "../reducers/modalSlice.js";
 import SmallSpinner from "./SmallSpinner.jsx";
 import { useGetFavourite } from "../hooks/favouriteGames/useGetFavourite.js";
 import { successNotify } from "../helpers/toaster/toast.js";
@@ -34,6 +34,7 @@ export const AddGameSearchResults = () => {
           dispatch(setSearchModal(false));
           successNotify(`${game.name} added to your favourite`);
           document.body.classList.remove("overflow-hidden");
+          dispatch(setGameQuery(""));
         },
       },
     );

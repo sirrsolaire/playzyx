@@ -7,6 +7,7 @@ import monthReducer from "../reducers/calendarSlice.js";
 import storeReducer from "../reducers/browseSlice.js";
 import modalReducer from "../reducers/modalSlice.js";
 import authReducer from "../reducers/authSlice.js";
+import profileReducer from "../reducers/profileSlice.js";
 
 export const store = configureStore({
   reducer: {
@@ -18,5 +19,6 @@ export const store = configureStore({
     store: storeReducer,
     modal: modalReducer,
     auth: authReducer,
+    profile: profileReducer,
   },
 });

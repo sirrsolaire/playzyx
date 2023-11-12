@@ -1,12 +1,12 @@
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 
-const SmallSpinner = () => {
+const SmallSpinner = ({ color }) => {
   const antIcon = (
     <LoadingOutlined
       style={{
         fontSize: 24,
-        color: "#202020",
+        color: color,
       }}
       spin
     />

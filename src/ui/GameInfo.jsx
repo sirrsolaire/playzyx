@@ -26,6 +26,7 @@ function GameInfo({
   rating,
   slug,
   id,
+  secondPlatforms,
 }) {
   const layout = useSelector((state) => state.layout.layout);
   const [open, setOpen] = useState(false);
@@ -45,6 +46,8 @@ function GameInfo({
   function handleOpen() {
     setOpen(!open);
   }
+
+  console.log(secondPlatforms);
 
   const handleAddWishList = () => {
     if (!isWishlisted) {
@@ -156,7 +159,7 @@ function GameInfo({
               }
             `}
           >
-            {allGamesLoading || deleteLoading ? (
+            {deleteLoading ? (
               <SmallSpinner color="white" />
             ) : (
               <Icon

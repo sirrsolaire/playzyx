@@ -1,7 +1,12 @@
 import { ConfigProvider, Dropdown } from "antd";
 import { Icon } from "@iconify/react";
 
-const GameDetailsDropDown = ({ children, data, handleAddGame, getStatus }) => {
+const GameDetailsDropDown = ({
+  children,
+  data,
+  handleSetStatus,
+  getStatus,
+}) => {
   const list = [
     {
       id: 1,
@@ -48,7 +53,7 @@ const GameDetailsDropDown = ({ children, data, handleAddGame, getStatus }) => {
         <div
           className="flex items-center justify-between gap-3 py-2"
           key={index}
-          onClick={() => handleAddGame(item.status)}
+          onClick={() => handleSetStatus(item.status)}
         >
           <div className="flex items-center gap-3">
             {item.icon}

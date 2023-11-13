@@ -60,7 +60,7 @@ export const AddToSection = ({ data }) => {
           image: data.background_image,
           meta: data.metacritic,
           added: data.added,
-          platforms: data.platforms,
+          // platforms: data.platforms,
           status: currentStatus,
         },
         {
@@ -119,7 +119,7 @@ export const AddToSection = ({ data }) => {
           name: data.name,
           image: data.background_image,
           meta: data.metacritic,
-          platforms: data.platforms,
+          // platforms: data.platforms,
           added: data.added,
         },
         {
@@ -154,7 +154,7 @@ export const AddToSection = ({ data }) => {
     <div className="mt-5 flex items-center justify-center gap-2 tablet:justify-start">
       <GameDetailsDropDown
         data={games}
-        handleAddGame={handleAddGame}
+        handleSetStatus={handleAddGame}
         getStatus={getStatus}
       >
         <div
@@ -199,8 +199,10 @@ export const AddToSection = ({ data }) => {
 
       <div
         className={`
-          flex w-56 cursor-pointer items-center justify-between rounded-lg border-2 border-white px-3 py-1 shadow-md transition-all duration-200 hover:border-green-600 ${
-            isWishlisted && "border-green-600 hover:border-green-400"
+          flex w-56 cursor-pointer items-center justify-between rounded-lg border-2 px-3 py-1 shadow-md transition-all duration-200 hover:border-green-600 ${
+            isWishlisted
+              ? "border-green-600 hover:border-green-400"
+              : "border-white"
           }
         `}
         onClick={handleAddWishlist}

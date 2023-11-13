@@ -95,6 +95,7 @@ const Library = () => {
                   })
                   .map((filteredGame, i) => (
                     <ProfileGameItem
+                      id={filteredGame.id}
                       key={i}
                       image={filteredGame.image}
                       platform={filteredGame.platforms?.map(

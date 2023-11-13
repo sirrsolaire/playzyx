@@ -22,6 +22,7 @@ export const AddGameSearchResults = () => {
   const handlePostFavourite = (game) => {
     postFavourite(
       {
+        id: game.id,
         name: game.name,
         image: game.background_image,
         meta: game.metacritic,

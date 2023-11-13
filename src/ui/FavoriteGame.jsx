@@ -3,14 +3,38 @@ import { useDispatch } from "react-redux";
 import { setSearchModal } from "../reducers/modalSlice.js";
 import { Platform } from "./Platform.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsis, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import CommentPopover from "./CommentPopover.jsx";
+import { useDeleteFavourite } from "../hooks/favouriteGames/useDeleteFavourite.js";
+import { generalError, successNotify } from "../helpers/toaster/toast.js";
+import { useQueryClient } from "@tanstack/react-query";
 
 const FavoriteGame = ({ game }) => {
+  const { deleteFavouriteMutate, deleteFavouriteLoading } =
+    useDeleteFavourite();
+  const queryClient = useQueryClient();
   const dispatch = useDispatch();
 
   const showModal = () => {
     dispatch(setSearchModal(true));
     document.body.classList.add("overflow-hidden");
+  };
+
+  const handleDeleteFavourite = () => {
+    deleteFavouriteMutate(
+      {
+        id: game?.id,
+      },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries(["favouriteGames"]);
+          successNotify(`You have removed ${game.name} from your favourite`);
+        },
+        onError: (err) => {
+          generalError(err.message);
+        },
+      },
+    );
   };
 
   if (!game)
@@ -51,8 +75,14 @@ const FavoriteGame = ({ game }) => {
             <span className="flex items-center gap-1 rounded-[0.3rem] bg-second-color px-2 font-semibold text-white">
               <FontAwesomeIcon icon={faPlus} className="text-xs" /> {game.added}
             </span>
-            <span className="rounded-[0.3rem] bg-second-color px-2 ">
-              <FontAwesomeIcon icon={faEllipsis} className="text-white" />
+            <span className="group flex h-6 cursor-pointer items-center rounded-[0.3rem] bg-second-color px-2 transition-all duration-200 hover:bg-white">
+              <CommentPopover
+                className="text-white transition-all duration-200 group-hover:text-black"
+                option2="Remove"
+                remove={handleDeleteFavourite}
+                loading={deleteFavouriteLoading}
+                showModal={showModal}
+              />
             </span>
           </div>
         </div>

@@ -1,5 +1,3 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGift } from "@fortawesome/free-solid-svg-icons";
 import { useUncategorized } from "../../hooks/library/useUncategorized.js";
 import { generalError, successNotify } from "../../helpers/toaster/toast.js";
 import { useGetAllGames } from "../../hooks/library/useGetAllGames.js";
@@ -10,16 +8,32 @@ import { DownOutlined } from "@ant-design/icons";
 import { useUpdateGames } from "../../hooks/library/useUpdateGames.js";
 import { useDeleteGame } from "../../hooks/library/useDeleteGame.js";
 import SmallSpinner from "../SmallSpinner.jsx";
+import { useAddWishlist } from "../../hooks/wishlist/useAddWishlist.js";
+import { useGetWishlist } from "../../hooks/wishlist/useGetWishlist.js";
+import { useDeleteWishlist } from "../../hooks/wishlist/useDeleteWishlist.js";
 
 export const AddToSection = ({ data }) => {
-  const { allGamesMutate, allGamesLoading } = useUncategorized();
-  const { updateMutate, updateLoading } = useUpdateGames();
-  const { games, gamesLoading } = useGetAllGames();
-  const { deleteMutate, deleteLoading } = useDeleteGame();
+  /////
+  const { games } = useGetAllGames(); // read
+  const { allGamesMutate } = useUncategorized(); //add
+  const { updateMutate, updateLoading } = useUpdateGames(); //update
+  const { deleteMutate, deleteLoading } = useDeleteGame(); //delete
+  /////
+  const { wishlistedGames } = useGetWishlist(); // read
+  const { wishMutate, wishLoading } = useAddWishlist(); //add
+  const { deleteWishMutate, deleteWishLoading } = useDeleteWishlist(); //delete
+  /////
   const queryClient = useQueryClient();
+  //////
   const getId = games?.map((game) => game.id);
   const gameAlreadyExists = getId?.includes(data?.id);
+  /////
   const getStatus = games?.find((game) => game.id === data?.id)?.status;
+  /////
+  const isWishlisted = wishlistedGames
+    ?.map((game) => game.id)
+    .includes(data?.id);
+  /////
 
   function handleShowStatus() {
     if (getStatus === "not_played") {
@@ -97,6 +111,45 @@ export const AddToSection = ({ data }) => {
     );
   };
 
+  const handleAddWishlist = () => {
+    if (!isWishlisted) {
+      wishMutate(
+        {
+          id: data.id,
+          name: data.name,
+          image: data.background_image,
+          meta: data.metacritic,
+          platforms: data.platforms,
+          added: data.added,
+        },
+        {
+          onSuccess: () => {
+            successNotify(`You have added ${data?.name} to your wishlist`);
+            queryClient.invalidateQueries(["wishlist"]);
+          },
+          onError: (err) => {
+            generalError(err.message);
+          },
+        },
+      );
+    } else {
+      deleteWishMutate(
+        {
+          id: data.id,
+        },
+        {
+          onSuccess: () => {
+            successNotify(`You have removed ${data?.name} from your wishlist`);
+            queryClient.invalidateQueries(["wishlist"]);
+          },
+          onError: (err) => {
+            generalError(err.message);
+          },
+        },
+      );
+    }
+  };
+
   return (
     <div className="mt-5 flex items-center justify-center gap-2 tablet:justify-start">
       <GameDetailsDropDown
@@ -144,9 +197,18 @@ export const AddToSection = ({ data }) => {
         </div>
       </GameDetailsDropDown>
 
-      <div className="flex w-56 cursor-pointer items-center justify-between rounded-lg border-[1px] border-white px-3 py-1 shadow-md transition-all duration-200 hover:border-green-600">
+      <div
+        className={`
+          flex w-56 cursor-pointer items-center justify-between rounded-lg border-2 border-white px-3 py-1 shadow-md transition-all duration-200 hover:border-green-600 ${
+            isWishlisted && "border-green-600 hover:border-green-400"
+          }
+        `}
+        onClick={handleAddWishlist}
+      >
         <div className="flex flex-col text-white">
-          <span className="text-sm font-semibold opacity-50">Add to</span>
+          <span className="text-sm font-semibold opacity-50">
+            {isWishlisted ? "Added to" : "Add to"}
+          </span>
           <span className="font-semibold">
             Wishlist{" "}
             <span className="font-normal opacity-50">
@@ -154,7 +216,16 @@ export const AddToSection = ({ data }) => {
             </span>
           </span>
         </div>
-        <FontAwesomeIcon icon={faGift} className="text-2xl text-white" />
+        {wishLoading || deleteWishLoading ? (
+          <SmallSpinner color="white" />
+        ) : (
+          <Icon
+            icon={`${
+              isWishlisted ? "bi:check-circle-fill" : "teenyicons:gift-solid"
+            }`}
+            className={`text-2xl ${isWishlisted && "text-green-500"}`}
+          />
+        )}
       </div>
     </div>
   );

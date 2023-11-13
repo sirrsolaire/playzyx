@@ -151,7 +151,7 @@ export async function getAllGames() {
 export async function updateGames(data) {
   const { error } = await supabase
     .from("games")
-    .update({ status: data.status })
+    .update({ status: data.status }, { is_wishlist: data.wishlist })
     .eq("id", data.id)
     .select();
 
@@ -165,3 +165,35 @@ export async function deleteGame(data) {
 }
 
 /////////////////////////////////////////////////////////
+
+export async function getWishlist() {
+  let { data: wishlist, error } = await supabase.from("wishlist").select("*");
+
+  if (error) throw new Error(error.message);
+
+  if (!error) return wishlist;
+}
+
+export async function addToWishlist(data) {
+  const { error } = await supabase
+    .from("wishlist")
+    .insert([
+      {
+        id: data.id,
+        name: data.name,
+        image: data.image,
+        meta: data.meta,
+        added: data.added,
+        platforms: data.platforms,
+      },
+    ])
+    .select();
+
+  if (error) throw new Error(error.message);
+}
+
+export async function deleteWishlist(data) {
+  const { error } = await supabase.from("wishlist").delete().eq("id", data.id);
+
+  if (error) throw new Error(error.message);
+}

@@ -6,6 +6,8 @@ import SliderPrevArrow from "../ui/SliderPrevArrow.jsx";
 import FavoriteGame from "../ui/FavoriteGame.jsx";
 import { useGetFavourite } from "../hooks/favouriteGames/useGetFavourite.js";
 import { Spinner } from "../ui/Spinner.jsx";
+import { useGetAllGames } from "../hooks/library/useGetAllGames.js";
+import { useGetWishlist } from "../hooks/wishlist/useGetWishlist.js";
 
 const settings = {
   dots: false,
@@ -57,6 +59,10 @@ const settings = {
 
 const Overview = () => {
   const { favouriteLoading, favouriteGames } = useGetFavourite();
+  const { games } = useGetAllGames();
+  const { wishlistedGames } = useGetWishlist();
+  const gamesInLibrary = games?.length;
+  const gamesInWishList = wishlistedGames?.length;
 
   const firstGame = favouriteGames?.at(0);
   const secondGame = favouriteGames?.at(1);
@@ -84,7 +90,9 @@ const Overview = () => {
       </div>
       <div className="mx-auto mt-20 max-w-[400px] divide-y-[1px] divide-second-color px-4 tablet:grid tablet:max-w-full tablet:grid-cols-3 tablet:divide-x-[1px] tablet:divide-y-0 tablet:text-center">
         <div className="space-x-2 py-4">
-          <span className="text-5xl font-bold text-purple-400">123</span>
+          <span className="text-5xl font-bold text-purple-400">
+            {gamesInLibrary}
+          </span>
           <span className="text-2xl font-semibold">games</span>
         </div>
         <div className="space-x-2 py-4">
@@ -92,7 +100,9 @@ const Overview = () => {
           <span className="text-2xl font-semibold">reviews</span>
         </div>
         <div className="space-x-2 py-4">
-          <span className="text-5xl font-bold text-yellow-600">237</span>
+          <span className="text-5xl font-bold text-yellow-600">
+            {gamesInWishList}
+          </span>
           <span className="text-2xl font-semibold">wishlist</span>
         </div>
       </div>

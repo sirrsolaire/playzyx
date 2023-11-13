@@ -2,7 +2,7 @@ import { Platform } from "./Platform.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis, faPlus } from "@fortawesome/free-solid-svg-icons";
 
-const LibraryItem = ({ image, platform, meta, name, added }) => {
+const ProfileGameItem = ({ image, platform, meta, name, added }) => {
   return (
     <div className="relative">
       <img
@@ -38,4 +38,4 @@ const LibraryItem = ({ image, platform, meta, name, added }) => {
   );
 };
 
-export default LibraryItem;
+export default ProfileGameItem;

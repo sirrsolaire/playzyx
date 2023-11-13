@@ -3,7 +3,7 @@ import { Icon } from "@iconify/react";
 import ProfileInputFilter from "../ui/ProfileInputFilter.jsx";
 import { useGetAllGames } from "../hooks/library/useGetAllGames.js";
 import CollapseLibrary from "../ui/CollapseLibrary.jsx";
-import LibraryItem from "../ui/LibraryItem.jsx";
+import ProfileGameItem from "../ui/ProfileGameItem.jsx";
 import { Spinner } from "../ui/Spinner.jsx";
 import { useState } from "react";
 
@@ -41,7 +41,7 @@ const Library = () => {
 
   let filteredGames = games;
 
-  if (query.length > 0) {
+  if (filteredGames && query.length > 0) {
     filteredGames = filteredGames.filter((game) =>
       game.name.toLowerCase().includes(query.toLowerCase()),
     );
@@ -50,7 +50,7 @@ const Library = () => {
   const categoryCounts = {};
 
   list.forEach((item) => {
-    const categoryCount = filteredGames.filter((game) => {
+    const categoryCount = filteredGames?.filter((game) => {
       return item.status === "uncategorized"
         ? game.status === "uncategorized"
         : game.status === item.status;
@@ -94,11 +94,11 @@ const Library = () => {
                       : game.status === item.status;
                   })
                   .map((filteredGame, i) => (
-                    <LibraryItem
+                    <ProfileGameItem
                       key={i}
                       image={filteredGame.image}
-                      platform={filteredGame.platforms.map(
-                        (game) => game.platform.name,
+                      platform={filteredGame.platforms?.map(
+                        (game) => game.platform?.name,
                       )}
                       meta={filteredGame.meta}
                       name={filteredGame.name}

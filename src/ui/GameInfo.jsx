@@ -1,14 +1,19 @@
-import {
-  faChevronRight,
-  faEllipsis,
-  faGift,
-  faPlus,
-} from "@fortawesome/free-solid-svg-icons";
+import { faChevronRight, faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { Platform } from "./Platform.jsx";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { useAddWishlist } from "../hooks/wishlist/useAddWishlist.js";
+import { generalError, successNotify } from "../helpers/toaster/toast.js";
+import { useQueryClient } from "@tanstack/react-query";
+import SmallSpinner from "./SmallSpinner.jsx";
+import { Icon } from "@iconify/react";
+import { useGetWishlist } from "../hooks/wishlist/useGetWishlist.js";
+import { useDeleteWishlist } from "../hooks/wishlist/useDeleteWishlist.js";
+import { useUncategorized } from "../hooks/library/useUncategorized.js";
+import { useGetAllGames } from "../hooks/library/useGetAllGames.js";
+import { useDeleteGame } from "../hooks/library/useDeleteGame.js";
 
 function GameInfo({
   name,
@@ -20,17 +25,94 @@ function GameInfo({
   genres,
   rating,
   slug,
+  id,
 }) {
   const layout = useSelector((state) => state.layout.layout);
   const [open, setOpen] = useState(false);
+  const { wishMutate, wishLoading } = useAddWishlist();
+  const { deleteWishMutate, deleteWishLoading } = useDeleteWishlist();
+  const { wishlistedGames } = useGetWishlist();
+  const { allGamesMutate, allGamesLoading } = useUncategorized();
+  const { games } = useGetAllGames();
+  const { deleteMutate, deleteLoading } = useDeleteGame();
+  const queryClient = useQueryClient();
+  const desiredDate = new Date(releasedDate);
+  const options = { year: "numeric", month: "short", day: "numeric" };
+  const formattedDate = desiredDate.toLocaleDateString(undefined, options);
+  const isWishlisted = wishlistedGames?.map((game) => game.id).includes(id);
+  const isInLibrary = games?.map((game) => game.id).includes(id);
 
   function handleOpen() {
     setOpen(!open);
   }
 
-  const desiredDate = new Date(releasedDate);
-  const options = { year: "numeric", month: "short", day: "numeric" };
-  const formattedDate = desiredDate.toLocaleDateString(undefined, options);
+  const handleAddWishList = () => {
+    if (!isWishlisted) {
+      wishMutate(
+        {
+          id,
+          name,
+          image,
+          meta,
+          added: add,
+        },
+        {
+          onSuccess: () => {
+            queryClient.invalidateQueries(["wishlist"]);
+            successNotify(`You have added ${name} to your wishlist`);
+          },
+          onError: (err) => {
+            generalError(err.message());
+          },
+        },
+      );
+    } else {
+      deleteWishMutate(
+        {
+          id,
+        },
+        {
+          onSuccess: () => {
+            queryClient.invalidateQueries(["wishlist"]);
+            successNotify(`You have removed ${name} from your wishlist`);
+          },
+        },
+      );
+    }
+  };
+
+  const handleAddLibrary = () => {
+    if (!isInLibrary) {
+      allGamesMutate(
+        {
+          id,
+          name,
+          image,
+          meta,
+          added: add,
+          status: "uncategorized",
+        },
+        {
+          onSuccess: () => {
+            queryClient.invalidateQueries(["games"]);
+            successNotify(`You have added ${name} to your library`);
+          },
+        },
+      );
+    } else {
+      deleteMutate(
+        {
+          id,
+        },
+        {
+          onSuccess: () => {
+            queryClient.invalidateQueries(["games"]);
+            successNotify(`You have removed ${name} from your library`);
+          },
+        },
+      );
+    }
+  };
 
   return (
     <div
@@ -66,14 +148,49 @@ function GameInfo({
           </span>
         </NavLink>
         <div className="mt-2 flex items-center gap-1">
-          <span className="flex items-center gap-1 rounded-[0.3rem] bg-second-color px-2 font-semibold text-white">
-            <FontAwesomeIcon icon={faPlus} className="text-xs" /> {add}
+          <span
+            onClick={handleAddLibrary}
+            className={`
+              group flex h-7 cursor-pointer items-center gap-1.5 rounded-[0.3rem]  px-2 font-semibold text-white transition-all duration-200 hover:bg-white hover:text-black ${
+                isInLibrary ? "bg-green-600" : "bg-second-color"
+              }
+            `}
+          >
+            {allGamesLoading || deleteLoading ? (
+              <SmallSpinner color="white" />
+            ) : (
+              <Icon
+                icon="fontisto:plus-a"
+                className="text-white transition-all duration-200
+            group-hover:text-black"
+              />
+            )}
+            <span>{add}</span>
           </span>
-          <span className="rounded-[0.3rem] bg-second-color px-2">
-            <FontAwesomeIcon icon={faGift} className="text-white" />
+          <span
+            className="group flex h-7 cursor-pointer items-center rounded-[0.3rem] bg-second-color px-2 transition-all duration-200 hover:bg-white"
+            onClick={handleAddWishList}
+          >
+            {wishLoading || deleteWishLoading ? (
+              <SmallSpinner color="white" />
+            ) : (
+              <Icon
+                icon={`${
+                  isWishlisted
+                    ? "bi:check-circle-fill"
+                    : "teenyicons:gift-solid"
+                }`}
+                className={`text-xl transition-all duration-200 group-hover:text-black ${
+                  isWishlisted && "text-green-500"
+                }`}
+              />
+            )}
           </span>
-          <span className="rounded-[0.3rem] bg-second-color px-2 ">
-            <FontAwesomeIcon icon={faEllipsis} className="text-white" />
+          <span className="group flex h-7 cursor-pointer items-center rounded-[0.3rem] bg-second-color px-2 transition-all duration-200 hover:bg-white">
+            <FontAwesomeIcon
+              icon={faEllipsis}
+              className="text-white transition-all duration-200 group-hover:text-black"
+            />
           </span>
         </div>
         {open && layout === "grid" && (

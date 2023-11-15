@@ -221,3 +221,51 @@ export async function deleteWishlist(data) {
 
   if (error) throw new Error(error.message);
 }
+
+/////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////
+//read
+export async function getReviews() {
+  let { data: reviews, error } = await supabase.from("reviews").select("*");
+
+  if (error) throw new Error(error.message);
+
+  if (!error) return reviews;
+}
+//post
+export async function postReview(data) {
+  const { error } = await supabase
+    .from("reviews")
+    .insert([
+      {
+        // id: data.id,
+        user_name: data.user_name,
+        user_avatar: data.user_avatar,
+        review: data.review,
+        rate: data.rate,
+        tags: data.tags,
+      },
+    ])
+    .select();
+
+  if (error) throw new Error(error.message);
+}
+//update
+export async function updateReview() {
+  const { data, error } = await supabase
+    .from("reviews")
+    .update({ other_column: "otherValue" })
+    .eq("some_column", "someValue")
+    .select();
+
+  if (error) throw new Error(error.message);
+}
+//delete
+export async function deleteReview() {
+  const { error } = await supabase
+    .from("reviews")
+    .delete()
+    .eq("some_column", "someValue");
+
+  if (error) throw new Error(error.message);
+}

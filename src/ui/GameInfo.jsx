@@ -47,8 +47,6 @@ function GameInfo({
     setOpen(!open);
   }
 
-  console.log(secondPlatforms);
-
   const handleAddWishList = () => {
     if (!isWishlisted) {
       wishMutate(

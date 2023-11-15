@@ -51,9 +51,11 @@ function Header() {
 
   return (
     <nav className="z-40 flex w-full items-center gap-4 px-7 py-4 tablet:px-10">
-      <h1 className="text-xl font-black tracking-[0.2rem] text-white">
-        PLAYZYX
-      </h1>
+      <NavLink to="/">
+        <h1 className="text-xl font-black tracking-[0.2rem] text-white">
+          PLAYZYX
+        </h1>
+      </NavLink>
 
       <div className="relative w-full hover:text-black">
         <input

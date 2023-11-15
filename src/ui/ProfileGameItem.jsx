@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import CommentPopover from "./CommentPopover.jsx";
+import ProfilePopover from "./ProfilePopover.jsx";
 import { useDeleteGame } from "../hooks/library/useDeleteGame.js";
 import { useQueryClient } from "@tanstack/react-query";
 import { generalError, successNotify } from "../helpers/toaster/toast.js";
@@ -8,27 +8,52 @@ import GameDetailsDropDown from "./GameDetailsDropDown.jsx";
 import { useUpdateGames } from "../hooks/library/useUpdateGames.js";
 import { useGetAllGames } from "../hooks/library/useGetAllGames.js";
 import SmallSpinner from "./SmallSpinner.jsx";
+import { useDeleteWishlist } from "../hooks/wishlist/useDeleteWishlist.js";
+import { useGetWishlist } from "../hooks/wishlist/useGetWishlist.js";
 
 const ProfileGameItem = ({ image, platform, meta, name, added, id }) => {
   const { games } = useGetAllGames();
   const { deleteMutate, deleteLoading } = useDeleteGame();
   const { updateMutate, updateLoading } = useUpdateGames();
+  const { deleteWishMutate, deleteWishLoading } = useDeleteWishlist();
+  const { wishlistedGames } = useGetWishlist();
   const queryClient = useQueryClient();
 
   const getStatus = games?.find((game) => game.id === id)?.status;
+  const isWishlisted = wishlistedGames?.map((game) => game.id).includes(id);
 
   const handleDeleteGame = () => {
-    deleteMutate(
-      {
-        id,
-      },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries(["games"]);
-          successNotify(`You have removed ${name} from your library`);
+    if (!isWishlisted) {
+      deleteMutate(
+        {
+          id,
         },
-      },
-    );
+        {
+          onSuccess: () => {
+            queryClient.invalidateQueries(["games"]);
+            successNotify(`You have removed ${name} from your library`);
+          },
+          onError: (err) => {
+            generalError(err.message);
+          },
+        },
+      );
+    } else {
+      deleteWishMutate(
+        {
+          id,
+        },
+        {
+          onSuccess: () => {
+            queryClient.invalidateQueries(["wishlist"]);
+            successNotify(`You have removed ${name} from your wishlist`);
+          },
+          onError: (err) => {
+            generalError(err.message);
+          },
+        },
+      );
+    }
   };
 
   const handleUpdateGame = (currentStatus) => {
@@ -76,25 +101,28 @@ const ProfileGameItem = ({ image, platform, meta, name, added, id }) => {
           </h2>
         </div>
         <div className="mt-2 flex items-center gap-1">
-          <GameDetailsDropDown handleSetStatus={handleUpdateGame}>
-            <span className="group flex h-6 cursor-pointer items-center gap-1 rounded-[0.3rem] bg-second-color px-2 font-semibold text-white transition-all duration-200 hover:bg-white hover:text-black">
-              {updateLoading ? (
-                <SmallSpinner color="white" />
-              ) : (
-                <FontAwesomeIcon
-                  icon={faPlus}
-                  className="text-xs transition-all duration-200 group-hover:text-black"
-                />
-              )}
-              <span>{added}</span>
-            </span>
-          </GameDetailsDropDown>
+          {!isWishlisted && (
+            <GameDetailsDropDown handleSetStatus={handleUpdateGame}>
+              <span className="group flex h-6 cursor-pointer items-center gap-1 rounded-[0.3rem] bg-second-color px-2 font-semibold text-white transition-all duration-200 hover:bg-white hover:text-black">
+                {updateLoading ? (
+                  <SmallSpinner color="white" />
+                ) : (
+                  <FontAwesomeIcon
+                    icon={faPlus}
+                    className="text-xs transition-all duration-200 group-hover:text-black"
+                  />
+                )}
+                <span>{added}</span>
+              </span>
+            </GameDetailsDropDown>
+          )}
           <span className="group flex h-6 cursor-pointer items-center rounded-[0.3rem] bg-second-color px-2 transition-all duration-200 hover:bg-white">
-            <CommentPopover
+            <ProfilePopover
               className="text-white transition-all duration-200 group-hover:text-black"
               option2="Remove"
               remove={handleDeleteGame}
               loading={deleteLoading}
+              loading2={deleteWishLoading}
             />
           </span>
         </div>

@@ -38,6 +38,7 @@ import Settings from "./pages/Settings.jsx";
 import SettingsProfile from "./pages/SettingsProfile.jsx";
 import SettingsMyPassword from "./pages/SettingsMyPassword.jsx";
 import SettingsMyEmail from "./pages/SettingsMyEmail.jsx";
+import AddReview from "./pages/AddReview.jsx";
 
 const router = createBrowserRouter([
   {
@@ -202,6 +203,10 @@ const router = createBrowserRouter([
             element: <SettingsMyEmail />,
           },
         ],
+      },
+      {
+        path: "/reviews/create-review/:gameId/:slug",
+        element: <AddReview />,
       },
     ],
   },

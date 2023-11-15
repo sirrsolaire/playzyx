@@ -68,6 +68,11 @@
         @apply flex w-full cursor-pointer justify-center rounded-md bg-white px-3 py-3 text-xl  leading-6 text-black shadow-modal-button transition-all duration-200 ease-out hover:shadow-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ;
     }
 }
+@layer utilities {
+    .durationAll{
+        @apply transition-all duration-200
+    }
+}
 
 /*@layer utilities {*/
 /*    .no-scrollbar::-webkit-scrollbar {*/

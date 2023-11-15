@@ -4,7 +4,7 @@ import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import "../assets/styles/antd.css";
 import SmallSpinner from "./SmallSpinner.jsx";
 
-const CommentPopover = ({
+const ProfilePopover = ({
   className,
   option1,
   option2,
@@ -30,7 +30,11 @@ const CommentPopover = ({
           onClick={remove}
           className="flex cursor-pointer items-center gap-1 px-2 py-1 text-base hover:rounded-b-lg hover:bg-game-info"
         >
-          {loading ? <SmallSpinner color="white" /> : <DeleteOutlined />}
+          {loading || loading2 ? (
+            <SmallSpinner color="white" />
+          ) : (
+            <DeleteOutlined />
+          )}
           <span>{option2}</span>
         </div>
       )}
@@ -47,7 +51,7 @@ const CommentPopover = ({
     >
       <Popover
         content={content}
-        trigger="hover"
+        trigger="click"
         placement="bottomLeft"
         arrow={false}
       >
@@ -60,4 +64,4 @@ const CommentPopover = ({
   );
 };
 
-export default CommentPopover;
+export default ProfilePopover;

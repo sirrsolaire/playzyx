@@ -4,7 +4,7 @@ import { setSearchModal } from "../reducers/modalSlice.js";
 import { Platform } from "./Platform.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import CommentPopover from "./CommentPopover.jsx";
+import ProfilePopover from "./ProfilePopover.jsx";
 import { useDeleteFavourite } from "../hooks/favouriteGames/useDeleteFavourite.js";
 import { generalError, successNotify } from "../helpers/toaster/toast.js";
 import { useQueryClient } from "@tanstack/react-query";
@@ -76,7 +76,7 @@ const FavoriteGame = ({ game }) => {
               <FontAwesomeIcon icon={faPlus} className="text-xs" /> {game.added}
             </span>
             <span className="group flex h-6 cursor-pointer items-center rounded-[0.3rem] bg-second-color px-2 transition-all duration-200 hover:bg-white">
-              <CommentPopover
+              <ProfilePopover
                 className="text-white transition-all duration-200 group-hover:text-black"
                 option2="Remove"
                 remove={handleDeleteFavourite}

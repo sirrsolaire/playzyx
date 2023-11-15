@@ -1,4 +1,4 @@
-import CommentPopover from "../ui/CommentPopover.jsx";
+import ProfilePopover from "../ui/ProfilePopover.jsx";
 
 const ProfileReviews = () => {
   return (
@@ -7,7 +7,7 @@ const ProfileReviews = () => {
         <h2 className="text-xl font-semibold underline underline-offset-4">
           Baldurs Gate 3
         </h2>
-        <CommentPopover />
+        <ProfilePopover />
       </div>
       <p className="mb-5 text-sm opacity-80">
         Byssuss congregabo, tanquam bi-color abaculus.Everything we do is

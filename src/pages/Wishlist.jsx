@@ -29,6 +29,7 @@ const Wishlist = () => {
         <div className="mt-2 grid grid-cols-1 gap-3 smallTb:grid-cols-2 tablet:grid-cols-3">
           {filteredWishList?.map((game, i) => (
             <ProfileGameItem
+              id={game.id}
               key={i}
               image={game.image}
               platform={

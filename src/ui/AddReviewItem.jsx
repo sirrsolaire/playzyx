@@ -5,7 +5,11 @@ import { useState } from "react";
 import { usePostReview } from "../hooks/reviews/usePostReview.js";
 import { rateList } from "../Data/reviewTags.js";
 import { useQueryClient } from "@tanstack/react-query";
-import { successNotify } from "../helpers/toaster/toast.js";
+import {
+  errorNotify,
+  generalError,
+  successNotify,
+} from "../helpers/toaster/toast.js";
 import { useGetUser } from "../hooks/authentication/useGetUser.js";
 import SmallSpinner from "./SmallSpinner.jsx";
 
@@ -23,22 +27,31 @@ const AddReviewItem = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const formattedTags = reviewTags.map((tag) => ({ name: tag }));
-    reviewMutate(
-      {
-        id: data?.id,
-        user_name: user?.user_metadata.username,
-        user_avatar: user?.user_metadata.avatar,
-        review: reviewText,
-        rate,
-        tags: formattedTags,
-      },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries(["reviews"]);
-          successNotify(`You have submitted a review for ${data?.name}`);
+    if (rate) {
+      reviewMutate(
+        {
+          id: data?.id,
+          user_name: user?.user_metadata.username,
+          user_avatar: user?.user_metadata.avatar,
+          game_name: data?.name,
+          game_slug: slug,
+          review: reviewText,
+          rate,
+          tags: formattedTags,
         },
-      },
-    );
+        {
+          onSuccess: () => {
+            queryClient.invalidateQueries(["reviews"]);
+            successNotify(`You have submitted a review for ${data?.name}`);
+          },
+          onError: (err) => {
+            generalError(err.message);
+          },
+        },
+      );
+    } else {
+      errorNotify("You have to rate the game before submitting!");
+    }
   };
 
   const rateTags = {

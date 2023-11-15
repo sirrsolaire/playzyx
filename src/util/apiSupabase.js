@@ -244,6 +244,8 @@ export async function postReview(data) {
         review: data.review,
         rate: data.rate,
         tags: data.tags,
+        game_name: data.game_name,
+        game_slug: data.game_slug,
       },
     ])
     .select();

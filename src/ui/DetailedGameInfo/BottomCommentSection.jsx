@@ -1,12 +1,34 @@
 import CommentDropDown from "../CommentDropDown.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import fakeCommentData from "../../Data/fakeComments.json";
 import { formatDate } from "../../helpers/dateFormat.js";
 import { useState } from "react";
+import { useGetReviews } from "../../hooks/reviews/useGetReviews.js";
+import { Icon } from "@iconify/react";
 
 export const BottomCommentSection = ({ data, screenShotsData }) => {
   const [replyStates, setReplyStates] = useState({});
+  const { reviews, reviewsLoading } = useGetReviews();
+
+  let filteredReviews = reviews;
+  if (reviews) {
+    if (reviews) {
+      filteredReviews = reviews.filter(
+        (review) => review.game_slug === data?.slug,
+      );
+    }
+  }
+
+  const handleRateIcon = (rate) => {
+    const setIcon = {
+      exceptional: <Icon icon="game-icons:supersonic-arrow" />,
+      recommended: <Icon icon="icon-park-outline:good-two" />,
+      meh: <Icon icon="vaadin:meh-o" />,
+      skip: <Icon icon="icon-park-outline:bad-two" />,
+    };
+
+    return setIcon[rate] || null;
+  };
 
   const handleReplyChange = (e, commentId) => {
     const newValue = e.target.value;
@@ -41,36 +63,39 @@ export const BottomCommentSection = ({ data, screenShotsData }) => {
       </div>
 
       <div className="mt-2 space-y-3">
-        {fakeCommentData?.map((comment, i) => (
+        {filteredReviews?.map((review, i) => (
           <div key={i} className="rounded-xl bg-[rgba(0,0,0,.3)] py-4">
-            <h3 className="mb-2 px-5 text-lg font-semibold underline decoration-gray-9 underline-offset-2">
-              {comment.rate}
-            </h3>
-            <p className="mb-2 px-5 text-sm  opacity-70 ">
-              {comment.comment.length > 500
-                ? comment.comment.slice(0, 500) + "..."
-                : comment.comment}
+            <div className="mb-2 flex items-center gap-3 px-5 text-xl font-semibold underline decoration-gray-9 underline-offset-2">
+              <h3>
+                {review.rate.charAt(0).toUpperCase() + review.rate.slice(1)}
+              </h3>
+              <span>{handleRateIcon(review.rate)}</span>
+            </div>
+            <p className="mb-5 px-5 text-sm  opacity-70 ">
+              {review.review.length > 500
+                ? review.review.slice(0, 500) + "..."
+                : review.review}
             </p>
-            <ul className="mb-3 space-y-2 px-5 text-[11px]  uppercase ">
-              {comment.tags?.map((tag, i) => (
+            <ul className="mb-3 flex flex-wrap items-center gap-2 px-5 text-[11px] uppercase">
+              {review.tags?.map((tag, i) => (
                 <li
                   key={i}
-                  className="w-fit rounded-full bg-tag-color px-3 py-1 tracking-widest"
+                  className="w-fit rounded-full bg-[hsla(0,0%,100%,.05)] px-3 py-1 tracking-widest"
                 >
-                  «{tag.tag}»
+                  «{tag.name}»
                 </li>
               ))}
             </ul>
             <div className="flex items-center gap-3  px-5 ">
               <img
-                src={comment.user_image}
-                alt={`${comment.username}'s image`}
+                src={review.user_avatar}
+                alt={`${review.user_name}'s image`}
                 className="h-[40px] w-[40px] rounded-full"
               />
               <div className="flex flex-col">
-                <span className="text-xs">{comment.username}</span>
+                <span className="text-xs">{review.user_name}</span>
                 <span className="text-xs text-info-color">
-                  {formatDate(comment.created)}
+                  {formatDate(review.created_at)}
                 </span>
               </div>
             </div>
@@ -80,10 +105,10 @@ export const BottomCommentSection = ({ data, screenShotsData }) => {
                   type="text"
                   className="mb-2 h-12 w-full rounded-md bg-game-info pl-5"
                   placeholder="Write a reply ..."
-                  onChange={(e) => handleReplyChange(e, comment.id)}
-                  value={replyStates[comment.id]}
+                  onChange={(e) => handleReplyChange(e, review.id)}
+                  value={replyStates[review.id]}
                 />
-                {replyStates[comment.id]?.length > 0 && (
+                {replyStates[review.id]?.length > 0 && (
                   <button className="h-12 w-full cursor-pointer bg-white font-bold text-black">
                     SEND
                   </button>

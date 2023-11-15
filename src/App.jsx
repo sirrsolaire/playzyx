@@ -39,6 +39,11 @@ import SettingsProfile from "./pages/SettingsProfile.jsx";
 import SettingsMyPassword from "./pages/SettingsMyPassword.jsx";
 import SettingsMyEmail from "./pages/SettingsMyEmail.jsx";
 import AddReview from "./pages/AddReview.jsx";
+import ScreenShots from "./pages/ExtendedGameDetails/ScreenShots.jsx";
+import GamesLike from "./pages/ExtendedGameDetails/GamesLike.jsx";
+import RedditPosts from "./pages/ExtendedGameDetails/RedditPosts.jsx";
+import GameReviews from "./pages/ExtendedGameDetails/GameReviews.jsx";
+import MoreGameDetails from "./pages/ExtendedGameDetails/MoreGameDetails.jsx";
 
 const router = createBrowserRouter([
   {
@@ -207,6 +212,28 @@ const router = createBrowserRouter([
       {
         path: "/reviews/create-review/:gameId/:slug",
         element: <AddReview />,
+      },
+      {
+        path: "/games/:slug/more",
+        element: <MoreGameDetails />,
+        children: [
+          {
+            path: "/games/:slug/more/screenshots",
+            element: <ScreenShots />,
+          },
+          {
+            path: "/games/:slug/more/games-like",
+            element: <GamesLike />,
+          },
+          {
+            path: "/games/:slug/more/reddit-posts",
+            element: <RedditPosts />,
+          },
+          {
+            path: "/games/:slug/more/reviews",
+            element: <GameReviews />,
+          },
+        ],
       },
     ],
   },

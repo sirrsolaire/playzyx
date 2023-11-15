@@ -1,7 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import { useParams } from "react-router";
 
 export const Achievements = ({ data, achievementData }) => {
+  const { slug } = useParams();
   return (
     <div className="mt-10 ">
       <div className="flex items-center justify-between">
@@ -38,9 +41,11 @@ export const Achievements = ({ data, achievementData }) => {
           <FontAwesomeIcon icon={faEllipsis} className="text-2xl " />
         </div>
         <div className="flex flex-col gap-1">
-          <span className="cursor-pointer text-sm font-semibold transition-all duration-200 hover:underline hover:opacity-50">
-            view all achievements
-          </span>
+          <Link to={`/games/${slug}/more/reviews`}>
+            <span className="cursor-pointer text-sm font-semibold transition-all duration-200 hover:underline hover:opacity-50">
+              view all achievements
+            </span>
+          </Link>
           <span className="text-xs text-info-color">
             {data?.achievements_count} items
           </span>

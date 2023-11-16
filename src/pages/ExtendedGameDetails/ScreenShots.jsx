@@ -1,10 +1,8 @@
 import { TopNavigation } from "../../ui/DetailedGameInfo/TopNavigation.jsx";
-import useDetailedGame from "../../hooks/useDetailedGame.js";
-import { useParams } from "react-router";
+import { useOutletContext } from "react-router";
 
 const ScreenShots = () => {
-  const { slug } = useParams();
-  const { data } = useDetailedGame(slug);
+  const { data } = useOutletContext();
 
   return (
     <div className="flex flex-col items-center">

@@ -44,6 +44,7 @@ import GamesLike from "./pages/ExtendedGameDetails/GamesLike.jsx";
 import RedditPosts from "./pages/ExtendedGameDetails/RedditPosts.jsx";
 import GameReviews from "./pages/ExtendedGameDetails/GameReviews.jsx";
 import MoreGameDetails from "./pages/ExtendedGameDetails/MoreGameDetails.jsx";
+import MoreAchievements from "./pages/ExtendedGameDetails/MoreAchievements.jsx";
 
 const router = createBrowserRouter([
   {
@@ -232,6 +233,10 @@ const router = createBrowserRouter([
           {
             path: "/games/:slug/more/reviews",
             element: <GameReviews />,
+          },
+          {
+            path: "/games/:slug/more/achievements",
+            element: <MoreAchievements />,
           },
         ],
       },

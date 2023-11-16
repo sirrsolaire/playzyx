@@ -2,9 +2,10 @@ import Header from "../../ui/Header.jsx";
 import { DesktopSideMenu } from "../../ui/DesktopSideMenu.jsx";
 import SideMenu from "../../ui/SideMenu.jsx";
 import { FloatSideMenu } from "../../ui/FloatButton.jsx";
-import { Outlet, useParams } from "react-router";
+import { Outlet, useLocation, useParams } from "react-router";
 import { NavLink } from "react-router-dom";
 import useDetailedGame from "../../hooks/useDetailedGame.js";
+import { TopNavigation } from "../../ui/DetailedGameInfo/TopNavigation.jsx";
 
 const navItems = [
   {
@@ -32,6 +33,11 @@ const navItems = [
 const MoreGameDetails = () => {
   const { slug } = useParams();
   const { data } = useDetailedGame(slug);
+  const location = useLocation();
+
+  const lastSegment = location.pathname.split("/").pop();
+  const isGamesLike = lastSegment === "games-like";
+  console.log(isGamesLike);
 
   const containerStyle = {
     backgroundImage: `linear-gradient(rgba(15, 15, 15, 0), rgb(21, 21, 21)), linear-gradient(rgba(21, 21, 21, 0.8), rgba(21, 21, 21, 0.5)), url(${data?.background_image})`,
@@ -45,7 +51,12 @@ const MoreGameDetails = () => {
           <DesktopSideMenu />
         </div>
         <section className="grid w-full grid-cols-1 px-5 pb-36 tablet:mx-auto tablet:max-w-[960px]">
-          <Outlet context={{ data }} />
+          <TopNavigation data={data} />
+          <h2 className="text-center text-2xl font-semibold">
+            {!isGamesLike
+              ? `${data?.name} ${lastSegment}`
+              : `Games-like ${data?.name}`}
+          </h2>
           <ul className="mt-5 flex gap-3 overflow-y-auto">
             {navItems.map((item, i) => (
               <NavLink
@@ -61,6 +72,7 @@ const MoreGameDetails = () => {
               </NavLink>
             ))}
           </ul>
+          <Outlet context={{ data }} />
         </section>
         <SideMenu />
         <FloatSideMenu />

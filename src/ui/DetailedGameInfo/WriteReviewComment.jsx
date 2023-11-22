@@ -1,8 +1,9 @@
 import { Icon } from "@iconify/react";
 import { useGetUser } from "../../hooks/authentication/useGetUser.js";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 export const WriteReviewComment = ({ data }) => {
+  const { slug } = useParams();
   const { data: user, isLoading } = useGetUser();
   const navigate = useNavigate();
 
@@ -28,13 +29,16 @@ export const WriteReviewComment = ({ data }) => {
           Write a review {data?.reviews_count}
         </span>
       </div>
-      <div className="group flex cursor-pointer items-center justify-center gap-2 rounded-md bg-button-color px-4 py-3 text-center transition-all duration-200 hover:bg-white hover:text-black">
+      <div
+        className="group flex cursor-pointer items-center justify-center gap-2 rounded-md bg-button-color px-4 py-3 text-center transition-all duration-200 hover:bg-white hover:text-black"
+        onClick={() => navigate(`/games/${slug}/more/reviews`)}
+      >
         <Icon
           icon="iconamoon:comment"
           className="text-xl opacity-50 group-hover:opacity-100"
         />
         <span className="tracking-wide opacity-50 group-hover:opacity-100">
-          Write a comment
+          See all reviews
         </span>
       </div>
     </div>

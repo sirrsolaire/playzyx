@@ -16,8 +16,10 @@ export const FloatSideMenu = () => {
       theme={{
         components: {
           FloatButton: {
-            colorText: "white",
-            colorBgElevated: "black",
+            colorBgElevated: "pink",
+            colorPrimary: "#202020",
+            colorTextLightSolid: "black",
+            colorFillContent: "#E4E1A1",
           },
         },
       }}
@@ -25,7 +27,7 @@ export const FloatSideMenu = () => {
       <FloatButton
         icon={<FontAwesomeIcon icon={faBars} />}
         onClick={sideMenuOpen}
-        className="tablet:hidden"
+        className={`desktopFirstHalf:hidden `}
       />
     </ConfigProvider>
   );

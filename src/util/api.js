@@ -38,9 +38,9 @@ export const fetchGame = async () => {
   return response.data.results;
 };
 
-export const fetchReviews = async (gameId, pageParam) => {
+export const fetchReviews = async (slug, pageParam) => {
   const response = await axios.get(
-    `https://api.rawg.io/api/games/${gameId}/reddit?page=${pageParam}&page_size=20&key=${API_KEY}`,
+    `https://api.rawg.io/api/games/${slug}/reddit?page=${pageParam}&page_size=20&key=${API_KEY}`,
   );
   return response.data;
 };

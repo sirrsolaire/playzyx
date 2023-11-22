@@ -11,7 +11,6 @@ import { useGetUser } from "../hooks/authentication/useGetUser.js";
 import { useLogOut } from "../hooks/authentication/useLogOut.js";
 import { NavLink } from "react-router-dom";
 import UserDropDown from "./UserDropDrown.jsx";
-import defaultUser from "../../public/default-user.png";
 
 function Header() {
   const [onEnter, setOnEnter] = useState(false);
@@ -23,6 +22,7 @@ function Header() {
   const authenticatedUser = user?.role === "authenticated";
   const userAvatar = user?.user_metadata?.avatar;
   const username = user?.user_metadata?.username;
+  const getFirstLetter = username?.charAt(0).toUpperCase();
 
   const handleLogout = () => {
     logoutMutate();
@@ -91,7 +91,7 @@ function Header() {
       </div>
       <FontAwesomeIcon
         icon={faBars}
-        className="text-2xl text-white tablet:hidden"
+        className="cursor-pointer text-2xl text-white tablet:hidden"
         onClick={showDrawer}
       />
       <MobileMenu />
@@ -119,13 +119,15 @@ function Header() {
         ) : (
           <div className="flex  items-center justify-between">
             <div className="flex items-center gap-3">
-              <img
-                src={userAvatar || defaultUser}
-                alt="User Avatar"
-                className="h-10 w-10 cursor-pointer rounded-full"
-              />
+              {!userAvatar ? (
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-default-profile-avatar">
+                  <span className="text-2xl  font-bold ">{getFirstLetter}</span>
+                </div>
+              ) : (
+                <img src={userAvatar} alt="" className="h-10 w-10" />
+              )}
               <NavLink
-                to={`/profile/${username}`}
+                to={`/profile/${username}/overview`}
                 className="cursor-pointer truncate text-lg decoration-2 hover:underline hover:underline-offset-4"
               >
                 {username}

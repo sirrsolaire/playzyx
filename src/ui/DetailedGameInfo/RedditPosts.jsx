@@ -1,6 +1,10 @@
 import { formatDate } from "../../helpers/dateFormat.js";
+import { useNavigate, useParams } from "react-router";
 
 export const RedditPosts = ({ data, redditData }) => {
+  const { slug } = useParams();
+  const navigate = useNavigate();
+  const slicedRedditData = redditData?.slice(0, 5);
   return (
     <div className="mt-10">
       <div className="flex  items-center justify-between">
@@ -20,7 +24,7 @@ export const RedditPosts = ({ data, redditData }) => {
       </div>
 
       <ul>
-        {redditData?.map((post) => (
+        {slicedRedditData?.map((post) => (
           <a href={post.url} key={post.id}>
             <li className="flex  items-center justify-between  border-b-[1px] border-button-color py-4 ">
               <div>
@@ -44,7 +48,10 @@ export const RedditPosts = ({ data, redditData }) => {
         ))}
       </ul>
       {redditData?.length > 0 && (
-        <button className="w-full rounded-md bg-button-color py-2 transition-all duration-200 hover:bg-white hover:text-black">
+        <button
+          className="w-full rounded-md bg-button-color py-2 transition-all duration-200 hover:bg-white hover:text-black"
+          onClick={() => navigate(`/games/${slug}/more/reddit-posts`)}
+        >
           View All
         </button>
       )}

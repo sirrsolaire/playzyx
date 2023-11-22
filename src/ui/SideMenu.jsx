@@ -40,8 +40,10 @@ const SideMenu = () => {
             theme={{
               components: {
                 FloatButton: {
-                  colorText: "black",
-                  colorBgElevated: "white",
+                  colorBgElevated: "pink",
+                  colorPrimary: "#202020",
+                  colorTextLightSolid: "black",
+                  colorFillContent: "#E4E1A1",
                 },
               },
             }}

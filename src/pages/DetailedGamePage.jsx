@@ -9,14 +9,14 @@ export const DetailedGamePage = () => {
     <>
       <Header />
       <div className="px-5 tablet:flex tablet:px-10">
-        <div className="desktopFirstHalf:block hidden h-fit">
+        <div className="hidden h-fit desktopFirstHalf:block">
           <DesktopSideMenu />
         </div>
         <section className="pb-36 ">
           <DesktopDetailedGameInfo />
         </section>
         <SideMenu />
-        <FloatSideMenu />
+        <FloatSideMenu hidden="desktopFirstHalf:hidden" />
       </div>
     </>
   );

@@ -43,6 +43,7 @@ const AddReviewItem = () => {
           onSuccess: () => {
             queryClient.invalidateQueries(["reviews"]);
             successNotify(`You have submitted a review for ${data?.name}`);
+            navigate(`/games/${slug}/more/reviews`);
           },
           onError: (err) => {
             generalError(err.message);

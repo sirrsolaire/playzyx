@@ -2,19 +2,16 @@ import Header from "../../ui/Header.jsx";
 import { DesktopSideMenu } from "../../ui/DesktopSideMenu.jsx";
 import SideMenu from "../../ui/SideMenu.jsx";
 import { FloatSideMenu } from "../../ui/FloatButton.jsx";
-import { Outlet, useLocation, useParams } from "react-router";
+import { Outlet, useLocation, useNavigate, useParams } from "react-router";
 import { NavLink } from "react-router-dom";
 import useDetailedGame from "../../hooks/useDetailedGame.js";
 import { TopNavigation } from "../../ui/DetailedGameInfo/TopNavigation.jsx";
+import { Icon } from "@iconify/react";
 
 const navItems = [
   {
     name: "Screenshots",
     link: "screenshots",
-  },
-  {
-    name: "Games-like",
-    link: "games-like",
   },
   {
     name: "Reddit posts",
@@ -34,10 +31,10 @@ const MoreGameDetails = () => {
   const { slug } = useParams();
   const { data } = useDetailedGame(slug);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const lastSegment = location.pathname.split("/").pop();
   const isGamesLike = lastSegment === "games-like";
-  console.log(isGamesLike);
 
   const containerStyle = {
     backgroundImage: `linear-gradient(rgba(15, 15, 15, 0), rgb(21, 21, 21)), linear-gradient(rgba(21, 21, 21, 0.8), rgba(21, 21, 21, 0.5)), url(${data?.background_image})`,
@@ -50,38 +47,49 @@ const MoreGameDetails = () => {
         <div className="hidden h-fit desktopFirstHalf:block">
           <DesktopSideMenu />
         </div>
-        <section className="grid w-full grid-cols-1 px-5 pb-36 tablet:mx-auto tablet:max-w-[960px]">
-          <TopNavigation data={data} />
-          <h2 className="text-center text-2xl font-semibold">
-            {!isGamesLike
-              ? `${data?.name} ${lastSegment}`
-              : `Games-like ${data?.name}`}
-          </h2>
-          <ul className="mt-5 flex gap-3 overflow-y-auto">
-            {navItems.map((item, i) => (
-              <NavLink
-                key={i}
-                to={item.link}
-                className={({ isActive }) =>
-                  isActive
-                    ? "whitespace-nowrap font-semibold text-white"
-                    : "whitespace-nowrap text-info-color "
-                }
-              >
-                <li>{item.name}</li>
-              </NavLink>
-            ))}
-          </ul>
-          <Outlet context={{ data }} />
+        <section className=" w-full  px-5 pb-36 tablet:mx-auto tablet:max-w-[960px]">
+          <div className="flex justify-center">
+            <TopNavigation data={data} />
+          </div>
+          <div className="flex items-center justify-center gap-4">
+            <Icon
+              icon="zondicons:arrow-left"
+              className="cursor-pointer text-2xl"
+              onClick={() => navigate(`/games/details/${slug}`)}
+            />
+            <h2 className="text-center text-2xl font-semibold">
+              {!isGamesLike
+                ? `${data?.name} ${lastSegment}`
+                : `Games-like ${data?.name}`}
+            </h2>
+          </div>
+          <div className="">
+            <ul className="mb-4 mt-5 flex justify-center gap-3 overflow-y-auto smallTb:text-xl">
+              {navItems.map((item, i) => (
+                <NavLink
+                  key={i}
+                  to={item.link}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "whitespace-nowrap font-semibold text-white"
+                      : "whitespace-nowrap text-info-color"
+                  }
+                >
+                  <li>{item.name}</li>
+                </NavLink>
+              ))}
+            </ul>
+            <Outlet context={{ data }} />
+          </div>
         </section>
         <SideMenu />
         <FloatSideMenu />
       </div>
       <div className="absolute left-0 top-0 -z-50 h-[100%] w-[100%]">
-        <div className="h-[300px]">
+        <div className="h-[600px]">
           <div
             style={containerStyle}
-            className="z-10 h-[300px] bg-transparent bg-cover bg-top "
+            className="z-10 h-[600px] bg-transparent bg-cover bg-top "
           ></div>
         </div>
       </div>

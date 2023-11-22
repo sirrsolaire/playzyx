@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { Outlet } from "react-router";
 import { Icon } from "@iconify/react";
 import { useGetFavourite } from "../hooks/favouriteGames/useGetFavourite.js";
+import { useState } from "react";
 
 const list = [
   {
@@ -28,6 +29,7 @@ const list = [
 ];
 
 const ProfileContent = () => {
+  const [showMore, setShowMore] = useState(false);
   const { data: user } = useGetUser();
   const userAvatar = user?.user_metadata.avatar;
   const username = user?.user_metadata.username;
@@ -74,12 +76,6 @@ const ProfileContent = () => {
                 Settings
               </button>
             </NavLink>
-            <button className="rounded-md bg-white px-5 py-3 text-black shadow-modal-button transition-all duration-200 hover:bg-opacity-80 tablet:flex-1">
-              <Icon
-                icon="akar-icons:arrow-forward-thick-fill"
-                className="text-2xl tablet:text-lg"
-              />
-            </button>
           </div>
         </div>
 
@@ -100,7 +96,19 @@ const ProfileContent = () => {
             </div>
           </NavLink>
         ) : (
-          <p className="tablet:self-start">{bio}</p>
+          <>
+            <p className="tablet:self-start">
+              {!showMore ? bio.slice(0, 400) : bio}{" "}
+              {!showMore && (
+                <span
+                  className="cursor-pointer rounded-md bg-white px-2 text-sm font-semibold text-black"
+                  onClick={() => setShowMore(true)}
+                >
+                  Show more
+                </span>
+              )}
+            </p>
+          </>
         )}
 
         <ul className="mt-4 flex gap-5 tablet:mt-8 tablet:gap-10 tablet:self-start">
@@ -118,7 +126,7 @@ const ProfileContent = () => {
             </NavLink>
           ))}
         </ul>
-        <div className="mt-10 w-full tablet:mt-12">
+        <div className="mt-10 flex w-full flex-col gap-2 tablet:mt-12">
           <Outlet />
         </div>
       </div>

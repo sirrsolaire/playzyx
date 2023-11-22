@@ -1,10 +1,10 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { fetchReviews } from "../util/api.js";
 
-const useReview = (gameId) => {
+export const useReview = (slug) => {
   return useInfiniteQuery({
-    queryKey: ["post", gameId],
-    queryFn: ({ pageParam = 1 }) => fetchReviews(gameId, pageParam),
+    queryKey: ["post", slug],
+    queryFn: ({ pageParam = 1 }) => fetchReviews(slug, pageParam),
     getNextPageParam: (lastPage) => {
       if (lastPage.next !== null) {
         return lastPage.next;

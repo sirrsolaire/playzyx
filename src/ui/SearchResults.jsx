@@ -11,7 +11,7 @@ export const SearchResults = () => {
   if (query.length === 0) return;
 
   return (
-    <div className="absolute top-14 z-50 max-h-[600px] w-full overflow-scroll rounded-3xl bg-black py-5 shadow-2xl">
+    <div className="fixed left-0 top-14 z-50 h-screen w-full overflow-scroll  bg-black py-5 shadow-2xl tablet:absolute tablet:max-h-[600px] tablet:rounded-lg ">
       <div className="flex items-center justify-center">
         {isLoading && (
           <ColorRing

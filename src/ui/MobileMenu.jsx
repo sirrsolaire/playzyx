@@ -2,88 +2,94 @@ import { Drawer } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { setOpen } from "../reducers/mobileMenuSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faRightToBracket,
-  faUserPlus,
-  faX,
-} from "@fortawesome/free-solid-svg-icons";
-import { setIsModalOpen, setModalType } from "../reducers/modalSlice.js";
+import { faRightToBracket, faX } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router";
+import { useGetUser } from "../hooks/authentication/useGetUser.js";
+import { Icon } from "@iconify/react";
+import { useLogOut } from "../hooks/authentication/useLogOut.js";
 
 const MobileMenu = () => {
+  const { data: user } = useGetUser();
+  const getUserAvatar = user?.user_metadata.avatar;
+  const getUsername = user?.user_metadata.username;
+  const navigate = useNavigate();
   const menuOpen = useSelector((state) => state.menu.open);
   const dispatch = useDispatch();
+  const { logoutMutate, logoutLoading } = useLogOut();
 
   const onClose = () => {
     dispatch(setOpen(false));
   };
 
-  const handleLoginModal = () => {
-    dispatch(setModalType("login"));
-    dispatch(setIsModalOpen(true));
-  };
-
-  const handleRegisterModal = () => {
-    dispatch(setModalType("register"));
-    dispatch(setIsModalOpen(true));
+  const handleLogOut = () => {
+    logoutMutate();
+    onClose();
   };
 
   return (
     <>
       <Drawer
-        className="  text-white"
+        className="text-white"
         bodyStyle={{ backgroundColor: "#202020" }}
         title="Basic Drawer"
         placement="right"
         onClose={onClose}
         open={menuOpen}
         headerStyle={{ display: "none" }}
+        width={100}
       >
-        <div className=" flex justify-between">
-          <div className="flex flex-col">
-            <h2 className="text-2xl font-semibold">HOME</h2>
-            <p className="ml-4 text-lg font-semibold">Rate Top Games</p>
-            <h2 className="mt-2 text-2xl font-semibold">REVIEWS</h2>
-            <h2 className="mt-2 text-2xl font-semibold">BROWSE</h2>
-            <ul className="text-lg font-semibold">
-              <li className="mobileList">Reviews</li>
-              <li className="mobileList">Collections</li>
-              <li className="mobileList">Platforms</li>
-              <li className="mobileList">Stores</li>
-              <li className="mobileList">Genres</li>
-              <li className="mobileList">Creators</li>
-              <li className="mobileList">Tags</li>
-              <li className="mobileList">Developers</li>
-              <li className="mobileList">Publishers</li>
-            </ul>
-          </div>
-          <div className="flex flex-col items-center gap-4">
-            <FontAwesomeIcon
-              icon={faX}
-              className=" self-end text-2xl"
-              onClick={onClose}
-            />
-            <div className="flex flex-col items-center">
+        <FontAwesomeIcon
+          icon={faX}
+          className="durationAll absolute right-1/2 top-5 translate-x-1/2 cursor-pointer self-end text-3xl hover:text-pink-500"
+          onClick={onClose}
+        />
+        <div className="flex h-full items-center justify-center">
+          <div className="flex flex-col items-center">
+            {!user ? (
               <div
-                className="mt-6 flex h-16 w-16 items-center justify-center rounded-full bg-second-color"
+                className=" durationAll mt-6 flex h-16 w-16 cursor-pointer items-center justify-center rounded-full bg-second-color hover:text-pink-500"
                 onClick={() => {
+                  navigate("/login");
                   onClose();
-                  handleLoginModal();
                 }}
               >
                 <FontAwesomeIcon icon={faRightToBracket} className="text-3xl" />
               </div>
-              <span className="mt-1 font-semibold">Log in</span>
-              <div
-                className="mt-3 flex h-16 w-16 items-center justify-center rounded-full bg-second-color"
+            ) : (
+              <img
+                src={getUserAvatar}
+                alt=""
+                className="h-16 w-16 cursor-pointer"
                 onClick={() => {
+                  navigate(`/profile/${getUsername}/overview`);
                   onClose();
-                  handleRegisterModal();
                 }}
-              >
-                <FontAwesomeIcon icon={faUserPlus} className="text-3xl" />
-              </div>
-              <span className="mt-1 font-semibold">Sign up</span>
+              />
+            )}
+            <span
+              className={`mb-4 mt-1 font-semibold ${user && "w-20 truncate"}`}
+            >
+              {!user ? "Log in" : getUsername}
+            </span>
+            <div
+              className="durationAll mt-3 flex h-16 w-16 cursor-pointer items-center justify-center rounded-full bg-second-color hover:text-pink-500"
+              onClick={
+                !user
+                  ? () => {
+                      navigate("/register");
+                      onClose();
+                    }
+                  : handleLogOut
+              }
+            >
+              <Icon
+                icon={`${!user ? "fluent-mdl2:signin" : "line-md:log-out"}`}
+                className="text-4xl"
+              />
             </div>
+            <span className="mt-1 font-semibold">
+              {!user ? "Sign up" : "Log out"}
+            </span>
           </div>
         </div>
       </Drawer>

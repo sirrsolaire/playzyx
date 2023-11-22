@@ -9,10 +9,6 @@ const UserDropDown = ({ handleLogout, username }) => {
       key: "0",
     },
     {
-      label: <Link to={"/profile"}>Subscriptions</Link>,
-      key: "1",
-    },
-    {
       type: "divider",
     },
     {

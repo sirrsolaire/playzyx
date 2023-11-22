@@ -225,8 +225,9 @@ export async function deleteWishlist(data) {
 /////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////
 //read
-export async function getReviews() {
+export async function getReviews(id) {
   let { data: reviews, error } = await supabase.from("reviews").select("*");
+  // .eq("account_id", id);
 
   if (error) throw new Error(error.message);
 
@@ -263,11 +264,8 @@ export async function updateReview() {
   if (error) throw new Error(error.message);
 }
 //delete
-export async function deleteReview() {
-  const { error } = await supabase
-    .from("reviews")
-    .delete()
-    .eq("some_column", "someValue");
+export async function deleteReview(data) {
+  const { error } = await supabase.from("reviews").delete().eq("id", data.id);
 
   if (error) throw new Error(error.message);
 }

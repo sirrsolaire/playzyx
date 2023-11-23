@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { postFavouriteGames } from "../../util/apiSupabase.js";
+import { postFavouriteGames } from "../../services/APIs/apiSupabase/apiFavourite.js";
 
 export const usePostFavourite = () => {
   const { mutate: postFavourite, isLoading: postFavouriteLoading } =

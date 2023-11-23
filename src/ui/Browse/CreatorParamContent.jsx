@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
-import GameInfo from "../GameInfo.jsx";
+import GameInfo from "../General/GameInfo.jsx";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Spinner } from "../Spinner.jsx";
-import { OrderFilter } from "../OrderFilter.jsx";
-import { LayoutView } from "../LayoutView.jsx";
+import { Spinner } from "../Loading/Spinner.jsx";
+import { OrderFilter } from "../General/OrderFilter.jsx";
+import { LayoutView } from "../General/LayoutView.jsx";
 import { setLayout } from "../../reducers/layoutSlice.js";
 import { useParams } from "react-router";
-import useCreatorGames from "../../hooks/useCreatorGames.js";
+import useCreatorGames from "../../hooks/generals/useCreatorGames.js";
 
 function CreatorParamContent() {
   const dispatch = useDispatch();

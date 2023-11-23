@@ -1,5 +1,5 @@
-import { updateReview } from "../../util/apiSupabase.js";
 import { useMutation } from "@tanstack/react-query";
+import { updateReview } from "../../services/APIs/apiSupabase/apiReviews.js";
 
 export const useUpdateReview = () => {
   const { mutate: reviewUpdate, isLoading: reviewUpdateLoading } = useMutation({

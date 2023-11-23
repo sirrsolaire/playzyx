@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { updateFavouriteGame } from "../../util/apiSupabase.js";
+import { updateFavouriteGame } from "../../services/APIs/apiSupabase/apiSupabase.js";
 
 export const useUpdateFavourite = () => {
   const { mutate: updateFavouriteMutate, isLoading: updateFavouriteLoading } =

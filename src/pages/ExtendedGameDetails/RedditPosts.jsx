@@ -1,12 +1,12 @@
 import { useOutletContext, useParams } from "react-router";
-import useReview from "../../hooks/useReview.js";
+import useReview from "../../hooks/generals/useReview.js";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Spinner } from "../../ui/Spinner.jsx";
+import { Spinner } from "../../ui/Loading/Spinner.jsx";
 import { useSelector } from "react-redux";
 import { getTimeAgo } from "../../helpers/dateConvertor.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRedditAlien } from "@fortawesome/free-brands-svg-icons";
-import NotFoundItem from "../../ui/NotFoundItem.jsx";
+import NotFoundItem from "../../ui/General/NotFoundItem.jsx";
 
 const RedditPosts = () => {
   const { data } = useOutletContext();

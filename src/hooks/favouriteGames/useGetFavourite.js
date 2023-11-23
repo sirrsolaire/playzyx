@@ -1,6 +1,6 @@
-import { getFavouriteGames } from "../../util/apiSupabase.js";
 import { useQuery } from "@tanstack/react-query";
 import { useGetUser } from "../authentication/useGetUser.js";
+import { getFavouriteGames } from "../../services/APIs/apiSupabase/apiFavourite.js";
 
 export const useGetFavourite = () => {
   const { data: user } = useGetUser();

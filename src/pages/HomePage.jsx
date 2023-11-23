@@ -1,9 +1,9 @@
-import Header from "../ui/Header.jsx";
-import { DesktopSideMenu } from "../ui/DesktopSideMenu.jsx";
-import SideMenu from "../ui/SideMenu.jsx";
-import Content from "../ui/Content.jsx";
-import { Title } from "../ui/Title.jsx";
-import { FloatSideMenu } from "../ui/FloatButton.jsx";
+import Header from "../ui/Header/Header.jsx";
+import { DesktopSideMenu } from "../ui/SideMenu/DesktopSideMenu.jsx";
+import SideMenu from "../ui/SideMenu/SideMenu.jsx";
+import Content from "../ui/General/Content.jsx";
+import { Title } from "../ui/General/Title.jsx";
+import { FloatSideMenu } from "../ui/Buttons/FloatButton.jsx";
 
 export const HomePage = () => {
   return (

@@ -1,7 +1,7 @@
 import { ConfigProvider, Dropdown, Space } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
-import useAllPlatforms from "../../hooks/useAllPlatforms.js";
+import useAllPlatforms from "../../hooks/generals/useAllPlatforms.js";
 import "../../assets/styles/DropDownMenu.css";
 import { setBrowsePlatform } from "../../reducers/browseSlice.js";
 import { NavLink } from "react-router-dom";

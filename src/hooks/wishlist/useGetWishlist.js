@@ -1,11 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import { getWishlist } from "../../util/apiSupabase.js";
+import { getWishlist } from "../../services/APIs/apiSupabase/apiWishList.js";
+import { useGetUser } from "../authentication/useGetUser.js";
 
 export const useGetWishlist = () => {
+  const { data: user } = useGetUser();
+  const id = user?.id;
   const { data: wishlistedGames, isLoading: wishlistedGamesLoading } = useQuery(
     {
       queryKey: ["wishlist"],
-      queryFn: getWishlist,
+      queryFn: () => getWishlist(id),
     },
   );
 

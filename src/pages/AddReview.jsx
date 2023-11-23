@@ -1,4 +1,4 @@
-import AddReviewItem from "../ui/AddReviewItem.jsx";
+import AddReviewItem from "../ui/Comment/AddReviewItem.jsx";
 
 const AddReview = () => {
   return (

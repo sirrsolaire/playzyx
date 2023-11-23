@@ -1,6 +1,6 @@
 import { useOutletContext, useParams } from "react-router";
-import useScreenShots from "../../hooks/useScreenShots.js";
-import { Spinner } from "../../ui/Spinner.jsx";
+import useScreenShots from "../../hooks/generals/useScreenShots.js";
+import { Spinner } from "../../ui/Loading/Spinner.jsx";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import { useState } from "react";

@@ -1,9 +1,9 @@
-import Header from "../../ui/Header.jsx";
-import { DesktopSideMenu } from "../../ui/DesktopSideMenu.jsx";
-import { Title } from "../../ui/Title.jsx";
+import Header from "../../ui/Header/Header.jsx";
+import { DesktopSideMenu } from "../../ui/SideMenu/DesktopSideMenu.jsx";
+import { Title } from "../../ui/General/Title.jsx";
 import BrowseContent from "../../ui/Browse/BrowseContent.jsx";
-import SideMenu from "../../ui/SideMenu.jsx";
-import { FloatSideMenu } from "../../ui/FloatButton.jsx";
+import SideMenu from "../../ui/SideMenu/SideMenu.jsx";
+import { FloatSideMenu } from "../../ui/Buttons/FloatButton.jsx";
 
 export const Genres = () => {
   return (

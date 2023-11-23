@@ -1,8 +1,8 @@
-import CommentReviewItem from "../../ui/CommentReviewItem.jsx";
+import CommentReviewItem from "../../ui/Comment/CommentReviewItem.jsx";
 import { useGetReviews } from "../../hooks/reviews/useGetReviews.js";
 import { useNavigate, useParams } from "react-router";
-import WriteReviewButton from "../../ui/WriteReviewButton.jsx";
-import useDetailedGame from "../../hooks/useDetailedGame.js";
+import WriteReviewButton from "../../ui/Buttons/WriteReviewButton.jsx";
+import useDetailedGame from "../../hooks/generals/useDetailedGame.js";
 
 const GameReviews = () => {
   const { slug } = useParams();

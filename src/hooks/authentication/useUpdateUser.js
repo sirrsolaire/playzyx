@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { updateUser } from "../../util/apiSupabase.js";
+import { updateUser } from "../../services/APIs/apiSupabase/apiAuth.js";
 
 export const useUpdateUser = (updatePayload) => {
   const { mutate: updateMutate, isLoading: updateLoading } = useMutation({

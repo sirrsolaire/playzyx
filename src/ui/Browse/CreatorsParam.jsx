@@ -1,10 +1,10 @@
-import Header from "../Header.jsx";
-import { DesktopSideMenu } from "../DesktopSideMenu.jsx";
-import { Title } from "../Title.jsx";
-import SideMenu from "../SideMenu.jsx";
-import { FloatSideMenu } from "../FloatButton.jsx";
+import Header from "../Header/Header.jsx";
+import { DesktopSideMenu } from "../SideMenu/DesktopSideMenu.jsx";
+import { Title } from "../General/Title.jsx";
+import SideMenu from "../SideMenu/SideMenu.jsx";
+import { FloatSideMenu } from "../Buttons/FloatButton.jsx";
 import { useParams } from "react-router";
-import useCreatorData from "../../hooks/useCreatorData.js";
+import useCreatorData from "../../hooks/generals/useCreatorData.js";
 import sanitizeHtml from "sanitize-html";
 import CreatorParamContent from "./CreatorParamContent.jsx";
 

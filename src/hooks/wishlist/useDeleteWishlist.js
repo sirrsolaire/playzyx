@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { deleteWishlist } from "../../util/apiSupabase.js";
+import { deleteWishlist } from "../../services/APIs/apiSupabase/apiWishList.js";
 
 export const useDeleteWishlist = () => {
   const { mutate: deleteWishMutate, isLoading: deleteWishLoading } =

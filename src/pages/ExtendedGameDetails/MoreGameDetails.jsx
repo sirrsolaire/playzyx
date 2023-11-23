@@ -1,10 +1,10 @@
-import Header from "../../ui/Header.jsx";
-import { DesktopSideMenu } from "../../ui/DesktopSideMenu.jsx";
-import SideMenu from "../../ui/SideMenu.jsx";
-import { FloatSideMenu } from "../../ui/FloatButton.jsx";
+import Header from "../../ui/Header/Header.jsx";
+import { DesktopSideMenu } from "../../ui/SideMenu/DesktopSideMenu.jsx";
+import SideMenu from "../../ui/SideMenu/SideMenu.jsx";
+import { FloatSideMenu } from "../../ui/Buttons/FloatButton.jsx";
 import { Outlet, useLocation, useNavigate, useParams } from "react-router";
 import { NavLink } from "react-router-dom";
-import useDetailedGame from "../../hooks/useDetailedGame.js";
+import useDetailedGame from "../../hooks/generals/useDetailedGame.js";
 import { TopNavigation } from "../../ui/DetailedGameInfo/TopNavigation.jsx";
 import { Icon } from "@iconify/react";
 

@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { deleteGame } from "../../util/apiSupabase.js";
+import { deleteGame } from "../../services/APIs/apiSupabase/apiAllGames.js";
 
 export const useDeleteGame = () => {
   const { mutate: deleteMutate, isLoading: deleteLoading } = useMutation({

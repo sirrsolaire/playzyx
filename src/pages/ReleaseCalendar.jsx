@@ -1,13 +1,13 @@
-import Header from "../ui/Header.jsx";
-import { DesktopSideMenu } from "../ui/DesktopSideMenu.jsx";
-import { Title } from "../ui/Title.jsx";
-import SideMenu from "../ui/SideMenu.jsx";
-import { FloatSideMenu } from "../ui/FloatButton.jsx";
-import GamesByMonth from "../ui/GamesByMonth.jsx";
+import Header from "../ui/Header/Header.jsx";
+import { DesktopSideMenu } from "../ui/SideMenu/DesktopSideMenu.jsx";
+import { Title } from "../ui/General/Title.jsx";
+import SideMenu from "../ui/SideMenu/SideMenu.jsx";
+import { FloatSideMenu } from "../ui/Buttons/FloatButton.jsx";
+import GamesByMonth from "../ui/Date/GamesByMonth.jsx";
 import { currentYear } from "../helpers/dateConvertor.js";
 import { useSelector } from "react-redux";
 import { fullMonths } from "../helpers/monthStringConvertor.js";
-import { Calendar } from "../ui/Calendar.jsx";
+import { Calendar } from "../ui/Date/Calendar.jsx";
 
 export const ReleaseCalendar = () => {
   const getMonth = useSelector((state) => state.month.monthNo);

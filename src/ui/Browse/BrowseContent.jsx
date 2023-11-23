@@ -1,6 +1,6 @@
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Spinner } from "../Spinner.jsx";
-import useBrowse from "../../hooks/useBrowse.js";
+import { Spinner } from "../Loading/Spinner.jsx";
+import useBrowse from "../../hooks/generals/useBrowse.js";
 import { BrowseContentItem } from "./BrowseContentItem.jsx";
 import { useSelector } from "react-redux";
 

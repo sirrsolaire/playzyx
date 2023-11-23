@@ -1,9 +1,9 @@
-import Header from "../Header.jsx";
-import { DesktopSideMenu } from "../DesktopSideMenu.jsx";
-import { Title } from "../Title.jsx";
-import Tags from "../Tags.jsx";
-import SideMenu from "../SideMenu.jsx";
-import { FloatSideMenu } from "../FloatButton.jsx";
+import Header from "../Header/Header.jsx";
+import { DesktopSideMenu } from "../SideMenu/DesktopSideMenu.jsx";
+import { Title } from "../General/Title.jsx";
+import Tags from "../General/Tags.jsx";
+import SideMenu from "../SideMenu/SideMenu.jsx";
+import { FloatSideMenu } from "../Buttons/FloatButton.jsx";
 import PageParamsContent from "./PageParamsContent.jsx";
 import { useParams } from "react-router";
 import { formattedSlug } from "../../helpers/platformFilterLetterConvertor.js";

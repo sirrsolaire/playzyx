@@ -1,9 +1,9 @@
 import { formatDate } from "../../helpers/dateFormat.js";
-import { ParentPlatformsIcon } from "../ParentPlatformsIcon.jsx";
+import { ParentPlatformsIcon } from "../Platform/ParentPlatformsIcon.jsx";
 
 export const TopDateAndPlatform = ({ data }) => {
   return (
-    <div className="desktopFirstHalf:flex-col desktopFirstHalf:items-start desktopFirstHalf:gap-2 flex flex-col items-center justify-start gap-4 tablet:flex-row desktopSecond:flex-row desktopSecond:items-center desktopSecond:gap-4">
+    <div className="flex flex-col items-center justify-start gap-4 tablet:flex-row desktopFirstHalf:flex-col desktopFirstHalf:items-start desktopFirstHalf:gap-2 desktopSecond:flex-row desktopSecond:items-center desktopSecond:gap-4">
       <div className="flex items-center justify-center gap-4">
         <span className="flex w-fit rounded bg-white px-2 text-base text-black">
           {formatDate(data?.released)}

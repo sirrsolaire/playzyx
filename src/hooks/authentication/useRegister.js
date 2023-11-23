@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { register } from "../../util/apiSupabase.js";
+import { register } from "../../services/APIs/apiSupabase/apiAuth.js";
 
 export const useRegister = (registerPayload) => {
   const { mutate: registerMutate, isLoading: registerLoading } = useMutation({

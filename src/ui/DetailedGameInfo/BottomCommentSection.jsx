@@ -1,9 +1,9 @@
-import CommentDropDown from "../CommentDropDown.jsx";
+import CommentDropDown from "../Comment/CommentDropDown.jsx";
 import { useGetReviews } from "../../hooks/reviews/useGetReviews.js";
-import CommentReviewItem from "../CommentReviewItem.jsx";
+import CommentReviewItem from "../Comment/CommentReviewItem.jsx";
 import { useGetUser } from "../../hooks/authentication/useGetUser.js";
 import { useNavigate } from "react-router";
-import WriteReviewButton from "../WriteReviewButton.jsx";
+import WriteReviewButton from "../Buttons/WriteReviewButton.jsx";
 
 export const BottomCommentSection = ({ data, screenShotsData }) => {
   const { reviews, reviewsLoading } = useGetReviews();

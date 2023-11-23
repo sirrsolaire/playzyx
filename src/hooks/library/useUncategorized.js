@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { postAllGames } from "../../util/apiSupabase.js";
+import { postAllGames } from "../../services/APIs/apiSupabase/apiAllGames.js";
 
 export const useUncategorized = () => {
   const { mutate: allGamesMutate, isLoading: allGamesLoading } = useMutation({

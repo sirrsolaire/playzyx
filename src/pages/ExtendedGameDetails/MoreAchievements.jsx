@@ -1,7 +1,7 @@
 import { useOutletContext, useParams } from "react-router";
-import useAchievements from "../../hooks/useAchievements.js";
-import { Spinner } from "../../ui/Spinner.jsx";
-import NotFoundItem from "../../ui/NotFoundItem.jsx";
+import useAchievements from "../../hooks/generals/useAchievements.js";
+import { Spinner } from "../../ui/Loading/Spinner.jsx";
+import NotFoundItem from "../../ui/General/NotFoundItem.jsx";
 
 const MoreAchievements = () => {
   const { slug } = useParams();

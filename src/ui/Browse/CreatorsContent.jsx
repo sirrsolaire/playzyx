@@ -1,6 +1,6 @@
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Spinner } from "../Spinner.jsx";
-import useCreators from "../../hooks/useCreators.js";
+import { Spinner } from "../Loading/Spinner.jsx";
+import useCreators from "../../hooks/generals/useCreators.js";
 import { CreatorsContentItem } from "./CreatorsContentItem.jsx";
 
 function CreatorsContent() {

@@ -1,9 +1,9 @@
-import Header from "../ui/Header.jsx";
-import { DesktopSideMenu } from "../ui/DesktopSideMenu.jsx";
-import { Title } from "../ui/Title.jsx";
-import SideMenu from "../ui/SideMenu.jsx";
-import { FloatSideMenu } from "../ui/FloatButton.jsx";
-import AllGamesContent from "../ui/AllGamesContent.jsx";
+import Header from "../ui/Header/Header.jsx";
+import { DesktopSideMenu } from "../ui/SideMenu/DesktopSideMenu.jsx";
+import { Title } from "../ui/General/Title.jsx";
+import SideMenu from "../ui/SideMenu/SideMenu.jsx";
+import { FloatSideMenu } from "../ui/Buttons/FloatButton.jsx";
+import AllGamesContent from "../ui/Date/AllGamesContent.jsx";
 
 export const AllGames = () => {
   return (

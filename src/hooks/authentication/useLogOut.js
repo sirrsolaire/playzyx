@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { logOut } from "../../util/apiSupabase.js";
 import { useNavigate } from "react-router";
 import { successNotify } from "../../helpers/toaster/toast.js";
+import { logOut } from "../../services/APIs/apiSupabase/apiAuth.js";
 
 export const useLogOut = () => {
   const queryClient = useQueryClient();

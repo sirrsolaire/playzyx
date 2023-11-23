@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { login } from "../../util/apiSupabase.js";
+import { login } from "../../services/APIs/apiSupabase/apiAuth.js";
 
 export const useLogin = (loginEmail, loginPassword) => {
   const { mutate: loginMutate, isLoading: loginLoading } = useMutation({

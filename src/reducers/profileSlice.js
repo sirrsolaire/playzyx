@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   status: null,
+  wishListArray: [],
 };
 
 export const profileSlice = createSlice({
@@ -11,8 +12,11 @@ export const profileSlice = createSlice({
     setStatus: (state, action) => {
       state.status = action.payload;
     },
+    setWishList: (state, action) => {
+      state.wishListArray = action.payload;
+    },
   },
 });
 
-export const { setStatus } = profileSlice.actions;
+export const { setStatus, setWishList } = profileSlice.actions;
 export default profileSlice.reducer;

@@ -35,7 +35,8 @@ export async function updateGames(data) {
   const { error } = await supabase
     .from("games")
     .update({ status: data.status }, { is_wishlist: data.wishlist })
-    .eq("id", data.id)
+    .eq("name", data.name)
+    .eq("account_id", data.userId)
     .select();
 
   if (error) throw new Error(error.message);

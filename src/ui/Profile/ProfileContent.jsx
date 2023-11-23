@@ -4,29 +4,9 @@ import { Outlet } from "react-router";
 import { Icon } from "@iconify/react";
 import { useGetFavourite } from "../../hooks/favouriteGames/useGetFavourite.js";
 import { useState } from "react";
-
-const list = [
-  {
-    id: 1,
-    name: "Overview",
-    slug: "overview",
-  },
-  {
-    id: 2,
-    name: "Library",
-    slug: "library",
-  },
-  {
-    id: 3,
-    name: "Wishlist",
-    slug: "wishlist",
-  },
-  {
-    id: 4,
-    name: "Reviews",
-    slug: "reviews",
-  },
-];
+import { useGetWishlist } from "../../hooks/wishlist/useGetWishlist.js";
+import { useGetAllGames } from "../../hooks/library/useGetAllGames.js";
+import { useGetReviews } from "../../hooks/reviews/useGetReviews.js";
 
 const ProfileContent = () => {
   const [showMore, setShowMore] = useState(false);
@@ -36,6 +16,35 @@ const ProfileContent = () => {
   const bio = user?.user_metadata.bio;
   const getFirstLetter = username.charAt(0).toUpperCase();
   const { favouriteGames } = useGetFavourite();
+  const { wishlistedGames } = useGetWishlist();
+  const { games } = useGetAllGames();
+  const { reviews } = useGetReviews();
+
+  const list = [
+    {
+      id: 1,
+      name: "Overview",
+      slug: "overview",
+    },
+    {
+      id: 2,
+      name: "Library",
+      slug: "library",
+      length: games?.length,
+    },
+    {
+      id: 3,
+      name: "Wishlist",
+      slug: "wishlist",
+      length: wishlistedGames?.length,
+    },
+    {
+      id: 4,
+      name: "Reviews",
+      slug: "reviews",
+      length: reviews?.length,
+    },
+  ];
 
   const getFirstBg = () => {
     if (favouriteGames?.[0]) {
@@ -84,10 +93,7 @@ const ProfileContent = () => {
             to={`/profile/${username}/settings/user`}
             className="tablet:self-start"
           >
-            <div
-              className=" flex cursor-pointer items-center gap-2 rounded-lg bg-button-color px-5 py-3 transition-all duration-200 hover:bg-second-color
-      "
-            >
+            <div className=" flex cursor-pointer items-center gap-2 rounded-lg bg-button-color px-5 py-3 transition-all duration-200 hover:bg-second-color">
               <Icon
                 icon="mingcute:add-fill"
                 className="text-xl text-mobile-comment"
@@ -122,7 +128,9 @@ const ProfileContent = () => {
                   : "text-xl text-info-color hover:underline hover:decoration-2 hover:underline-offset-8"
               }
             >
-              <li>{list.name}</li>
+              <li className="flex items-center gap-2">
+                <span>{list.name}</span>
+              </li>
             </NavLink>
           ))}
         </ul>

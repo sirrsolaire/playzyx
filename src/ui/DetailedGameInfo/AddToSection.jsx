@@ -11,9 +11,10 @@ import SmallSpinner from "../Loading/SmallSpinner.jsx";
 import { useAddWishlist } from "../../hooks/wishlist/useAddWishlist.js";
 import { useGetWishlist } from "../../hooks/wishlist/useGetWishlist.js";
 import { useDeleteWishlist } from "../../hooks/wishlist/useDeleteWishlist.js";
+import { useGetUser } from "../../hooks/authentication/useGetUser.js";
 
 export const AddToSection = ({ data }) => {
-  /////
+  const { data: user } = useGetUser();
   const { games } = useGetAllGames(); // read
   const { allGamesMutate } = useUncategorized(); //add
   const { updateMutate, updateLoading } = useUpdateGames(); //update
@@ -28,11 +29,12 @@ export const AddToSection = ({ data }) => {
   const getId = games?.map((game) => game.id);
   const gameAlreadyExists = getId?.includes(data?.id);
   /////
-  const getStatus = games?.find((game) => game.id === data?.id)?.status;
+  const getStatus = games?.find((game) => game.name === data?.name)?.status;
   /////
   const isWishlisted = wishlistedGames
-    ?.map((game) => game.id)
-    .includes(data?.id);
+    ?.map((game) => game.name)
+    .includes(data?.name);
+  const isInLibrary = games?.map((game) => game.name).includes(data?.name);
   /////
 
   function handleShowStatus() {
@@ -52,7 +54,7 @@ export const AddToSection = ({ data }) => {
   }
 
   const handleAddGame = (currentStatus) => {
-    if (!gameAlreadyExists) {
+    if (!isInLibrary) {
       allGamesMutate(
         {
           id: data.id,
@@ -77,8 +79,9 @@ export const AddToSection = ({ data }) => {
       if (currentStatus !== getStatus) {
         updateMutate(
           {
-            id: data.id,
+            name: data?.name,
             status: currentStatus,
+            userId: user?.id,
           },
           {
             onSuccess: () => {
@@ -97,7 +100,8 @@ export const AddToSection = ({ data }) => {
   const handleDeleteGame = () => {
     deleteMutate(
       {
-        id: data.id,
+        name: data?.name,
+        userId: user?.id,
       },
       {
         onSuccess: () => {
@@ -135,7 +139,8 @@ export const AddToSection = ({ data }) => {
     } else {
       deleteWishMutate(
         {
-          id: data.id,
+          name: data?.name,
+          userId: user?.id,
         },
         {
           onSuccess: () => {
@@ -159,16 +164,16 @@ export const AddToSection = ({ data }) => {
       >
         <div
           className={`group flex w-56 cursor-pointer items-center justify-between rounded-lg  px-3 py-1 shadow-md transition-all duration-200 hover:bg-green-600 ${
-            gameAlreadyExists ? "bg-green-600" : "bg-white"
+            isInLibrary ? "bg-green-600" : "bg-white"
           }`}
         >
           <div
             className={`flex flex-col text-black transition-all duration-200 group-hover:text-white ${
-              gameAlreadyExists && "text-white"
+              isInLibrary && "text-white"
             }`}
           >
             <span className="text-sm font-semibold opacity-50">
-              {!gameAlreadyExists ? "Add to" : "Added to"}
+              {!isInLibrary ? "Add to" : "Added to"}
             </span>
             <div className="flex gap-2">
               <span className="font-semibold">{handleShowStatus()}</span>
@@ -180,7 +185,7 @@ export const AddToSection = ({ data }) => {
             <SmallSpinner color="white" />
           ) : (
             <div>
-              {!gameAlreadyExists ? (
+              {!isInLibrary ? (
                 <Icon
                   icon="octicon:feed-plus-16"
                   className="text-2xl text-black transition-all duration-200 group-hover:text-white"

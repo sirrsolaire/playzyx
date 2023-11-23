@@ -482,7 +482,7 @@ export const DetailedGameInfo = () => {
               {data?.name} posts
             </h2>
             <img
-              src="/redditlogo.png"
+              src="/images/redditlogo.png"
               alt="Reddit logo with letter"
               className="h-5"
             />

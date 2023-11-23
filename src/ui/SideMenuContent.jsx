@@ -210,7 +210,7 @@ function SideMenuContent() {
                 }
               >
                 <li className="filterList">
-                  <img src="/action.png" alt="" />
+                  <img src="/images/action.png" alt="" />
                   <span>Action</span>
                 </li>
               </NavLink>
@@ -223,7 +223,7 @@ function SideMenuContent() {
                 }
               >
                 <li className="filterList">
-                  <img src="/strategy.png" alt="" />
+                  <img src="/images/strategy.png" alt="" />
                   <span>Strategy</span>
                 </li>
               </NavLink>
@@ -236,7 +236,7 @@ function SideMenuContent() {
                 }
               >
                 <li className="filterList">
-                  <img src="/rpg.png" alt="" />
+                  <img src="/images/rpg.png" alt="" />
                   <span>RPG</span>
                 </li>
               </NavLink>
@@ -251,7 +251,7 @@ function SideMenuContent() {
                     }
                   >
                     <li className="filterList">
-                      <img src="/shooter.png" alt="" />
+                      <img src="/images/shooter.png" alt="" />
                       <span>Shooter</span>
                     </li>
                   </NavLink>
@@ -264,7 +264,7 @@ function SideMenuContent() {
                     }
                   >
                     <li className="filterList">
-                      <img src="/adventure.png" alt="" />
+                      <img src="/images/adventure.png" alt="" />
                       <span>Adventure</span>
                     </li>
                   </NavLink>
@@ -277,7 +277,7 @@ function SideMenuContent() {
                     }
                   >
                     <li className="filterList">
-                      <img src="/puzzle.png" alt="" />
+                      <img src="/images/puzzle.png" alt="" />
                       <span>Puzzle</span>
                     </li>
                   </NavLink>
@@ -290,7 +290,7 @@ function SideMenuContent() {
                     }
                   >
                     <li className="filterList">
-                      <img src="/racing.png" alt="" />
+                      <img src="/images/racing.png" alt="" />
                       <span>Racing</span>
                     </li>
                   </NavLink>
@@ -303,7 +303,7 @@ function SideMenuContent() {
                     }
                   >
                     <li className="filterList">
-                      <img src="/sports.png" alt="" />
+                      <img src="/images/sports.png" alt="" />
                       <span>Sports</span>
                     </li>
                   </NavLink>

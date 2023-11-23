@@ -8,11 +8,12 @@ const MoreAchievements = () => {
   const { data } = useOutletContext();
   const { data: achievements, isLoading } = useAchievements(slug);
 
+  if (isLoading) return <Spinner />;
+
   if (!achievements?.length) {
     return <NotFoundItem gameName={data?.name} title="achievement" />;
   }
 
-  if (isLoading) return <Spinner />;
   return (
     <ul className="mt-4">
       {achievements?.map((item) => (

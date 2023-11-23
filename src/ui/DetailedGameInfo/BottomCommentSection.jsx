@@ -1,10 +1,9 @@
 import CommentDropDown from "../CommentDropDown.jsx";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useGetReviews } from "../../hooks/reviews/useGetReviews.js";
 import CommentReviewItem from "../CommentReviewItem.jsx";
 import { useGetUser } from "../../hooks/authentication/useGetUser.js";
 import { useNavigate } from "react-router";
+import WriteReviewButton from "../WriteReviewButton.jsx";
 
 export const BottomCommentSection = ({ data, screenShotsData }) => {
   const { reviews, reviewsLoading } = useGetReviews();
@@ -46,15 +45,7 @@ export const BottomCommentSection = ({ data, screenShotsData }) => {
         <CommentDropDown />
       </div>
 
-      <div
-        className="mt-4 cursor-pointer rounded-xl bg-[rgba(0,0,0,.5)] transition-all duration-200 hover:bg-white hover:text-black"
-        onClick={handleNavigate}
-      >
-        <div className="flex flex-col items-center justify-center gap-2 py-4 text-xl">
-          <FontAwesomeIcon icon={faPlus} />
-          <span>Write a review</span>
-        </div>
-      </div>
+      <WriteReviewButton handleNavigate={handleNavigate} />
 
       <CommentReviewItem reviews={filteredReviews} />
 

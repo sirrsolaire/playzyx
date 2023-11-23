@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { getTimeAgo } from "../../helpers/dateConvertor.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRedditAlien } from "@fortawesome/free-brands-svg-icons";
-import useDetailedGame from "../../hooks/useDetailedGame.js";
+import NotFoundItem from "../../ui/NotFoundItem.jsx";
 
 const RedditPosts = () => {
   const { data } = useOutletContext();
@@ -25,11 +25,7 @@ const RedditPosts = () => {
     0;
 
   if (!postData?.pages[0].results.length) {
-    return (
-      <div>
-        <p>{`No reddit post found for ${data?.name}`}</p>
-      </div>
-    );
+    return <NotFoundItem gameName={data?.name} title="reddit post" />;
   }
 
   return (

@@ -12,6 +12,7 @@ const MobileMenu = () => {
   const { data: user } = useGetUser();
   const getUserAvatar = user?.user_metadata.avatar;
   const getUsername = user?.user_metadata.username;
+  const getFirstLetter = getUsername?.charAt(0).toUpperCase();
   const navigate = useNavigate();
   const menuOpen = useSelector((state) => state.menu.open);
   const dispatch = useDispatch();
@@ -55,6 +56,16 @@ const MobileMenu = () => {
               >
                 <FontAwesomeIcon icon={faRightToBracket} className="text-3xl" />
               </div>
+            ) : !getUserAvatar ? (
+              <div
+                className="flex h-16 w-16 cursor-pointer items-center justify-center rounded-full bg-default-profile-avatar"
+                onClick={() => {
+                  navigate(`/profile/${getUsername}/overview`);
+                  onClose();
+                }}
+              >
+                <span className="text-4xl  font-bold ">{getFirstLetter}</span>
+              </div>
             ) : (
               <img
                 src={getUserAvatar}
@@ -67,7 +78,9 @@ const MobileMenu = () => {
               />
             )}
             <span
-              className={`mb-4 mt-1 font-semibold ${user && "w-20 truncate"}`}
+              className={`mb-4 mt-1 text-center font-semibold ${
+                user && "w-20 truncate"
+              }`}
             >
               {!user ? "Log in" : getUsername}
             </span>

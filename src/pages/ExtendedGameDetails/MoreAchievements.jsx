@@ -1,14 +1,18 @@
 import { useOutletContext, useParams } from "react-router";
 import useAchievements from "../../hooks/useAchievements.js";
 import { Spinner } from "../../ui/Spinner.jsx";
+import NotFoundItem from "../../ui/NotFoundItem.jsx";
 
 const MoreAchievements = () => {
   const { slug } = useParams();
   const { data } = useOutletContext();
   const { data: achievements, isLoading } = useAchievements(slug);
 
-  if (isLoading) return <Spinner />;
+  if (!achievements?.length) {
+    return <NotFoundItem gameName={data?.name} title="achievement" />;
+  }
 
+  if (isLoading) return <Spinner />;
   return (
     <ul className="mt-4">
       {achievements?.map((item) => (

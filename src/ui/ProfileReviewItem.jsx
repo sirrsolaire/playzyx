@@ -6,7 +6,16 @@ import { useDeleteReview } from "../hooks/reviews/useDeleteReview.js";
 import { useQueryClient } from "@tanstack/react-query";
 import { generalError, successNotify } from "../helpers/toaster/toast.js";
 
-function ProfileReviewItem({ date, username, text, rate, tags, game, id }) {
+function ProfileReviewItem({
+  date,
+  username,
+  text,
+  rate,
+  tags,
+  game,
+  id,
+  review,
+}) {
   const { reviewDelete, reviewDeleteLoading } = useDeleteReview();
   const queryClient = useQueryClient();
 

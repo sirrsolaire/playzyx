@@ -14,6 +14,8 @@ const ProfileReviews = () => {
     );
   }
 
+  const hasReview = profileReviews?.length;
+
   if (reviewsLoading) return <Spinner />;
 
   return (
@@ -28,6 +30,7 @@ const ProfileReviews = () => {
           rate={review.rate}
           tags={review.tags}
           game={review.game_name}
+          review={review}
         />
       ))}
     </>

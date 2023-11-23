@@ -1,7 +1,7 @@
 import { formattedNumber } from "../../helpers/numberFormatter.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
   setBrowsePlatform,
@@ -40,10 +40,7 @@ export const BrowseContentItem = ({
           {name}
         </span>
       </NavLink>
-      <button className="rounded bg-button-color px-8 py-2 text-base text-white transition-colors duration-200 hover:bg-slate-100 hover:text-black">
-        Follow
-      </button>
-      <h2 className="flex w-full justify-between border-b-[1px] border-button-color pb-2">
+      <h2 className="mt-8 flex w-full justify-between border-b-[1px] border-button-color pb-2">
         <span className="font-bold">Popular Items</span>
         <span className="text-sm text-info-color">
           {formattedNumber(gamesCount)}
@@ -52,9 +49,11 @@ export const BrowseContentItem = ({
       <ul className="w-full space-y-1">
         {games.map((game) => (
           <li key={game.id} className="flex justify-between text-sm">
-            <span className="cursor-pointer truncate  underline decoration-gray-600 decoration-0 underline-offset-2 transition-colors duration-200 hover:text-info-color">
-              {game.name}
-            </span>
+            <Link to={`/games/details/${game.slug}`}>
+              <span className="cursor-pointer truncate  underline decoration-gray-600 decoration-0 underline-offset-2 transition-colors duration-200 hover:text-info-color">
+                {game.name}
+              </span>
+            </Link>
             <div className="ml-4 flex items-center gap-1">
               <span className="text-info-color">
                 {formattedNumber(game.added)}

@@ -22,14 +22,6 @@ function PageParamsContent() {
     isFetchingNextPage,
   } = useStore({ firstSelectValue, tag, itemId, browseType });
 
-  // const { data: platforms } = useAllPlatforms();
-  // const location = useLocation();
-  // const urlsToHideComponent = platforms?.map(
-  //   (platform) => `/games/${platform.slug}`,
-  // );
-  // const showComponent = urlsToHideComponent?.includes(location.pathname);
-  //
-
   const dataLength =
     storeData?.pages.reduce((total, page) => total + page.results.length, 0) ||
     0;
@@ -39,7 +31,6 @@ function PageParamsContent() {
       <div className="mb-6 mt-9 flex flex-wrap justify-center gap-2 tablet:mt-4 tablet:justify-between">
         <div className="flex gap-1 tablet:gap-2">
           <OrderFilter />
-          {/*{showComponent && <BrowsePlatformFilter />}*/}
         </div>
         <LayoutView
           onGrid={() => dispatch(setLayout("grid"))}
@@ -78,7 +69,7 @@ function PageParamsContent() {
                 image={game.background_image}
                 meta={game.metacritic}
                 add={game.added}
-                platforms={game.platforms.map((game) => game.platform.name)}
+                platforms={game.platforms.map((game) => game.platform?.name)}
                 releasedDate={game.released}
                 genres={game.genres.map((genre) => genre.name)}
                 rating={game.rating}

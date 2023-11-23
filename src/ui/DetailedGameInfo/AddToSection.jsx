@@ -214,7 +214,7 @@ export const AddToSection = ({ data }) => {
           <span className="font-semibold">
             Wishlist{" "}
             <span className="font-normal opacity-50">
-              {data?.added_by_status.toplay}
+              {data?.added_by_status?.toplay}
             </span>
           </span>
         </div>

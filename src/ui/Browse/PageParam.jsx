@@ -17,7 +17,7 @@ export const PageParam = () => {
       <div className="tablet:flex tablet:px-10">
         <DesktopSideMenu />
         <section className="flex-col px-0 tablet:mt-6 tablet:flex tablet:w-full tablet:px-0">
-          <Title title={`Games for ${formattedSlug(slug)}`} subTitle="" />
+          <Title title={`${formattedSlug(slug)}`} subTitle="" />
           <Tags />
           <PageParamsContent genreId={4} />
         </section>

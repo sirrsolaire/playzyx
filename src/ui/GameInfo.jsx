@@ -1,5 +1,3 @@
-import { faChevronRight, faEllipsis } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { Platform } from "./Platform.jsx";
 import { useSelector } from "react-redux";
@@ -26,14 +24,13 @@ function GameInfo({
   rating,
   slug,
   id,
-  secondPlatforms,
 }) {
   const layout = useSelector((state) => state.layout.layout);
   const [open, setOpen] = useState(false);
   const { wishMutate, wishLoading } = useAddWishlist();
   const { deleteWishMutate, deleteWishLoading } = useDeleteWishlist();
   const { wishlistedGames } = useGetWishlist();
-  const { allGamesMutate, allGamesLoading } = useUncategorized();
+  const { allGamesMutate } = useUncategorized();
   const { games } = useGetAllGames();
   const { deleteMutate, deleteLoading } = useDeleteGame();
   const queryClient = useQueryClient();
@@ -137,11 +134,9 @@ function GameInfo({
             platforms={platforms}
             className="text-base text-white opacity-40"
           />
-          {meta ? (
-            <div className="flex h-full items-center justify-center rounded-[0.3rem] border-[1px] border-solid border-green-500 px-2 font-semibold text-green-500">
-              <span>{meta}</span>
-            </div>
-          ) : null}
+          <div className="flex h-full items-center justify-center rounded-[0.3rem] border-[1px] border-solid border-green-500 px-2 font-semibold text-green-500">
+            <span>{meta ? meta : "Soon"}</span>
+          </div>
         </div>
         <NavLink to={`/games/details/${slug}`}>
           <span className="block truncate text-2xl font-bold text-white">
@@ -187,12 +182,6 @@ function GameInfo({
               />
             )}
           </span>
-          <span className="group flex h-7 cursor-pointer items-center rounded-[0.3rem] bg-second-color px-2 transition-all duration-200 hover:bg-white">
-            <FontAwesomeIcon
-              icon={faEllipsis}
-              className="text-white transition-all duration-200 group-hover:text-black"
-            />
-          </span>
         </div>
         {open && layout === "grid" && (
           <div className="  mt-5 flex flex-col text-sm text-white">
@@ -226,15 +215,6 @@ function GameInfo({
                 <span className="text-ms">{rating}</span>
               </div>
             </div>
-            {layout === "box" && (
-              <div className="flex max-w-fit cursor-pointer items-center gap-2 rounded-lg bg-border-color px-4 py-2.5 text-sm font-semibold tracking-normal text-white">
-                <span>Show more like this</span>
-                <FontAwesomeIcon
-                  icon={faChevronRight}
-                  className="text-xl text-info-color opacity-60"
-                />
-              </div>
-            )}
           </div>
         )}
 
@@ -246,15 +226,6 @@ function GameInfo({
             <span>{!open ? "View More" : "View Less"}</span>
           )}
         </p>
-        {open && layout === "grid" && (
-          <p className="mt-4 flex cursor-pointer items-center justify-between rounded-lg bg-border-color px-4 py-2.5 text-sm font-semibold tracking-normal text-white">
-            Show more like this
-            <FontAwesomeIcon
-              icon={faChevronRight}
-              className="text-xl text-info-color opacity-60"
-            />
-          </p>
-        )}
       </div>
     </div>
   );

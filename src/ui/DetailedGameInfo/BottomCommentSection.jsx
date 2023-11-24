@@ -4,10 +4,12 @@ import CommentReviewItem from "../Comment/CommentReviewItem.jsx";
 import { useGetUser } from "../../hooks/authentication/useGetUser.js";
 import { useNavigate } from "react-router";
 import WriteReviewButton from "../Buttons/WriteReviewButton.jsx";
+import { useSelector } from "react-redux";
 
 export const BottomCommentSection = ({ data, screenShotsData }) => {
   const { reviews, reviewsLoading } = useGetReviews();
   const { data: user, isLoading } = useGetUser();
+  const filterByDate = useSelector((state) => state.filtering.filterByDate);
   const navigate = useNavigate();
 
   let filteredReviews = reviews;
@@ -17,6 +19,16 @@ export const BottomCommentSection = ({ data, screenShotsData }) => {
         (review) => review.game_slug === data?.slug,
       );
     }
+  }
+
+  if (filterByDate === "1" || filterByDate === "0") {
+    const sortOrder = filterByDate === "1" ? 1 : -1;
+
+    filteredReviews?.sort((a, b) => {
+      const dateA = new Date(a.created_at).getTime();
+      const dateB = new Date(b.created_at).getTime();
+      return sortOrder * (dateA - dateB);
+    });
   }
 
   const handleNavigate = () => {
@@ -34,20 +46,15 @@ export const BottomCommentSection = ({ data, screenShotsData }) => {
     )})`,
   };
   return (
-    <div className="relative mx-auto mt-10 max-w-2xl">
-      <h2 className="text-center text-2xl">
-        {data?.name} reviews and comments
-      </h2>
-      <div className="mt-3 flex justify-center gap-2 ">
-        <span className="tab">Reviews</span>
-      </div>
+    <div className="relative  mx-auto mt-10 max-w-[1000px]">
+      <h2 className="text-center text-2xl">{data?.name} reviews</h2>
       <div className="mt-2 flex justify-center">
         <CommentDropDown />
       </div>
 
       <WriteReviewButton handleNavigate={handleNavigate} />
 
-      <CommentReviewItem reviews={filteredReviews} />
+      <CommentReviewItem reviews={filteredReviews} user={user} />
 
       <div className="absolute left-0 top-0 -z-50 h-[100%] w-[100%] blur-sm">
         <div className="h-[300px]">

@@ -14,15 +14,13 @@ const ProfileReviews = () => {
     );
   }
 
-  const hasReview = profileReviews?.length;
-
   if (reviewsLoading) return <Spinner />;
 
   return (
     <>
-      {profileReviews?.map((review) => (
+      {profileReviews?.map((review, i) => (
         <ProfileReviewItem
-          key={review.id}
+          key={i}
           id={review.id}
           date={review.created_at}
           username={review.user_name}

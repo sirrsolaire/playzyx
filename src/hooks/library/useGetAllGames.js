@@ -8,6 +8,7 @@ export const useGetAllGames = () => {
   const { data: games, isLoading: gamesLoading } = useQuery({
     queryKey: ["games"],
     queryFn: () => getAllGames(id),
+    enabled: !!id,
   });
 
   return { games, gamesLoading };

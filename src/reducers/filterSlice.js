@@ -4,6 +4,7 @@ const initialState = {
   firstSelect: "",
   platform: 4,
   tag: 31,
+  filterByDate: "0",
 };
 
 export const filterSlice = createSlice({
@@ -19,8 +20,12 @@ export const filterSlice = createSlice({
     setTag: (state, action) => {
       state.tag = action.payload;
     },
+    setFilterByDate: (state, action) => {
+      state.filterByDate = action.payload;
+    },
   },
 });
 
-export const { setFirstSelect, setChildPlatform, setTag } = filterSlice.actions;
+export const { setFirstSelect, setChildPlatform, setTag, setFilterByDate } =
+  filterSlice.actions;
 export default filterSlice.reducer;

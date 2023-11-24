@@ -23,6 +23,7 @@ function Header() {
   const userAvatar = user?.user_metadata?.avatar;
   const username = user?.user_metadata?.username;
   const getFirstLetter = username?.charAt(0).toUpperCase();
+  const inputRef = useRef(null);
 
   const handleLogout = () => {
     logoutMutate();
@@ -31,8 +32,6 @@ function Header() {
   function showDrawer() {
     dispatch(setOpen(true));
   }
-
-  const inputRef = useRef(null);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -59,6 +58,7 @@ function Header() {
 
       <div className="relative w-full hover:text-black">
         <input
+          ref={inputRef}
           type="text"
           className="w-full rounded-full border-none bg-second-color py-0.5 pl-8 pr-4 text-white transition-colors duration-200 placeholder:text-[15px] placeholder:text-gray-500 hover:bg-yellow-50 hover:text-black focus:border-none focus:bg-yellow-50 focus:text-black focus:outline-none tablet:py-2.5"
           value={query}
@@ -69,7 +69,6 @@ function Header() {
             setShowSearchResults(true);
           }}
           placeholder="Search for games"
-          ref={inputRef}
         />
         <FontAwesomeIcon
           icon={faSearch}

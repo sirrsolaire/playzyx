@@ -11,8 +11,8 @@ const PageLoadSpinner = () => {
         justifyContent: "center",
         height: "100vh",
         alignItems: "center",
+        // width: "1500px",
       }}
-      wrapperClass=""
       visible={true}
       ariaLabel="oval-loading"
       secondaryColor="#4fa94d"

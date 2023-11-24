@@ -1,24 +1,66 @@
 import { Icon } from "@iconify/react";
 import { handleRateIcon } from "../../helpers/rateIcon.js";
-import { formatDate } from "../../helpers/dateFormat.js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getTimeAgo } from "../../helpers/dateConvertor.js";
 import { Spinner } from "../Loading/Spinner.jsx";
-import { useParams } from "react-router";
+import { usePostReply } from "../../hooks/replies/usePostReply.js";
+import { useGetUser } from "../../hooks/authentication/useGetUser.js";
+import SmallSpinner from "../Loading/SmallSpinner.jsx";
+import { useQueryClient } from "@tanstack/react-query";
+import { successNotify } from "../../helpers/toaster/toast.js";
+import { useGetReplies } from "../../hooks/replies/useGetReplies.js";
+import ReplyItem from "./ReplyItem.jsx";
 
 function CommentReviewItem({ reviews, loading }) {
-  const { slug } = useParams();
-  const [replyStates, setReplyStates] = useState({});
+  const { data: user } = useGetUser();
+  const [replyInputs, setReplyInputs] = useState([]);
+  const { postReplyLoading, postReplyMutate } = usePostReply();
+  const { replyData, replyLoading } = useGetReplies();
+  const username = user?.user_metadata.username;
+  const avatar = user?.user_metadata.avatar;
+  const queryClient = useQueryClient();
 
-  const handleReplyChange = (e, commentId) => {
-    const newValue = e.target.value;
-    setReplyStates((prevState) => ({
-      ...prevState,
-      [commentId]: newValue,
-    }));
+  useEffect(() => {
+    if (reviews && reviews?.length > 0) {
+      const initialInputs = reviews.map(() => ({
+        query: "",
+        showButton: false,
+      }));
+      setReplyInputs(initialInputs);
+    }
+  }, [reviews]);
+
+  const handleInputChange = (index, value) => {
+    const updatedInputs = [...replyInputs];
+    updatedInputs[index].query = value;
+    updatedInputs[index].showButton = value.length > 0;
+    setReplyInputs(updatedInputs);
+  };
+
+  const handleReplySubmit = (e, i, id) => {
+    e.preventDefault();
+    postReplyMutate(
+      {
+        reply: replyInputs[i].query,
+        username,
+        avatar,
+        id,
+      },
+      {
+        onSuccess: () => {
+          const initialInputs = reviews.map(() => ({
+            query: "",
+            showButton: false,
+          }));
+          setReplyInputs(initialInputs);
+          queryClient.invalidateQueries(["replies"]);
+          successNotify("You have replied!");
+        },
+      },
+    );
   };
 
   if (loading) return <Spinner />;
-
   return (
     <>
       <div className="mt-2 w-full space-y-3">
@@ -47,7 +89,7 @@ function CommentReviewItem({ reviews, loading }) {
                 </li>
               ))}
             </ul>
-            <div className="flex items-center gap-3  px-5 ">
+            <div className="flex items-center gap-3  border-b-[1px] border-border-color px-5 pb-5">
               {!review.user_avatar ? (
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-default-profile-avatar">
                   <span className="text-2xl  font-bold ">
@@ -60,22 +102,46 @@ function CommentReviewItem({ reviews, loading }) {
               <div className="flex flex-col">
                 <span className="text-xs">{review.user_name}</span>
                 <span className="text-xs text-info-color">
-                  {formatDate(review.created_at)}
+                  {getTimeAgo(review.created_at)}
                 </span>
               </div>
             </div>
-            <div className=" mt-6 border-t-[1px] border-border-color pt-4">
-              <form className="w-full px-5">
+            <div className="px-1 py-5">
+              {replyData
+                ?.filter((reply) => reply.reply_uid === review.id)
+                .map((item, i) => (
+                  <ReplyItem
+                    key={i}
+                    username={item.username}
+                    createdAt={item.created_at}
+                    reply={item.reply}
+                    avatar={item.avatar}
+                  />
+                ))}
+            </div>
+            <div className="border-t-[1px] border-border-color pt-4">
+              <form
+                className="w-full px-5"
+                onSubmit={(e) => handleReplySubmit(e, i, review.id)}
+              >
                 <input
                   type="text"
-                  className="mb-2 h-12 w-full rounded-md bg-game-info pl-5"
+                  className="mb-2 h-12 w-full rounded-md bg-game-info pl-5 disabled:cursor-not-allowed disabled:opacity-50"
                   placeholder="Write a reply ..."
-                  onChange={(e) => handleReplyChange(e, review.id)}
-                  value={replyStates[review.id]}
+                  onChange={(e) => handleInputChange(i, e.target.value)}
+                  value={replyInputs[i] ? replyInputs[i].query : ""}
+                  disabled={postReplyLoading}
                 />
-                {replyStates[review.id]?.length > 0 && (
-                  <button className="h-12 w-full cursor-pointer bg-white font-bold text-black">
-                    SEND
+                {replyInputs[i]?.showButton && (
+                  <button
+                    className="h-12 w-full cursor-pointer bg-white font-bold text-black disabled:cursor-not-allowed"
+                    disabled={postReplyLoading}
+                  >
+                    {postReplyLoading ? (
+                      <SmallSpinner color="black" />
+                    ) : (
+                      <span>SEND</span>
+                    )}
                   </button>
                 )}
               </form>

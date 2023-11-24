@@ -6,16 +6,7 @@ import { useDeleteReview } from "../../hooks/reviews/useDeleteReview.js";
 import { useQueryClient } from "@tanstack/react-query";
 import { generalError, successNotify } from "../../helpers/toaster/toast.js";
 
-function ProfileReviewItem({
-  date,
-  username,
-  text,
-  rate,
-  tags,
-  game,
-  id,
-  review,
-}) {
+function ProfileReviewItem({ date, username, text, rate, tags, game, id }) {
   const { reviewDelete, reviewDeleteLoading } = useDeleteReview();
   const queryClient = useQueryClient();
 
@@ -53,10 +44,10 @@ function ProfileReviewItem({
       </div>
       <p className="mb-5 text-sm opacity-80">{text}</p>
       <ul className="mb-4 flex items-center gap-1 text-[11px] uppercase">
-        {tags.map((tag) => (
+        {tags.map((tag, i) => (
           <li
+            key={i}
             className="w-fit rounded-full bg-tag-color px-3 py-1 tracking-widest"
-            key={tag.id}
           >
             {tag.name}
           </li>

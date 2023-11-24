@@ -26,9 +26,7 @@ export async function getAllGames(id) {
 
   if (error) throw new Error(error.message);
 
-  if (!error) {
-    return allGames;
-  }
+  if (!error) return allGames;
 }
 
 export async function updateGames(data) {

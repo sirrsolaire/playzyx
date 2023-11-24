@@ -23,16 +23,32 @@ import { RedditPosts } from "./RedditPosts.jsx";
 import { Achievements } from "./Achievements.jsx";
 import { BottomCommentSection } from "./BottomCommentSection.jsx";
 import { TopBgImage } from "./TopBgImage.jsx";
+import PageLoadSpinner from "../Loading/PageLoadSpinner.jsx";
 
 export const DesktopDetailedGameInfo = () => {
   const { slug } = useParams();
-  const { data } = useDetailedGame(slug);
-  const { data: screenShotsData } = useScreenShots(slug);
-  const { data: sameSeries } = useSameSeries(slug);
-  const { data: achievementData } = useAchievements(slug);
-  const { data: redditData } = useRedditPosts(slug);
-  const { data: storeData } = useEachGameShop(slug);
+  const { data, isLoading } = useDetailedGame(slug);
+  const { data: screenShotsData, isLoading: shotsLoading } =
+    useScreenShots(slug);
+  const { data: sameSeries, isLoading: sameLoading } = useSameSeries(slug);
+  const { data: achievementData, isLoading: achieveLoading } =
+    useAchievements(slug);
+  const { data: redditData, isLoading: postLoading } = useRedditPosts(slug);
+  const { data: storeData, isLoading: storeLoading } = useEachGameShop(slug);
 
+  if (
+    isLoading ||
+    shotsLoading ||
+    sameLoading ||
+    achieveLoading ||
+    postLoading ||
+    storeLoading
+  )
+    return (
+      <div className="">
+        <PageLoadSpinner />
+      </div>
+    );
   return (
     <>
       <TopNavigation data={data} />

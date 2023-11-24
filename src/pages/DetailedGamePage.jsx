@@ -12,7 +12,7 @@ export const DetailedGamePage = () => {
         <div className="hidden h-fit desktopFirstHalf:block">
           <DesktopSideMenu />
         </div>
-        <section className="pb-36 ">
+        <section className="w-full pb-36">
           <DesktopDetailedGameInfo />
         </section>
         <SideMenu />

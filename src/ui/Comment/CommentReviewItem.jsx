@@ -106,7 +106,7 @@ function CommentReviewItem({ reviews, loading }) {
                 </span>
               </div>
             </div>
-            <div className="px-1 py-5">
+            <div className="space-y-2 px-1 py-5">
               {replyData
                 ?.filter((reply) => reply.reply_uid === review.id)
                 .map((item, i) => (

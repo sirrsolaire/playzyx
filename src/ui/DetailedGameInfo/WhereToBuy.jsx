@@ -1,5 +1,6 @@
 import { selectStore } from "../../helpers/storeNameSelect.js";
 import { Icon } from "@iconify/react";
+import { Link } from "react-router-dom";
 
 export const WhereToBuy = ({ storeData }) => {
   return (
@@ -7,7 +8,7 @@ export const WhereToBuy = ({ storeData }) => {
       <h2 className="text-xl opacity-50">Where to buy</h2>
       <ul className="mt-2 flex flex-wrap gap-2">
         {storeData?.map((store) => (
-          <a key={store.id} href={store.url}>
+          <Link to={store.url} key={store.id} target="_blank">
             <li className="group flex cursor-pointer items-center gap-2 rounded-md bg-button-color px-3 py-2 text-sm transition-all duration-200 hover:bg-white hover:text-black">
               <span className="whitespace-nowrap opacity-50 group-hover:opacity-100">
                 {selectStore(store.store_id)}
@@ -29,7 +30,7 @@ export const WhereToBuy = ({ storeData }) => {
                 )}
               </span>
             </li>
-          </a>
+          </Link>
         ))}
       </ul>
     </div>

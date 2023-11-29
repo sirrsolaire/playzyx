@@ -7,6 +7,7 @@ import useLastThirty from "../../hooks/hooksByDate/useLastThirty.js";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Spinner } from "../Loading/Spinner.jsx";
 import GameInfo from "../General/GameInfo.jsx";
+import { isNsfw } from "../../helpers/nsfwFilter.js";
 
 function LastThirtyDaysContent() {
   const dispatch = useDispatch();
@@ -62,21 +63,27 @@ function LastThirtyDaysContent() {
                 : "grid-cols-2  tablet:h-fit desktopFirst:grid-cols-3 desktopSecond:grid-cols-4 desktopThird:grid-cols-5"
             }`}
           >
-            {page.results?.map((game, i) => (
-              <GameInfo
-                slug={game.slug}
-                key={i}
-                id={game.id}
-                name={game.name}
-                image={game.background_image}
-                meta={game.metacritic}
-                add={game.added}
-                platforms={game.platforms?.map((game) => game.platform.name)}
-                releasedDate={game.released}
-                genres={game.genres.map((genre) => genre.name)}
-                rating={game.rating}
-              />
-            ))}
+            {page?.results
+              .filter(
+                (game) => !game.tags?.find((tag) => isNsfw.includes(tag.slug)),
+              )
+              .map((game, i) => (
+                <GameInfo
+                  slug={game.slug}
+                  key={i}
+                  id={game.id}
+                  name={game.name}
+                  image={game.background_image}
+                  meta={game.metacritic}
+                  add={game.added}
+                  platforms={game.platforms.map(
+                    (platform) => platform.platform.name,
+                  )}
+                  releasedDate={game.released}
+                  genres={game.genres.map((genre) => genre.name)}
+                  rating={game.rating}
+                />
+              ))}
           </div>
         ))}
       </InfiniteScroll>

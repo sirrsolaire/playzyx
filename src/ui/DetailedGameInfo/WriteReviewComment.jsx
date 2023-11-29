@@ -26,7 +26,7 @@ export const WriteReviewComment = ({ data }) => {
           className="text-xl opacity-50 group-hover:opacity-100"
         />
         <span className="tracking-wide opacity-50 group-hover:opacity-100">
-          Write a review {data?.reviews_count}
+          Write a review
         </span>
       </div>
       <div

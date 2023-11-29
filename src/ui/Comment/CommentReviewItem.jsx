@@ -15,7 +15,7 @@ function CommentReviewItem({ reviews, loading }) {
   const { data: user } = useGetUser();
   const [replyInputs, setReplyInputs] = useState([]);
   const { postReplyLoading, postReplyMutate } = usePostReply();
-  const { replyData, replyLoading } = useGetReplies();
+  const { replyData } = useGetReplies();
   const username = user?.user_metadata.username;
   const avatar = user?.user_metadata.avatar;
   const queryClient = useQueryClient();

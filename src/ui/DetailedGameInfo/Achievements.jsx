@@ -9,14 +9,9 @@ export const Achievements = ({ data, achievementData }) => {
   const slicedAchievement = achievementData?.slice(0, 5);
   return (
     <div className="mt-10 ">
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-semibold underline underline-offset-2">
-          {data?.name} achievements
-        </h2>
-        <span className="whitespace-nowrap text-sm underline underline-offset-2 opacity-40">
-          {data?.achievements_count} achievements
-        </span>
-      </div>
+      <h2 className="text-2xl font-semibold underline underline-offset-2">
+        {data?.name} achievements
+      </h2>
 
       <ul className="mt-4">
         {slicedAchievement?.map((item) => (

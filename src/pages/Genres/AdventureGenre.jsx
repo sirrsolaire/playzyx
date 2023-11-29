@@ -3,7 +3,7 @@ import { DesktopSideMenu } from "../../ui/SideMenu/DesktopSideMenu.jsx";
 import { Title } from "../../ui/General/Title.jsx";
 import SideMenu from "../../ui/SideMenu/SideMenu.jsx";
 import { FloatSideMenu } from "../../ui/Buttons/FloatButton.jsx";
-import ActionGamesContent from "../../ui/Genre/ActionGamesContent.jsx";
+import GenreGameContent from "../../ui/ByGenre/GenreGameContent.jsx";
 import Tags from "../../ui/General/Tags.jsx";
 
 export const AdventureGenre = () => {
@@ -15,7 +15,7 @@ export const AdventureGenre = () => {
         <section className="flex-col px-0 tablet:mt-6 tablet:flex tablet:w-full tablet:px-0">
           <Title title="Adventure Games" subTitle="" />
           <Tags />
-          <ActionGamesContent genreId={3} />
+          <GenreGameContent genreId={3} />
         </section>
         <SideMenu />
         <FloatSideMenu />

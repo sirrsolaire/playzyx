@@ -14,6 +14,9 @@ import { useGetAllGames } from "../../hooks/library/useGetAllGames.js";
 import { useDeleteGame } from "../../hooks/library/useDeleteGame.js";
 import { useGetUser } from "../../hooks/authentication/useGetUser.js";
 import { useNavigate } from "react-router";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+import placeholder from "../../../public/images/placeholder.png";
 
 function GameInfo({
   name,
@@ -26,6 +29,7 @@ function GameInfo({
   rating,
   slug,
   id,
+  tags,
 }) {
   const layout = useSelector((state) => state.layout.layout);
   const [open, setOpen] = useState(false);
@@ -132,8 +136,10 @@ function GameInfo({
           : "tablet:transition tablet:duration-300 tablet:hover:scale-[1.03] tablet:hover:ease-in-out"
       }`}
     >
-      <img
+      <LazyLoadImage
+        placeholderSrc={placeholder}
         src={image}
+        effect="blur"
         alt=""
         className={`h-250px rounded-t-xl object-cover object-center tablet:h-[200px] tablet:w-full ${
           layout === "box" && "min-h-[350px] tablet:object-top"

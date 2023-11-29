@@ -24,11 +24,11 @@ export async function postReply(data) {
   if (error) throw new Error(error.message);
 }
 
-export async function deleteReply() {
+export async function deleteReply(data) {
   const { error } = await supabase
     .from("replies")
     .delete()
-    .eq("some_column", "someValue");
+    .eq("reply_uid", data.id);
 
   if (error) throw new Error(error.message);
 }

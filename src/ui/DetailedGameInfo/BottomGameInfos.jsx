@@ -9,10 +9,7 @@ export const BottomGameInfos = ({ data, sameSeries }) => {
           <span className="text-base opacity-50">Platforms</span>
           <ul className="flex flex-wrap items-center gap-1 text-base text-white">
             {data?.platforms.map((platform, i) => (
-              <li
-                key={i}
-                className="underline decoration-gray-9 underline-offset-2"
-              >
+              <li key={i}>
                 {platform.platform.name}
                 {i < data.platforms.length - 1 ? "," : ""}
               </li>
@@ -32,10 +29,7 @@ export const BottomGameInfos = ({ data, sameSeries }) => {
           <span className="text-base opacity-50">Genres</span>
           <ul className="flex flex-wrap items-center gap-1 text-base text-white">
             {data?.genres.map((genre, i) => (
-              <li
-                key={i}
-                className="underline decoration-gray-9 underline-offset-2"
-              >
+              <li key={i}>
                 {genre.name}
                 {i < data.platforms.length - 1 ? "," : ""}
               </li>
@@ -55,12 +49,7 @@ export const BottomGameInfos = ({ data, sameSeries }) => {
           <span className="text-base opacity-50">Developer</span>
           <ul className="flex items-center gap-1 text-base text-white">
             {data?.developers.map((developer, i) => (
-              <li
-                key={i}
-                className="underline decoration-gray-9 underline-offset-2"
-              >
-                {developer.name}
-              </li>
+              <li key={i}>{developer.name}</li>
             ))}
           </ul>
         </div>
@@ -68,10 +57,7 @@ export const BottomGameInfos = ({ data, sameSeries }) => {
           <span className="text-base opacity-50">Publisher</span>
           <ul className="flex flex-wrap gap-1">
             {data?.publishers.map((publisher, i) => (
-              <li
-                className=" w-fit  text-base text-white underline decoration-gray-9 underline-offset-2"
-                key={i}
-              >
+              <li className=" w-fit  text-base text-white " key={i}>
                 {publisher.name}
                 {i < data?.publishers.length - 1 ? "," : ""}
               </li>
@@ -85,9 +71,7 @@ export const BottomGameInfos = ({ data, sameSeries }) => {
           <div className="flex flex-col gap-0.5">
             <span className="text-base opacity-50">Age rating</span>
             <ul className="flex items-center gap-1 text-base text-white">
-              <li className="underline decoration-gray-9 underline-offset-2">
-                {data?.esrb_rating ? data.esrb_rating.name : null}
-              </li>
+              <li>{data?.esrb_rating ? data.esrb_rating.name : null}</li>
             </ul>
           </div>
         </div>
@@ -102,7 +86,7 @@ export const BottomGameInfos = ({ data, sameSeries }) => {
             <ul className="flex flex-wrap items-center gap-1 text-base text-white">
               {sameSeries?.map((game, i) => (
                 <Link key={i} to={`/games/details/${game.slug}`}>
-                  <li className="underline decoration-gray-9 underline-offset-2">
+                  <li className="durationAll cursor-pointer underline decoration-gray-9 underline-offset-2 hover:opacity-60">
                     {game.name}
                     {i < sameSeries?.length - 1 ? "," : ""}
                   </li>
@@ -118,10 +102,7 @@ export const BottomGameInfos = ({ data, sameSeries }) => {
           <span className="text-base opacity-50">Tags</span>
           <ul className="flex flex-wrap items-center gap-1 text-base text-white">
             {data?.tags.map((tag, i) => (
-              <li
-                className="underline decoration-gray-9 underline-offset-2"
-                key={i}
-              >
+              <li key={i}>
                 {tag.name}
                 {i < data?.tags.length - 1 ? "," : ""}
               </li>
@@ -134,8 +115,10 @@ export const BottomGameInfos = ({ data, sameSeries }) => {
           <div className="flex flex-col gap-0.5">
             <span className="text-base opacity-50">Website</span>
             <ul className="flex flex-wrap items-center gap-1 text-base text-white">
-              <li className="underline decoration-gray-9 underline-offset-2">
-                {data?.website}
+              <li className="durationAll cursor-pointer underline decoration-gray-9 underline-offset-2 hover:opacity-60">
+                <Link to={data?.website} target="_blank">
+                  {data?.website}
+                </Link>
               </li>
             </ul>
           </div>

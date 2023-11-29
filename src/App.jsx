@@ -39,11 +39,10 @@ import SettingsProfile from "./pages/Settings/SettingsProfile.jsx";
 import SettingsMyPassword from "./pages/Settings/SettingsMyPassword.jsx";
 import SettingsMyEmail from "./pages/Settings/SettingsMyEmail.jsx";
 import AddReview from "./pages/AddReview.jsx";
+import MoreGameDetails from "./pages/ExtendedGameDetails/MoreGameDetails.jsx";
 import ScreenShots from "./pages/ExtendedGameDetails/ScreenShots.jsx";
-import GamesLike from "./pages/ExtendedGameDetails/GamesLike.jsx";
 import RedditPosts from "./pages/ExtendedGameDetails/RedditPosts.jsx";
 import GameReviews from "./pages/ExtendedGameDetails/GameReviews.jsx";
-import MoreGameDetails from "./pages/ExtendedGameDetails/MoreGameDetails.jsx";
 import MoreAchievements from "./pages/ExtendedGameDetails/MoreAchievements.jsx";
 
 const router = createBrowserRouter([
@@ -76,7 +75,7 @@ const router = createBrowserRouter([
     element: <ReleaseCalendar />,
     children: [
       {
-        path: "/release-calendar/:month", // :month captures the month parameter
+        path: "/release-calendar/:month",
         element: <GamesByMonth />,
       },
     ],
@@ -214,31 +213,27 @@ const router = createBrowserRouter([
         path: "/reviews/create-review/:gameId/:slug",
         element: <AddReview />,
       },
+    ],
+  },
+  {
+    path: "/games/:slug/more",
+    element: <MoreGameDetails />,
+    children: [
       {
-        path: "/games/:slug/more",
-        element: <MoreGameDetails />,
-        children: [
-          {
-            path: "/games/:slug/more/screenshots",
-            element: <ScreenShots />,
-          },
-          {
-            path: "/games/:slug/more/games-like",
-            element: <GamesLike />,
-          },
-          {
-            path: "/games/:slug/more/reddit-posts",
-            element: <RedditPosts />,
-          },
-          {
-            path: "/games/:slug/more/reviews",
-            element: <GameReviews />,
-          },
-          {
-            path: "/games/:slug/more/achievements",
-            element: <MoreAchievements />,
-          },
-        ],
+        path: "/games/:slug/more/screenshots",
+        element: <ScreenShots />,
+      },
+      {
+        path: "/games/:slug/more/reddit-posts",
+        element: <RedditPosts />,
+      },
+      {
+        path: "/games/:slug/more/reviews",
+        element: <GameReviews />,
+      },
+      {
+        path: "/games/:slug/more/achievements",
+        element: <MoreAchievements />,
       },
     ],
   },
@@ -251,7 +246,8 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
-      <RouterProvider router={router} /> <ToastContainer />
+      <RouterProvider router={router} />
+      <ToastContainer />
     </>
   );
 }

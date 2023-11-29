@@ -12,6 +12,7 @@ import { useAddWishlist } from "../../hooks/wishlist/useAddWishlist.js";
 import { useGetWishlist } from "../../hooks/wishlist/useGetWishlist.js";
 import { useDeleteWishlist } from "../../hooks/wishlist/useDeleteWishlist.js";
 import { useGetUser } from "../../hooks/authentication/useGetUser.js";
+import { useNavigate } from "react-router";
 
 export const AddToSection = ({ data }) => {
   const { data: user } = useGetUser();
@@ -35,6 +36,7 @@ export const AddToSection = ({ data }) => {
     ?.map((game) => game.name)
     .includes(data?.name);
   const isInLibrary = games?.map((game) => game.name).includes(data?.name);
+  const navigate = useNavigate();
   /////
 
   function handleShowStatus() {
@@ -54,7 +56,12 @@ export const AddToSection = ({ data }) => {
   }
 
   const handleAddGame = (currentStatus) => {
-    if (!isInLibrary) {
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+
+    if (!isInLibrary && user) {
       allGamesMutate(
         {
           id: data.id,
@@ -116,14 +123,18 @@ export const AddToSection = ({ data }) => {
   };
 
   const handleAddWishlist = () => {
-    if (!isWishlisted) {
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+
+    if (!isWishlisted && user) {
       wishMutate(
         {
           id: data.id,
           name: data.name,
           image: data.background_image,
           meta: data.metacritic,
-          // platforms: data.platforms,
           added: data.added,
         },
         {

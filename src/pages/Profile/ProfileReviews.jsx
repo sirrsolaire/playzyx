@@ -28,6 +28,7 @@ const ProfileReviews = () => {
           rate={review.rate}
           tags={review.tags}
           game={review.game_name}
+          slug={review.game_slug}
           review={review}
         />
       ))}

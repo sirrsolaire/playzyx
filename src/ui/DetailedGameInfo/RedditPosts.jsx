@@ -1,5 +1,6 @@
 import { formatDate } from "../../helpers/dateFormat.js";
 import { useNavigate, useParams } from "react-router";
+import { Link } from "react-router-dom";
 
 export const RedditPosts = ({ data, redditData }) => {
   const { slug } = useParams();
@@ -9,9 +10,13 @@ export const RedditPosts = ({ data, redditData }) => {
     <div className="mt-10">
       <div className="flex  items-center justify-between">
         <div className="flex items-center gap-2 tablet:w-[390px] desktopFirst:w-[420px] desktopSecond:w-[480px]">
-          <h2 className="cursor-pointer truncate text-2xl font-semibold underline underline-offset-4">
+          <Link
+            to={data?.reddit_url}
+            target="_blank"
+            className="durationAll cursor-pointer truncate text-2xl font-semibold underline underline-offset-4 hover:opacity-60"
+          >
             {data?.name} posts
-          </h2>
+          </Link>
           <img
             src="/images/redditlogo.png"
             alt="Reddit logo with letter"
@@ -24,27 +29,32 @@ export const RedditPosts = ({ data, redditData }) => {
       </div>
 
       <ul>
-        {slicedRedditData?.map((post) => (
-          <a href={post.url} key={post.id}>
-            <li className="flex  items-center justify-between  border-b-[1px] border-button-color py-4 ">
-              <div>
-                <h3 className="mb-1 font-semibold">
-                  {post.name.slice(0, 60) + "..."}
-                </h3>
-                <div className="flex gap-2 text-xs font-bold text-info-color">
-                  <span>{formatDate(post.created)}</span>
-                  <span>{post.username.slice(3)}</span>
-                </div>
+        {slicedRedditData?.map((post, i) => (
+          <li
+            key={i}
+            className="flex  items-center justify-between border-b-[1px] border-button-color py-4 "
+          >
+            <div>
+              <Link
+                to={post?.url}
+                target="_blank"
+                className="mb-1 font-semibold hover:underline"
+              >
+                <p>{post.name.slice(0, 60) + "..."}</p>
+              </Link>
+              <div className="flex gap-2 text-xs font-bold text-info-color">
+                <span>{formatDate(post.created)}</span>
+                <span>{post.username.slice(3)}</span>
               </div>
-              {post.image ? (
-                <img
-                  src={post.image}
-                  alt=""
-                  className="ml-4 mr-2 min-h-[40px] min-w-[70px]"
-                />
-              ) : null}
-            </li>
-          </a>
+            </div>
+            {post.image ? (
+              <img
+                src={post.image}
+                alt=""
+                className="ml-4 mr-2 min-h-[40px] min-w-[70px]"
+              />
+            ) : null}
+          </li>
         ))}
       </ul>
       {redditData?.length > 0 && (

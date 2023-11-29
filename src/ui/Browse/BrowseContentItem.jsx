@@ -49,11 +49,9 @@ export const BrowseContentItem = ({
       <ul className="w-full space-y-1">
         {games.map((game) => (
           <li key={game.id} className="flex justify-between text-sm">
-            <Link to={`/games/details/${game.slug}`}>
-              <span className="cursor-pointer truncate  underline decoration-gray-600 decoration-0 underline-offset-2 transition-colors duration-200 hover:text-info-color">
-                {game.name}
-              </span>
-            </Link>
+            <span className="cursor-pointer truncate  underline decoration-gray-600 decoration-0 underline-offset-2 transition-colors duration-200 hover:text-info-color">
+              <Link to={`/games/details/${game.slug}`}>{game.name}</Link>
+            </span>
             <div className="ml-4 flex items-center gap-1">
               <span className="text-info-color">
                 {formattedNumber(game.added)}

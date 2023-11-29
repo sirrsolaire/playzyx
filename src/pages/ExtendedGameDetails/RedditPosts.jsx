@@ -7,6 +7,8 @@ import { getTimeAgo } from "../../helpers/dateConvertor.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRedditAlien } from "@fortawesome/free-brands-svg-icons";
 import NotFoundItem from "../../ui/General/NotFoundItem.jsx";
+import { Link } from "react-router-dom";
+import { Icon } from "@iconify/react";
 
 const RedditPosts = () => {
   const { data } = useOutletContext();
@@ -78,14 +80,17 @@ function RedditPostItem({
           <span className="text-lg font-semibold underline decoration-gray-9 underline-offset-[3px]">
             {gameName}
           </span>
-          <a
-            href={postUrl}
-            className={`mt-2 block opacity-70 transition-colors duration-200 tablet:hover:text-gray-400 ${
+          <Link
+            to={postUrl}
+            className={` mt-2 flex items-center justify-between gap-3 opacity-70 transition-colors duration-200 tablet:hover:text-gray-400  ${
               postLayout === "box" && "mb-1 text-lg font-semibold opacity-100"
             }`}
           >
-            {title}
-          </a>
+            <span>{title}</span>
+            <span className="mt-1.5 self-start">
+              <Icon icon="fluent:open-32-filled" />
+            </span>
+          </Link>
         </div>
         <div className="mt-2 flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center self-end rounded-full bg-gray-8 shadow-md">
@@ -95,12 +100,7 @@ function RedditPostItem({
             />
           </div>
           <div>
-            <a
-              href={usernameUrl}
-              className="mt-2 block text-sm font-semibold transition-all duration-200 tablet:hover:text-stone-500"
-            >
-              {username}
-            </a>
+            <span className="mt-2 block text-sm font-semibold">{username}</span>
             <span className="text-sm opacity-50">{convertedDate}</span>
           </div>
         </div>

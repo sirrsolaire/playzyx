@@ -5,8 +5,18 @@ import { Icon } from "@iconify/react";
 import { useDeleteReview } from "../../hooks/reviews/useDeleteReview.js";
 import { useQueryClient } from "@tanstack/react-query";
 import { generalError, successNotify } from "../../helpers/toaster/toast.js";
+import { Link } from "react-router-dom";
 
-function ProfileReviewItem({ date, username, text, rate, tags, game, id }) {
+function ProfileReviewItem({
+  date,
+  username,
+  text,
+  rate,
+  tags,
+  game,
+  id,
+  slug,
+}) {
   const { reviewDelete, reviewDeleteLoading } = useDeleteReview();
   const queryClient = useQueryClient();
 
@@ -30,12 +40,15 @@ function ProfileReviewItem({ date, username, text, rate, tags, game, id }) {
   return (
     <div className="flex flex-col rounded bg-border-color px-6 py-5">
       <div className="mb-2 flex items-center justify-between">
-        <h2 className="flex items-center gap-3 text-xl font-semibold underline underline-offset-4">
+        <Link
+          to={`/games/${slug}/more/reviews`}
+          className="durationAll flex items-center gap-3 text-xl font-semibold underline underline-offset-4 hover:opacity-60"
+        >
           <span>{game}</span>
           <span className="text-2xl">
             <Icon icon={handleRateIcon(rate)} />
           </span>
-        </h2>
+        </Link>
         <ProfilePopover
           option2="Delete"
           remove={handleDeleteReview}

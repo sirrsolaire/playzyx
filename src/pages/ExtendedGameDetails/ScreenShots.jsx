@@ -4,6 +4,9 @@ import { Spinner } from "../../ui/Loading/Spinner.jsx";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import { useState } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+import placeholder from "../../../public/images/placeholder.png";
 
 const ScreenShots = () => {
   const { slug } = useParams();
@@ -19,16 +22,22 @@ const ScreenShots = () => {
   if (isLoading) return <Spinner />;
 
   return (
-    <div className="flex flex-col items-center ">
-      <div className="mt-4 grid grid-cols-1 gap-2 smallTb:grid-cols-2">
+    <div className="flex flex-col items-center">
+      <div className="mt-4 grid grid-cols-1 gap-3 smallTb:grid-cols-2">
         {screenShots?.map((shots, i) => (
-          <img
+          <div
             key={shots.id}
-            src={shots.image}
-            alt={`${i + 1}. Image of ${data?.name}`}
-            className="cursor-pointer rounded-lg transition-all duration-200 hover:scale-105"
-            onClick={() => setOpen(true)}
-          />
+            className="durationAll cursor-pointer hover:scale-[1.03]"
+          >
+            <LazyLoadImage
+              placeholderSrc={placeholder}
+              effect="blur"
+              src={shots.image}
+              alt={`${i + 1}. Image of ${data?.name}`}
+              className="h-[260px] w-[480px] rounded-lg object-cover object-center"
+              onClick={() => setOpen(true)}
+            />
+          </div>
         ))}
         <Lightbox
           slides={lightboxImages}

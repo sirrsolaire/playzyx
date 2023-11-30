@@ -8,6 +8,8 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { Spinner } from "../Loading/Spinner.jsx";
 import GameInfo from "../General/GameInfo.jsx";
 import { isNsfw } from "../../helpers/nsfwFilter.js";
+import NotFoundItem from "../General/NotFoundItem.jsx";
+import { filteredPlatform } from "../../helpers/platformFilterLabel.js";
 
 function LastThirtyDaysContent() {
   const dispatch = useDispatch();
@@ -28,6 +30,8 @@ function LastThirtyDaysContent() {
       0,
     ) || 0;
 
+  const hasGame = lastThirtyData?.pages[0].results;
+
   return (
     <section className="flex-col px-4 tablet:mt-6 tablet:flex tablet:w-full tablet:px-0">
       <div className="mb-6 mt-9 flex flex-wrap justify-center gap-2 tablet:mt-4 tablet:justify-between">
@@ -46,6 +50,9 @@ function LastThirtyDaysContent() {
           }`}
         />
       </div>
+      {!hasGame?.length && !isLoading && (
+        <NotFoundItem title="Games" gameName={filteredPlatform(platform)} />
+      )}
       <InfiniteScroll
         style={{}}
         dataLength={dataLength}

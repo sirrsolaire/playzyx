@@ -70,7 +70,7 @@ const MobileMenu = () => {
               <img
                 src={getUserAvatar}
                 alt=""
-                className="h-16 w-16 cursor-pointer"
+                className="h-16 w-16 cursor-pointer rounded-full object-cover object-center"
                 onClick={() => {
                   navigate(`/profile/${getUsername}/overview`);
                   onClose();

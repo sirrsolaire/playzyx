@@ -8,7 +8,6 @@ import useAchievements from "../../hooks/generals/useAchievements.js";
 import useRedditPosts from "../../hooks/generals/useRedditPosts.js";
 import "../../assets/styles/antd.css";
 import useEachGameShop from "../../hooks/generals/useEacHGameShop.js";
-import { WhereToBuy } from "./WhereToBuy.jsx";
 import { WriteReviewComment } from "./WriteReviewComment.jsx";
 import { RatingChart } from "./RatingChart.jsx";
 import { TopRatingInfos } from "./TopRatingInfos.jsx";
@@ -24,6 +23,7 @@ import { Achievements } from "./Achievements.jsx";
 import { BottomCommentSection } from "./BottomCommentSection.jsx";
 import { TopBgImage } from "./TopBgImage.jsx";
 import PageLoadSpinner from "../Loading/PageLoadSpinner.jsx";
+import { WhereToBuy } from "./WhereToBuy.jsx";
 
 export const DesktopDetailedGameInfo = () => {
   const { slug } = useParams();
@@ -65,7 +65,7 @@ export const DesktopDetailedGameInfo = () => {
         </div>
         <div>
           <Gallery screenShotsData={screenShotsData} />
-          <WhereToBuy storeData={storeData} />
+          {storeData ? <WhereToBuy storeData={storeData} /> : null}
           <RedditPosts data={data} redditData={redditData} />
         </div>
       </div>

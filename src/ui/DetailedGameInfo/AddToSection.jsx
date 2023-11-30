@@ -227,12 +227,7 @@ export const AddToSection = ({ data }) => {
           <span className="text-sm font-semibold opacity-50">
             {isWishlisted ? "Added to" : "Add to"}
           </span>
-          <span className="font-semibold">
-            Wishlist{" "}
-            <span className="font-normal opacity-50">
-              {data?.added_by_status?.toplay}
-            </span>
-          </span>
+          <span className="font-semibold">Wishlist</span>
         </div>
         {wishLoading || deleteWishLoading ? (
           <SmallSpinner color="white" />

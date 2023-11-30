@@ -73,7 +73,11 @@ const ProfileContent = () => {
                 </span>
               </div>
             ) : (
-              <img src={userAvatar} alt="" className="h-20 w-20" />
+              <img
+                src={userAvatar}
+                alt=""
+                className="h-20 w-20  rounded-full object-cover object-center"
+              />
             )}
             <h2 className="text-3xl font-bold text-white tablet:self-start tablet:text-7xl">
               {truncatedUsername}
@@ -105,12 +109,12 @@ const ProfileContent = () => {
           <>
             <p className="tablet:self-start">
               {!showMore ? bio.slice(0, 400) : bio}{" "}
-              {!showMore && (
+              {bio.length > 400 && (
                 <span
                   className="cursor-pointer rounded-md bg-white px-2 text-sm font-semibold text-black"
-                  onClick={() => setShowMore(true)}
+                  onClick={() => setShowMore(!showMore)}
                 >
-                  Show more
+                  {!showMore ? "Read more" : "Show less"}
                 </span>
               )}
             </p>

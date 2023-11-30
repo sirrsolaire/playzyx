@@ -28,6 +28,7 @@ export const AddGameSearchResults = () => {
         meta: game.metacritic,
         added: game.added,
         platforms: game.platforms,
+        slug: game.slug,
       },
       {
         onSuccess: () => {

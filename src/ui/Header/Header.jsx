@@ -49,14 +49,14 @@ function Header() {
   }, []);
 
   return (
-    <nav className="z-40 flex w-full items-center gap-4 px-7 py-4 tablet:px-10">
+    <nav className="z-40 flex w-full items-center justify-between gap-4 px-7 py-4 tablet:px-10">
       <NavLink to="/">
         <h1 className="text-xl font-black tracking-[0.2rem] text-white">
           PLAYZYX
         </h1>
       </NavLink>
 
-      <div className="relative w-full hover:text-black">
+      <div className="relative w-[500px] hover:text-black tablet:w-[700px] desktopFirst:w-[800px]">
         <input
           ref={inputRef}
           type="text"
@@ -95,42 +95,40 @@ function Header() {
       />
       <MobileMenu />
 
-      <ul className=" hidden items-center gap-3 whitespace-nowrap font-semibold text-white tablet:flex">
+      <ul className="hidden items-center gap-3 whitespace-nowrap font-semibold text-white tablet:flex">
         {!authenticatedUser ? (
           <>
             <NavLink to={"/login"}>
-              <li
-                className="cursor-pointer decoration-2 hover:underline hover:underline-offset-4"
-                // onClick={handleLoginModal}
-              >
+              <li className="cursor-pointer decoration-2 hover:underline hover:underline-offset-4">
                 LOG IN
               </li>
             </NavLink>
             <NavLink to={"/register"}>
-              <li
-                className="cursor-pointer decoration-2 hover:underline hover:underline-offset-4"
-                // onClick={handleRegisterModal}
-              >
+              <li className="cursor-pointer decoration-2 hover:underline hover:underline-offset-4">
                 SIGN UP
               </li>
             </NavLink>
           </>
         ) : (
-          <div className="flex  items-center justify-between">
+          <div className="flex items-center justify-end">
             <div className="flex items-center gap-3">
               {!userAvatar ? (
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-default-profile-avatar">
                   <span className="text-2xl  font-bold ">{getFirstLetter}</span>
                 </div>
               ) : (
-                <img src={userAvatar} alt="" className="h-10 w-10" />
+                <img
+                  src={userAvatar}
+                  alt={`Avatar of ${username}`}
+                  className="h-10 w-10 rounded-full object-cover object-center"
+                />
               )}
-              <NavLink
-                to={`/profile/${username}/overview`}
-                className="cursor-pointer truncate text-lg decoration-2 hover:underline hover:underline-offset-4"
-              >
-                {username}
-              </NavLink>
+              {/*<NavLink*/}
+              {/*  to={`/profile/${username}/overview`}*/}
+              {/*  className="cursor-pointer text-lg decoration-2 hover:underline hover:underline-offset-4"*/}
+              {/*>*/}
+              {/*  {username}*/}
+              {/*</NavLink>*/}
             </div>
             <UserDropDown handleLogout={handleLogout} username={username} />
           </div>

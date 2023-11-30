@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import ProfilePopover from "./ProfilePopover.jsx";
 import { useDeleteGame } from "../../hooks/library/useDeleteGame.js";
 import { useQueryClient } from "@tanstack/react-query";
 import { generalError, successNotify } from "../../helpers/toaster/toast.js";
@@ -11,6 +10,7 @@ import SmallSpinner from "../Loading/SmallSpinner.jsx";
 import { useDeleteWishlist } from "../../hooks/wishlist/useDeleteWishlist.js";
 import { useGetWishlist } from "../../hooks/wishlist/useGetWishlist.js";
 import { useGetUser } from "../../hooks/authentication/useGetUser.js";
+import RemoveItem from "../General/RemoveItem.jsx";
 
 const ProfileGameItem = ({ image, platform, meta, name, added, id }) => {
   const { games } = useGetAllGames();
@@ -120,15 +120,20 @@ const ProfileGameItem = ({ image, platform, meta, name, added, id }) => {
               </span>
             </GameDetailsDropDown>
           )}
-          <span className="group flex h-6 cursor-pointer items-center rounded-[0.3rem] bg-second-color px-2 transition-all duration-200 hover:bg-white">
-            <ProfilePopover
-              className="text-white transition-all duration-200 group-hover:text-black"
-              option2="Remove"
-              remove={handleDeleteGame}
-              loading={deleteLoading}
-              loading2={deleteWishLoading}
-            />
-          </span>
+          <RemoveItem
+            remove={handleDeleteGame}
+            loading={deleteWishLoading}
+            loading2={deleteLoading}
+          />
+          {/*<span className="group flex h-6 cursor-pointer items-center rounded-[0.3rem] bg-second-color px-2 transition-all duration-200 hover:bg-white">*/}
+          {/*  <ProfilePopover*/}
+          {/*    className="text-white transition-all duration-200 group-hover:text-black"*/}
+          {/*    option2="Remove"*/}
+          {/*    remove={handleDeleteGame}*/}
+          {/*    loading={deleteLoading}*/}
+          {/*    loading2={deleteWishLoading}*/}
+          {/*  />*/}
+          {/*</span>*/}
         </div>
       </div>
     </div>

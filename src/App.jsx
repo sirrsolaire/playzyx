@@ -3,7 +3,7 @@ import { HomePage } from "./pages/HomePage.jsx";
 import { LastThirtyGames } from "./pages/Date/LastThirtyGames.jsx";
 import { ThisWeekGames } from "./pages/Date/ThisWeekGames.jsx";
 import { NextWeekGames } from "./pages/Date/NextWeekGames.jsx";
-import { ReleaseCalendar } from "./pages/ReleaseCalendar.jsx";
+import { ReleaseCalendar } from "./pages/Date/ReleaseCalendar.jsx";
 import { AllGames } from "./pages/AllGames.jsx";
 import GamesByMonth from "./ui/Date/GamesByMonth.jsx";
 import { ActionGenre } from "./pages/Genres/ActionGenre.jsx";

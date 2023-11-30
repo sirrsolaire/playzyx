@@ -8,6 +8,8 @@ import useGames from "../../hooks/generals/useGames.js";
 import { LayoutView } from "./LayoutView.jsx";
 import { setLayout } from "../../reducers/layoutSlice.js";
 import { isNsfw } from "../../helpers/nsfwFilter.js";
+import NotFoundItem from "./NotFoundItem.jsx";
+import { filteredPlatform } from "../../helpers/platformFilterLabel.js";
 
 function Content() {
   const dispatch = useDispatch();
@@ -28,9 +30,11 @@ function Content() {
       0,
     ) || 0;
 
+  const hasGame = platformData?.pages[0].results;
+
   return (
     <section className="flex-col px-4 tablet:mt-6 tablet:flex tablet:w-full tablet:px-0">
-      <div className="mb-6 mt-9 flex flex-wrap justify-center gap-2 tablet:mt-4 tablet:justify-between">
+      <div className="mb-6 mt-9 flex  flex-wrap justify-center gap-2 tablet:mt-4 tablet:justify-between">
         <div className="flex gap-1 tablet:gap-2">
           <OrderFilter />
           <PlatformsFilter />
@@ -46,6 +50,9 @@ function Content() {
           }`}
         />
       </div>
+      {!hasGame?.length && !isLoading && (
+        <NotFoundItem title="Games" gameName={filteredPlatform(platform)} />
+      )}
       <InfiniteScroll
         style={{}}
         dataLength={dataLength}

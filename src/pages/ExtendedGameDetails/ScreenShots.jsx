@@ -23,7 +23,7 @@ const ScreenShots = () => {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="mt-4 grid grid-cols-1 gap-3 smallTb:grid-cols-2">
+      <div className="mt-4 grid grid-cols-1 gap-2 smallTb:grid-cols-2">
         {screenShots?.map((shots, i) => (
           <div
             key={shots.id}

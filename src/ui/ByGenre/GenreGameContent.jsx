@@ -8,6 +8,11 @@ import { LayoutView } from "../General/LayoutView.jsx";
 import { setLayout } from "../../reducers/layoutSlice.js";
 import useGenres from "../../hooks/generals/useGenres.js";
 import { isNsfw } from "../../helpers/nsfwFilter.js";
+import NotFoundItem from "../General/NotFoundItem.jsx";
+import { filteredPlatform } from "../../helpers/platformFilterLabel.js";
+import { useLocation } from "react-router";
+import { useEffect } from "react";
+import { setTag } from "../../reducers/filterSlice.js";
 
 function GenreGameContent({ genreId }) {
   const dispatch = useDispatch();
@@ -15,6 +20,7 @@ function GenreGameContent({ genreId }) {
   const firstSelectValue = useSelector((state) => state.filtering.firstSelect);
   const platform = useSelector((state) => state.filtering.platform);
   const tag = useSelector((state) => state.filtering.tag);
+  const { pathname } = useLocation();
 
   const {
     data: genreData,
@@ -27,6 +33,12 @@ function GenreGameContent({ genreId }) {
   const dataLength =
     genreData?.pages.reduce((total, page) => total + page.results.length, 0) ||
     0;
+
+  useEffect(() => {
+    dispatch(setTag(31));
+  }, [pathname, dispatch]);
+
+  const hasGame = genreData?.pages[0].results;
 
   return (
     <section className="flex-col px-4 tablet:mt-6 tablet:flex tablet:w-full tablet:px-0">
@@ -46,6 +58,9 @@ function GenreGameContent({ genreId }) {
           }`}
         />
       </div>
+      {!hasGame?.length && !isLoading && (
+        <NotFoundItem title="Games" gameName={filteredPlatform(platform)} />
+      )}
       <InfiniteScroll
         style={{}}
         dataLength={dataLength}

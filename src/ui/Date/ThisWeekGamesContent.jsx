@@ -8,6 +8,8 @@ import { LayoutView } from "../General/LayoutView.jsx";
 import { setLayout } from "../../reducers/layoutSlice.js";
 import useThisWeek from "../../hooks/hooksByDate/useThisWeek.js";
 import { isNsfw } from "../../helpers/nsfwFilter.js";
+import NotFoundItem from "../General/NotFoundItem.jsx";
+import { filteredPlatform } from "../../helpers/platformFilterLabel.js";
 
 function ThisWeekGamesContent() {
   const dispatch = useDispatch();
@@ -28,6 +30,8 @@ function ThisWeekGamesContent() {
       0,
     ) || 0;
 
+  const hasGame = thisWeekData?.pages[0].results;
+
   return (
     <section className="flex-col px-4 tablet:mt-6 tablet:flex tablet:w-full tablet:px-0">
       <div className="mb-6 mt-9 flex flex-wrap justify-center gap-2 tablet:mt-4 tablet:justify-between">
@@ -46,6 +50,9 @@ function ThisWeekGamesContent() {
           }`}
         />
       </div>
+      {!hasGame?.length && !isLoading && (
+        <NotFoundItem title="Games" gameName={filteredPlatform(platform)} />
+      )}
       <InfiniteScroll
         style={{}}
         dataLength={dataLength}

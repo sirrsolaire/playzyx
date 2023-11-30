@@ -7,12 +7,16 @@ import { LayoutView } from "../General/LayoutView.jsx";
 import { setLayout } from "../../reducers/layoutSlice.js";
 import { useParams } from "react-router";
 import useCreatorGames from "../../hooks/generals/useCreatorGames.js";
+import { PlatformsFilter } from "../Platform/PlatformsFilter.jsx";
+import NotFoundItem from "../General/NotFoundItem.jsx";
+import { filteredPlatform } from "../../helpers/platformFilterLabel.js";
 
 function CreatorParamContent() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const layout = useSelector((state) => state.layout.layout);
   const firstSelectValue = useSelector((state) => state.filtering.firstSelect);
+  const platform = useSelector((state) => state.filtering.platform);
 
   const {
     data: creatorGamesData,
@@ -20,7 +24,7 @@ function CreatorParamContent() {
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
-  } = useCreatorGames({ firstSelectValue, id });
+  } = useCreatorGames({ firstSelectValue, id, platform });
 
   const dataLength =
     creatorGamesData?.pages.reduce(
@@ -28,12 +32,15 @@ function CreatorParamContent() {
       0,
     ) || 0;
 
+  const hasGame = creatorGamesData?.pages[0].results;
+
   return (
     <>
       <section className="flex-col px-4 tablet:mt-6 tablet:flex tablet:w-full tablet:px-0">
         <div className="mb-6 mt-9 flex flex-wrap justify-center gap-2 tablet:mt-4 tablet:justify-between">
           <div className="flex gap-1 tablet:gap-2">
             <OrderFilter />
+            <PlatformsFilter />
           </div>
           <LayoutView
             onGrid={() => dispatch(setLayout("grid"))}
@@ -46,6 +53,9 @@ function CreatorParamContent() {
             }`}
           />
         </div>
+        {!hasGame?.length && !isLoading && (
+          <NotFoundItem title="Games" gameName={filteredPlatform(platform)} />
+        )}
         <InfiniteScroll
           style={{}}
           dataLength={dataLength}

@@ -11,6 +11,7 @@ export async function postFavouriteGames(data) {
         meta: data.meta,
         added: data.added,
         platforms: data.platforms,
+        slug: data.slug,
       },
     ])
     .select();

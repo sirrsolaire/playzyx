@@ -17,6 +17,7 @@ import { useNavigate } from "react-router";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import placeholder from "../../../public/images/placeholder.png";
+import { motion } from "framer-motion";
 
 function GameInfo({
   name,
@@ -29,7 +30,6 @@ function GameInfo({
   rating,
   slug,
   id,
-  tags,
 }) {
   const layout = useSelector((state) => state.layout.layout);
   const [open, setOpen] = useState(false);
@@ -138,10 +138,11 @@ function GameInfo({
     >
       <LazyLoadImage
         placeholderSrc={placeholder}
+        onClick={() => navigate(`/games/details/${slug}`)}
         src={image}
         effect="blur"
-        alt=""
-        className={`h-250px rounded-t-xl object-cover object-center tablet:h-[200px] tablet:w-full ${
+        alt={`Image of ${name}`}
+        className={`h-250px cursor-pointer rounded-t-xl object-cover object-center tablet:h-[200px] tablet:w-full ${
           layout === "box" && "min-h-[350px] tablet:object-top"
         }`}
       />
@@ -152,9 +153,14 @@ function GameInfo({
             platforms={platforms}
             className="text-base text-white opacity-40"
           />
-          <div className="flex h-full items-center justify-center rounded-[0.3rem] border-[1px] border-solid border-green-500 px-2 font-semibold text-green-500">
-            <span>{meta ? meta : "Soon"}</span>
-          </div>
+
+          {meta ? (
+            <div className="flex h-[30px] items-center justify-center rounded-[0.3rem] border-[1px] border-solid border-green-500 px-2 font-semibold text-green-500">
+              <span>{meta}</span>
+            </div>
+          ) : (
+            <div className="h-[30px]"></div>
+          )}
         </div>
         <NavLink to={`/games/details/${slug}`}>
           <span className="block truncate text-2xl font-bold text-white">
@@ -207,8 +213,8 @@ function GameInfo({
             )}
           </span>
         </div>
-        {open && layout === "grid" && (
-          <div className="  mt-5 flex flex-col text-sm text-white">
+        {layout === "grid" && (
+          <motion.div className={`mt-5 flex flex-col text-sm text-white`}>
             <div className="flex items-center justify-between border-b-[1px] border-border-color py-3">
               <span className="text-info-color">Release date:</span>
               <span className="text-xs">{formattedDate}</span>
@@ -221,7 +227,7 @@ function GameInfo({
               <span className="text-info-color">Rating:</span>
               <span className="text-xs">{rating}</span>
             </div>
-          </div>
+          </motion.div>
         )}
         {layout === "box" && (
           <div className="mt-7 flex flex-col gap-3">
@@ -241,15 +247,6 @@ function GameInfo({
             </div>
           </div>
         )}
-
-        <p
-          className="mt-4 cursor-pointer text-center text-xs text-white underline underline-offset-2"
-          onClick={handleOpen}
-        >
-          {layout === "grid" && (
-            <span>{!open ? "View More" : "View Less"}</span>
-          )}
-        </p>
       </div>
     </div>
   );

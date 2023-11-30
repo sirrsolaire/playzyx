@@ -12,7 +12,7 @@ export const selectStore = (id) => {
   } else if (id === 6) {
     return "Nintendo";
   } else if (id === 7) {
-    return "Xbox Store";
+    return "Xbox 360 Store";
   } else if (id === 8) {
     return "Google Play";
   } else if (id === 9) {

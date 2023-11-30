@@ -6,6 +6,9 @@ import { OrderFilter } from "../General/OrderFilter.jsx";
 import { LayoutView } from "../General/LayoutView.jsx";
 import { setLayout } from "../../reducers/layoutSlice.js";
 import useStore from "../../hooks/generals/useStore.js";
+import { PlatformsFilter } from "../Platform/PlatformsFilter.jsx";
+import NotFoundItem from "../General/NotFoundItem.jsx";
+import { filteredPlatform } from "../../helpers/platformFilterLabel.js";
 
 function PageParamsContent() {
   const dispatch = useDispatch();
@@ -14,23 +17,28 @@ function PageParamsContent() {
   const tag = useSelector((state) => state.filtering.tag);
   const itemId = useSelector((state) => state.store.store);
   const browseType = useSelector((state) => state.store.browseType);
+  const platform = useSelector((state) => state.filtering.platform);
+
   const {
     data: storeData,
     isLoading,
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
-  } = useStore({ firstSelectValue, tag, itemId, browseType });
+  } = useStore({ firstSelectValue, tag, itemId, browseType, platform });
 
   const dataLength =
     storeData?.pages.reduce((total, page) => total + page.results.length, 0) ||
     0;
+
+  const hasGame = storeData?.pages[0].results;
 
   return (
     <section className="flex-col px-4 tablet:mt-6 tablet:flex tablet:w-full tablet:px-0">
       <div className="mb-6 mt-9 flex flex-wrap justify-center gap-2 tablet:mt-4 tablet:justify-between">
         <div className="flex gap-1 tablet:gap-2">
           <OrderFilter />
+          {browseType !== "platforms" ? <PlatformsFilter /> : null}
         </div>
         <LayoutView
           onGrid={() => dispatch(setLayout("grid"))}
@@ -43,6 +51,9 @@ function PageParamsContent() {
           }`}
         />
       </div>
+      {!hasGame?.length && !isLoading && (
+        <NotFoundItem title="Games" gameName={filteredPlatform(platform)} />
+      )}
       <InfiniteScroll
         style={{}}
         dataLength={dataLength}

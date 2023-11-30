@@ -128,8 +128,15 @@ export const fetchStoreID = async () => {
   return response.data.results;
 };
 
-export const fetchStore = async (order, pageParam, tag, itemId, browseType) => {
-  let url = `https://api.rawg.io/api/games?&tags=${tag}&page=${pageParam}&page_size=20&ordering=${order}&key=${API_KEY}`;
+export const fetchStore = async (
+  order,
+  pageParam,
+  tag,
+  itemId,
+  browseType,
+  platform,
+) => {
+  let url = `https://api.rawg.io/api/games?&tags=${tag}&page=${pageParam}&page_size=20&platforms=${platform}&ordering=${order}&key=${API_KEY}`;
 
   if (browseType === "platforms") {
     url += `&platforms=${itemId}`;
@@ -156,9 +163,9 @@ export const fetchByCreatorId = async (id) => {
   return response.data;
 };
 
-export const fetchCreatorGames = async (order, id, pageParam) => {
+export const fetchCreatorGames = async (order, id, pageParam, platform) => {
   const response = await axios.get(
-    `https://api.rawg.io/api/games?&creators=${id}&page=${pageParam}&page_size=20&ordering=${order}&key=${API_KEY}`,
+    `https://api.rawg.io/api/games?&creators=${id}&page=${pageParam}&page_size=20&platforms=${platform}&ordering=${order}&key=${API_KEY}`,
   );
   return response.data;
 };

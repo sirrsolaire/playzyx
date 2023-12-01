@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Platform } from "../Platform/Platform.jsx";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
@@ -32,7 +32,7 @@ function GameInfo({
   id,
 }) {
   const layout = useSelector((state) => state.layout.layout);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(window.innerWidth > 980);
   const { wishMutate, wishLoading } = useAddWishlist();
   const { deleteWishMutate, deleteWishLoading } = useDeleteWishlist();
   const { wishlistedGames } = useGetWishlist();
@@ -51,6 +51,18 @@ function GameInfo({
   function handleOpen() {
     setOpen(!open);
   }
+
+  useEffect(() => {
+    function handleResize() {
+      setOpen(window.innerWidth > 980);
+    }
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const handleAddWishList = () => {
     if (!isWishlisted) {
@@ -213,7 +225,7 @@ function GameInfo({
             )}
           </span>
         </div>
-        {layout === "grid" && (
+        {open && layout === "grid" && (
           <motion.div className={`mt-5 flex flex-col text-sm text-white`}>
             <div className="flex items-center justify-between border-b-[1px] border-border-color py-3">
               <span className="text-info-color">Release date:</span>
@@ -247,6 +259,14 @@ function GameInfo({
             </div>
           </div>
         )}
+        <p
+          className="mt-4 cursor-pointer text-center text-xs text-white underline underline-offset-2 tablet:hidden"
+          onClick={handleOpen}
+        >
+          {layout === "grid" && (
+            <span>{!open ? "View More" : "View Less"}</span>
+          )}
+        </p>
       </div>
     </div>
   );

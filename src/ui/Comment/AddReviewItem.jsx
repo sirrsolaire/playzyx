@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router";
 import useDetailedGame from "../../hooks/generals/useDetailedGame.js";
 import { Icon } from "@iconify/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePostReview } from "../../hooks/reviews/usePostReview.js";
 import { rateList } from "../../Data/reviewTags.js";
 import { useQueryClient } from "@tanstack/react-query";
@@ -54,6 +54,10 @@ const AddReviewItem = () => {
       errorNotify("You have to rate the game before submitting!");
     }
   };
+
+  useEffect(() => {
+    setReviewTag([]);
+  }, [rate]);
 
   const rateTags = {
     exceptional: rateList[0].tags,

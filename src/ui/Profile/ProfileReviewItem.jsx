@@ -60,7 +60,7 @@ function ProfileReviewItem({
         />
       </div>
       <p className="mb-5 text-sm opacity-80">{text}</p>
-      <ul className="mb-4 flex items-center gap-1 text-[11px] uppercase">
+      <ul className="mb-4 flex flex-wrap items-center gap-1 text-[11px] uppercase ">
         {tags.map((tag, i) => (
           <li
             key={i}

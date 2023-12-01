@@ -45,6 +45,7 @@ import RedditPosts from "./pages/ExtendedGameDetails/RedditPosts.jsx";
 import GameReviews from "./pages/ExtendedGameDetails/GameReviews.jsx";
 import MoreAchievements from "./pages/ExtendedGameDetails/MoreAchievements.jsx";
 import UpdateReview from "./pages/UpdateReview.jsx";
+import FallBackPage from "./pages/FallBackPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -244,7 +245,7 @@ const router = createBrowserRouter([
   },
   {
     path: "*",
-    element: <h1>Page Not Found!!</h1>,
+    element: <FallBackPage />,
   },
 ]);
 

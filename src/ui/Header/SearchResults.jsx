@@ -11,7 +11,7 @@ export const SearchResults = () => {
   if (query.length === 0) return;
 
   return (
-    <div className="fixed left-0 top-14 z-50 h-screen  w-full  overflow-scroll bg-black py-5 shadow-2xl tablet:absolute tablet:rounded-lg ">
+    <div className="fixed left-0 top-14 z-50 h-screen w-full overflow-scroll bg-black py-5 shadow-2xl tablet:absolute tablet:h-[600px] tablet:rounded-lg ">
       <div className="flex items-center justify-center">
         {isLoading && (
           <ColorRing
@@ -19,7 +19,6 @@ export const SearchResults = () => {
             height="80"
             width="80"
             ariaLabel="blocks-loading"
-            wrapperStyle={{}}
             wrapperClass="blocks-wrapper"
             colors={["white", "white", "white", "white", "white"]}
           />

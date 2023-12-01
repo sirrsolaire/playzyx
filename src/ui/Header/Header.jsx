@@ -56,7 +56,7 @@ function Header() {
         </h1>
       </NavLink>
 
-      <div className="relative w-[500px] hover:text-black tablet:w-[700px] desktopFirst:w-[800px]">
+      <div className="relative w-[500px] hover:text-black tablet:w-[700px] desktopFirst:w-[1000px]">
         <input
           ref={inputRef}
           type="text"

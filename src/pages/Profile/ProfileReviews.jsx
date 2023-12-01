@@ -30,6 +30,7 @@ const ProfileReviews = () => {
           game={review.game_name}
           slug={review.game_slug}
           review={review}
+          updated={review.updated_at}
         />
       ))}
     </>

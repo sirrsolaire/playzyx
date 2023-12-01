@@ -65,8 +65,10 @@ export const DesktopDetailedGameInfo = () => {
         </div>
         <div>
           <Gallery screenShotsData={screenShotsData} />
-          {storeData ? <WhereToBuy storeData={storeData} /> : null}
-          <RedditPosts data={data} redditData={redditData} />
+          {storeData?.length ? <WhereToBuy storeData={storeData} /> : null}
+          {redditData?.length ? (
+            <RedditPosts data={data} redditData={redditData} />
+          ) : null}
         </div>
       </div>
       <Achievements data={data} achievementData={achievementData} />

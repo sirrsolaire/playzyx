@@ -44,6 +44,7 @@ import ScreenShots from "./pages/ExtendedGameDetails/ScreenShots.jsx";
 import RedditPosts from "./pages/ExtendedGameDetails/RedditPosts.jsx";
 import GameReviews from "./pages/ExtendedGameDetails/GameReviews.jsx";
 import MoreAchievements from "./pages/ExtendedGameDetails/MoreAchievements.jsx";
+import UpdateReview from "./pages/UpdateReview.jsx";
 
 const router = createBrowserRouter([
   {
@@ -212,6 +213,10 @@ const router = createBrowserRouter([
       {
         path: "/reviews/create-review/:gameId/:slug",
         element: <AddReview />,
+      },
+      {
+        path: "/reviews/update-review/:reviewId/:slug",
+        element: <UpdateReview />,
       },
     ],
   },

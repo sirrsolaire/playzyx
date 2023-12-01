@@ -64,7 +64,8 @@ const ProfileGameItem = ({ image, platform, meta, name, added, id }) => {
     if (currentStatus !== getStatus) {
       updateMutate(
         {
-          id,
+          name,
+          userId: user?.id,
           status: currentStatus,
         },
         {

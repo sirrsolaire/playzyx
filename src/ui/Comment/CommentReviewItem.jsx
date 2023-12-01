@@ -97,13 +97,23 @@ function CommentReviewItem({ reviews, loading }) {
                   </span>
                 </div>
               ) : (
-                <img src={review.user_avatar} alt="" className="h-10 w-10" />
+                <img
+                  src={review.user_avatar}
+                  alt=""
+                  className="h-10 w-10 rounded-full object-cover object-center"
+                />
               )}
               <div className="flex flex-col">
                 <span className="text-xs">{review.user_name}</span>
-                <span className="text-xs text-info-color">
-                  {getTimeAgo(review.created_at)}
-                </span>
+                <div className="space-x-1 text-xs text-info-color">
+                  <span>{getTimeAgo(review.created_at)}</span>
+                  {review.updated_at ? (
+                    <>
+                      <span>-</span>
+                      <span>(Updated: {getTimeAgo(review.updated_at)})</span>
+                    </>
+                  ) : null}
+                </div>
               </div>
             </div>
             <div className="space-y-2 px-1 py-5">

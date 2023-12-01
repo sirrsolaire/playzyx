@@ -22,7 +22,9 @@ export const Gallery = ({ screenShotsData }) => {
               effect="blur"
               src={game.image}
               alt="Game's Screenshot"
-              className={`h-full w-full rounded-md object-cover `}
+              className={`rounded-md object-cover object-center ${
+                index === 0 ? "h-full w-full" : "h-[210px] w-[390px]"
+              }`}
             />
           </Link>
         </div>

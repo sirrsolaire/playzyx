@@ -28,11 +28,17 @@ export async function postReview(data) {
   if (error) throw new Error(error.message);
 }
 //update
-export async function updateReview() {
-  const { data, error } = await supabase
+export async function updateReview(data) {
+  const { error } = await supabase
     .from("reviews")
-    .update({ other_column: "otherValue" })
-    .eq("some_column", "someValue")
+    .update({
+      review: data.review,
+      rate: data.rate,
+      tags: data.tags,
+      updated_at: data.updated_at,
+    })
+    .eq("id", data.id)
+    .eq("account_id", data.userId)
     .select();
 
   if (error) throw new Error(error.message);

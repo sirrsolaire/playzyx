@@ -6,6 +6,7 @@ export const RedditPosts = ({ data, redditData }) => {
   const { slug } = useParams();
   const navigate = useNavigate();
   const slicedRedditData = redditData?.slice(0, 5);
+
   return (
     <div className="mt-10">
       <div className="flex  items-center justify-between">
@@ -27,7 +28,6 @@ export const RedditPosts = ({ data, redditData }) => {
           {data?.reddit_count} posts
         </span>
       </div>
-
       <ul>
         {slicedRedditData?.map((post, i) => (
           <li

@@ -16,6 +16,7 @@ function ProfileReviewItem({
   game,
   id,
   slug,
+  updated,
 }) {
   const { reviewDelete, reviewDeleteLoading } = useDeleteReview();
   const queryClient = useQueryClient();
@@ -50,9 +51,12 @@ function ProfileReviewItem({
           </span>
         </Link>
         <ProfilePopover
+          reviewId={id}
+          option1="Update"
           option2="Delete"
           remove={handleDeleteReview}
-          loading2={reviewDeleteLoading}
+          deleteLoading={reviewDeleteLoading}
+          slug={slug}
         />
       </div>
       <p className="mb-5 text-sm opacity-80">{text}</p>
@@ -68,7 +72,14 @@ function ProfileReviewItem({
       </ul>
       <div className="flex flex-col">
         <span className="text-xs">{username}</span>
-        <span className="text-xs text-info-color">{getTimeAgo(date)}</span>
+        <span className="text-xs text-info-color">
+          Created: {getTimeAgo(date)}
+        </span>
+        {updated ? (
+          <span className="text-xs text-info-color">
+            Last update: {getTimeAgo(updated)}
+          </span>
+        ) : null}
       </div>
     </div>
   );

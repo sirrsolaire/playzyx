@@ -9,6 +9,7 @@ const initialState = {
   registerPassword: "",
   invalid: false,
   showContent: false,
+  isReviewed: null,
 };
 
 export const authSlice = createSlice({
@@ -39,6 +40,9 @@ export const authSlice = createSlice({
     setShowContent: (state, action) => {
       state.showContent = action.payload;
     },
+    setIsReviewed: (state, action) => {
+      state.isReviewed = action.payload;
+    },
   },
 });
 
@@ -51,5 +55,6 @@ export const {
   setLoginInvalid,
   setShowContent,
   setRegisterFullName,
+  setIsReviewed,
 } = authSlice.actions;
 export default authSlice.reducer;

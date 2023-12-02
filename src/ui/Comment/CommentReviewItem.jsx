@@ -10,6 +10,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { successNotify } from "../../helpers/toaster/toast.js";
 import { useGetReplies } from "../../hooks/replies/useGetReplies.js";
 import ReplyItem from "./ReplyItem.jsx";
+import { NavLink } from "react-router-dom";
 
 function CommentReviewItem({ reviews, loading }) {
   const { data: user } = useGetUser();
@@ -130,31 +131,42 @@ function CommentReviewItem({ reviews, loading }) {
                 ))}
             </div>
             <div className="border-t-[1px] border-border-color pt-4">
-              <form
-                className="w-full px-5"
-                onSubmit={(e) => handleReplySubmit(e, i, review.id)}
-              >
-                <input
-                  type="text"
-                  className="mb-2 h-12 w-full rounded-md bg-game-info pl-5 disabled:cursor-not-allowed disabled:opacity-50"
-                  placeholder="Write a reply ..."
-                  onChange={(e) => handleInputChange(i, e.target.value)}
-                  value={replyInputs[i] ? replyInputs[i].query : ""}
-                  disabled={postReplyLoading}
-                />
-                {replyInputs[i]?.showButton && (
-                  <button
-                    className="h-12 w-full cursor-pointer bg-white font-bold text-black disabled:cursor-not-allowed"
+              {!user ? (
+                <p className="ml-10">
+                  <NavLink to="/login">
+                    <span className="durationAll cursor-pointer text-blue-400 hover:underline">
+                      Log in
+                    </span>
+                  </NavLink>{" "}
+                  to reply
+                </p>
+              ) : (
+                <form
+                  className="w-full px-5"
+                  onSubmit={(e) => handleReplySubmit(e, i, review.id)}
+                >
+                  <input
+                    type="text"
+                    className="mb-2 h-12 w-full rounded-md bg-game-info pl-5 disabled:cursor-not-allowed disabled:opacity-50"
+                    placeholder="Write a reply ..."
+                    onChange={(e) => handleInputChange(i, e.target.value)}
+                    value={replyInputs[i] ? replyInputs[i].query : ""}
                     disabled={postReplyLoading}
-                  >
-                    {postReplyLoading ? (
-                      <SmallSpinner color="black" />
-                    ) : (
-                      <span>SEND</span>
-                    )}
-                  </button>
-                )}
-              </form>
+                  />
+                  {replyInputs[i]?.showButton && (
+                    <button
+                      className="h-12 w-full cursor-pointer bg-white font-bold text-black disabled:cursor-not-allowed"
+                      disabled={postReplyLoading}
+                    >
+                      {postReplyLoading ? (
+                        <SmallSpinner color="black" />
+                      ) : (
+                        <span>SEND</span>
+                      )}
+                    </button>
+                  )}
+                </form>
+              )}
             </div>
           </div>
         ))}

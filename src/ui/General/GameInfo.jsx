@@ -233,7 +233,7 @@ function GameInfo({
             </div>
             <div className="flex items-center justify-between border-b-[1px] border-border-color py-3">
               <span className="text-info-color">Genres:</span>
-              <span className="text-xs ">{genres.join(", ")}</span>
+              <span className="text-xs">{genres.slice(0, 4).join(", ")}</span>
             </div>
             <div className="flex items-center justify-between border-b-[1px] border-border-color py-3">
               <span className="text-info-color">Rating:</span>

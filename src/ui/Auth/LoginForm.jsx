@@ -29,7 +29,6 @@ const LoginForm = () => {
           successNotify("You have logged in!");
           dispatch(setUsername(""));
           dispatch(setPassword(""));
-          // queryClient.setQueryData(["user"], user.user);
           queryClient.invalidateQueries({ queryKey: ["user"] });
         },
         onError(err) {
@@ -78,14 +77,14 @@ const LoginForm = () => {
               >
                 Password
               </label>
-              <div className="text-sm">
-                <a
-                  href="#"
-                  className="font-semibold text-[#919090] transition-all duration-200 hover:text-indigo-400 hover:underline"
-                >
-                  Forgot password?
-                </a>
-              </div>
+              {/*<div className="text-sm">*/}
+              {/*  <a*/}
+              {/*    href="#"*/}
+              {/*    className="font-semibold text-[#919090] transition-all duration-200 hover:text-indigo-400 hover:underline"*/}
+              {/*  >*/}
+              {/*    Forgot password?*/}
+              {/*  </a>*/}
+              {/*</div>*/}
             </div>
             <div className="mt-2">
               <input

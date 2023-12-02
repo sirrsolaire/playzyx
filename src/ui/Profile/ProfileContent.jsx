@@ -54,9 +54,6 @@ const ProfileContent = () => {
     }
   };
 
-  const truncatedUsername =
-    username.length > 12 ? username.slice(0, 12) : username;
-
   const containerStyle = {
     backgroundImage: `linear-gradient(rgba(15, 15, 15, 0), rgb(21, 21, 21)), linear-gradient(rgba(21, 21, 21, 0.8), rgba(21, 21, 21, 0.5)), url(${getFirstBg()})`,
   };
@@ -80,7 +77,7 @@ const ProfileContent = () => {
               />
             )}
             <h2 className="text-3xl font-bold text-white tablet:self-start tablet:text-7xl">
-              {truncatedUsername}
+              {username}
             </h2>
           </div>
           <div className="flex gap-2">

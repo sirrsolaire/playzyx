@@ -38,7 +38,7 @@
 
 @layer base {
     body {
-        @apply bg-body-color
+        @apply bg-body-color text-white
     }
     option {
         @apply bg-[#202020];

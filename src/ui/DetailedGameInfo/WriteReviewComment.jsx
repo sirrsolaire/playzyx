@@ -1,40 +1,9 @@
 import { Icon } from "@iconify/react";
-import { useGetUser } from "../../hooks/authentication/useGetUser.js";
 import { useNavigate, useParams } from "react-router";
-import { useGetReviews } from "../../hooks/reviews/useGetReviews.js";
 
-export const WriteReviewComment = ({ data }) => {
+export const WriteReviewComment = ({ handleNavigate, checkReviewed }) => {
   const { slug } = useParams();
-  const { data: user, isLoading } = useGetUser();
-  const { reviews, reviewsLoading } = useGetReviews();
   const navigate = useNavigate();
-  const userId = user?.id;
-  const gameSlug = data?.slug;
-  const username = user?.user_metadata.username;
-
-  ///
-  const userReviewedGame = (reviews, userId, gameSlug) => {
-    return reviews.some(
-      (review) => review.account_id === userId && review.game_slug === gameSlug,
-    );
-  };
-
-  let checkReviewed = false;
-
-  if (!reviewsLoading) {
-    checkReviewed = userReviewedGame(reviews, userId, gameSlug);
-  }
-  ///
-
-  const handleNavigate = () => {
-    if (!isLoading && user && !checkReviewed) {
-      navigate(`/reviews/create-review/${data?.id}/${data?.slug}`);
-    } else if (!isLoading && user && checkReviewed) {
-      navigate(`/profile/${username}/reviews`);
-    } else {
-      navigate("/login");
-    }
-  };
 
   return (
     <div className="mx-auto mt-4 max-w-[500px] gap-2 space-y-1 tablet:mx-0 tablet:flex tablet:space-y-0">

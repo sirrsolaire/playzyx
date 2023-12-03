@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import useDetailedGame from "../../hooks/generals/useDetailedGame.js";
 import useScreenShots from "../../hooks/generals/useScreenShots.js";
 import "slick-carousel/slick/slick.css";
@@ -24,6 +24,10 @@ import { BottomCommentSection } from "./BottomCommentSection.jsx";
 import { TopBgImage } from "./TopBgImage.jsx";
 import PageLoadSpinner from "../Loading/PageLoadSpinner.jsx";
 import { WhereToBuy } from "./WhereToBuy.jsx";
+import { useGetReviews } from "../../hooks/reviews/useGetReviews.js";
+import { useGetUser } from "../../hooks/authentication/useGetUser.js";
+import { useSelector } from "react-redux";
+import { userReviewedGame } from "../../helpers/checkIfReviewed.js";
 
 export const DesktopDetailedGameInfo = () => {
   const { slug } = useParams();
@@ -35,6 +39,29 @@ export const DesktopDetailedGameInfo = () => {
     useAchievements(slug);
   const { data: redditData, isLoading: postLoading } = useRedditPosts(slug);
   const { data: storeData, isLoading: storeLoading } = useEachGameShop(slug);
+  const { reviews, reviewsLoading } = useGetReviews();
+  const { data: user, isLoading: userLoading } = useGetUser();
+  const username = user?.user_metadata.username;
+  const navigate = useNavigate();
+  const userId = user?.id;
+  const gameSlug = data?.slug;
+  const isChecked = useSelector((state) => state.auth.isReviewed);
+
+  let checkReviewed = isChecked;
+
+  if (!reviewsLoading) {
+    checkReviewed = userReviewedGame(reviews, userId, gameSlug);
+  }
+
+  const handleNavigate = () => {
+    if (!userLoading && user && !checkReviewed) {
+      navigate(`/reviews/create-review/${data?.id}/${data?.slug}`);
+    } else if (!userLoading && user && checkReviewed) {
+      navigate(`/profile/${username}/reviews`);
+    } else {
+      navigate("/login");
+    }
+  };
 
   if (
     isLoading ||
@@ -59,7 +86,11 @@ export const DesktopDetailedGameInfo = () => {
           <AddToSection data={data} />
           <TopRatingInfos data={data} />
           <RatingChart data={data} />
-          <WriteReviewComment data={data} />
+          <WriteReviewComment
+            data={data}
+            checkReviewed={checkReviewed}
+            handleNavigate={handleNavigate}
+          />
           <ReadMoreToggle data={data} />
           <BottomGameInfos data={data} sameSeries={sameSeries} />
         </div>
@@ -72,7 +103,11 @@ export const DesktopDetailedGameInfo = () => {
         </div>
       </div>
       <Achievements data={data} achievementData={achievementData} />
-      <BottomCommentSection data={data} screenShotsData={screenShotsData} />
+      <BottomCommentSection
+        data={data}
+        screenShotsData={screenShotsData}
+        checkReviewed={checkReviewed}
+      />
       <TopBgImage data={data} />
     </>
   );

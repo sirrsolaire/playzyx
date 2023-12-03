@@ -6,7 +6,7 @@ import "yet-another-react-lightbox/styles.css";
 import { useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
-import placeholder from "../../../public/images/placeholder.png";
+import placeholder from "../../../public/images/placeholder.jpg";
 
 const ScreenShots = () => {
   const { slug } = useParams();

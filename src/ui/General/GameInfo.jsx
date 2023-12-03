@@ -16,8 +16,7 @@ import { useGetUser } from "../../hooks/authentication/useGetUser.js";
 import { useNavigate } from "react-router";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
-import placeholder from "../../../public/images/placeholder.png";
-import { motion } from "framer-motion";
+import placeholder from "../../../public/images/placeholder.jpg";
 
 function GameInfo({
   name,
@@ -226,7 +225,7 @@ function GameInfo({
           </span>
         </div>
         {open && layout === "grid" && (
-          <motion.div className={`mt-5 flex flex-col text-sm text-white`}>
+          <div className={`mt-5 flex flex-col text-sm text-white`}>
             <div className="flex items-center justify-between border-b-[1px] border-border-color py-3">
               <span className="text-info-color">Release date:</span>
               <span className="text-xs">{formattedDate}</span>
@@ -239,7 +238,7 @@ function GameInfo({
               <span className="text-info-color">Rating:</span>
               <span className="text-xs">{rating}</span>
             </div>
-          </motion.div>
+          </div>
         )}
         {layout === "box" && (
           <div className="mt-7 flex flex-col gap-3">

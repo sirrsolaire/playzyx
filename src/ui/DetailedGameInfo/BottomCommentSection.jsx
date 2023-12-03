@@ -6,7 +6,11 @@ import { useNavigate } from "react-router";
 import WriteReviewButton from "../Buttons/WriteReviewButton.jsx";
 import { useSelector } from "react-redux";
 
-export const BottomCommentSection = ({ data, screenShotsData }) => {
+export const BottomCommentSection = ({
+  data,
+  screenShotsData,
+  checkReviewed,
+}) => {
   const { reviews, reviewsLoading } = useGetReviews();
   const { data: user, isLoading } = useGetUser();
   const filterByDate = useSelector((state) => state.filtering.filterByDate);
@@ -46,15 +50,21 @@ export const BottomCommentSection = ({ data, screenShotsData }) => {
     )})`,
   };
   return (
-    <div className="relative  mx-auto mt-10 max-w-[1000px]">
+    <div className="relative mx-auto mt-10 max-w-[1000px]">
       <h2 className="text-center text-2xl">{data?.name} reviews</h2>
       <div className="mt-2 flex justify-center">
         <CommentDropDown />
       </div>
 
-      <WriteReviewButton handleNavigate={handleNavigate} />
+      {!checkReviewed ? (
+        <WriteReviewButton handleNavigate={handleNavigate} />
+      ) : null}
 
-      <CommentReviewItem reviews={filteredReviews} user={user} />
+      <CommentReviewItem
+        reviews={filteredReviews}
+        user={user}
+        checkReviewed={checkReviewed}
+      />
 
       <div className="absolute left-0 top-0 -z-50 h-[100%] w-[100%] blur-sm">
         <div className="h-[300px]">

@@ -12,7 +12,11 @@ function ReplyItem({ reply, createdAt, username, avatar }) {
             </span>
           </div>
         ) : (
-          <img src={avatar} alt={`${username}'s avatar`} className="h-9 w-9" />
+          <img
+            src={avatar}
+            alt={`${username}'s avatar`}
+            className="h-9 w-9 rounded-full object-cover object-center"
+          />
         )}
         <div className="flex flex-col text-xs">
           <span>{username}</span>

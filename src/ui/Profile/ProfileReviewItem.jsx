@@ -6,6 +6,8 @@ import { useDeleteReview } from "../../hooks/reviews/useDeleteReview.js";
 import { useQueryClient } from "@tanstack/react-query";
 import { generalError, successNotify } from "../../helpers/toaster/toast.js";
 import { Link } from "react-router-dom";
+import ReplyItem from "../Comment/ReplyItem.jsx";
+import { useGetReplies } from "../../hooks/replies/useGetReplies.js";
 
 function ProfileReviewItem({
   date,
@@ -19,6 +21,7 @@ function ProfileReviewItem({
   updated,
 }) {
   const { reviewDelete, reviewDeleteLoading } = useDeleteReview();
+  const { replyData, replyLoading } = useGetReplies();
   const queryClient = useQueryClient();
 
   const handleDeleteReview = () => {
@@ -80,6 +83,19 @@ function ProfileReviewItem({
             Last update: {getTimeAgo(updated)}
           </span>
         ) : null}
+      </div>
+      <div className="mt-4">
+        {replyData
+          ?.filter((reply) => reply.reply_uid === id)
+          .map((item, i) => (
+            <ReplyItem
+              key={i}
+              username={item.username}
+              createdAt={item.created_at}
+              reply={item.reply}
+              avatar={item.avatar}
+            />
+          ))}
       </div>
     </div>
   );

@@ -9,7 +9,7 @@ const initialState = {
   registerPassword: "",
   invalid: false,
   showContent: false,
-  isReviewed: null,
+  isReviewed: false,
 };
 
 export const authSlice = createSlice({

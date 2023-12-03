@@ -5,14 +5,14 @@ import { getTimeAgo } from "../../helpers/dateConvertor.js";
 import { Spinner } from "../Loading/Spinner.jsx";
 import { usePostReply } from "../../hooks/replies/usePostReply.js";
 import { useGetUser } from "../../hooks/authentication/useGetUser.js";
-import SmallSpinner from "../Loading/SmallSpinner.jsx";
 import { useQueryClient } from "@tanstack/react-query";
 import { successNotify } from "../../helpers/toaster/toast.js";
 import { useGetReplies } from "../../hooks/replies/useGetReplies.js";
 import ReplyItem from "./ReplyItem.jsx";
 import { NavLink } from "react-router-dom";
+import SmallSpinner from "../Loading/SmallSpinner.jsx";
 
-function CommentReviewItem({ reviews, loading }) {
+function CommentReviewItem({ reviews, loading, checkReviewed }) {
   const { data: user } = useGetUser();
   const [replyInputs, setReplyInputs] = useState([]);
   const { postReplyLoading, postReplyMutate } = usePostReply();
@@ -20,6 +20,7 @@ function CommentReviewItem({ reviews, loading }) {
   const username = user?.user_metadata.username;
   const avatar = user?.user_metadata.avatar;
   const queryClient = useQueryClient();
+  const userId = user?.id;
 
   useEffect(() => {
     if (reviews && reviews?.length > 0) {
@@ -66,7 +67,12 @@ function CommentReviewItem({ reviews, loading }) {
     <>
       <div className="mt-2 w-full space-y-3">
         {reviews?.map((review, i) => (
-          <div key={i} className="rounded-xl bg-[rgba(0,0,0,.3)] py-4">
+          <div
+            key={i}
+            className={`rounded-xl bg-[rgba(0,0,0,.3)] py-4 ${
+              review.account_id === userId && "border-[1px] border-green-500"
+            }`}
+          >
             <div className="mb-2 flex items-center gap-3 px-5 text-xl font-semibold underline decoration-gray-9 underline-offset-2">
               <h3>
                 {review.rate.charAt(0).toUpperCase() + review.rate.slice(1)}

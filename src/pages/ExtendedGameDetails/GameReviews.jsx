@@ -5,13 +5,26 @@ import WriteReviewButton from "../../ui/Buttons/WriteReviewButton.jsx";
 import useDetailedGame from "../../hooks/generals/useDetailedGame.js";
 import CommentDropDown from "../../ui/Comment/CommentDropDown.jsx";
 import { useSelector } from "react-redux";
+import { useGetUser } from "../../hooks/authentication/useGetUser.js";
+import { userReviewedGame } from "../../helpers/checkIfReviewed.js";
 
 const GameReviews = () => {
   const { slug } = useParams();
   const { data } = useDetailedGame(slug);
+  const { data: user } = useGetUser();
+  const gameSlug = data?.slug;
+  const userId = user?.id;
   const navigate = useNavigate();
+
   const { reviews, reviewsLoading } = useGetReviews();
   const filterByDate = useSelector((state) => state.filtering.filterByDate);
+  const isChecked = useSelector((state) => state.auth.isReviewed);
+
+  let checkReviewed = isChecked;
+
+  if (!reviewsLoading) {
+    checkReviewed = userReviewedGame(reviews, userId, gameSlug);
+  }
 
   let filteredReviews = reviews;
   if (filteredReviews) {
@@ -40,7 +53,9 @@ const GameReviews = () => {
         <CommentDropDown />
       </div>
       <CommentReviewItem reviews={filteredReviews} loading={reviewsLoading} />
-      <WriteReviewButton handleNavigate={handleNavigate} />
+      {!checkReviewed ? (
+        <WriteReviewButton handleNavigate={handleNavigate} />
+      ) : null}
     </div>
   );
 };

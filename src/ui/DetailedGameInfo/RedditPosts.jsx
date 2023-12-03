@@ -51,7 +51,7 @@ export const RedditPosts = ({ data, redditData }) => {
               <img
                 src={post.image}
                 alt=""
-                className="ml-4 mr-2 min-h-[40px] min-w-[70px]"
+                className="ml-4 mr-2 min-h-[40px] min-w-[70px] object-cover object-center"
               />
             ) : null}
           </li>

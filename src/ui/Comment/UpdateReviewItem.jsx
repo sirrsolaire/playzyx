@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router";
 import useDetailedGame from "../../hooks/generals/useDetailedGame.js";
 import { Icon } from "@iconify/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { rateList } from "../../Data/reviewTags.js";
 import { useQueryClient } from "@tanstack/react-query";
 import {
@@ -12,8 +12,8 @@ import {
 import { useGetUser } from "../../hooks/authentication/useGetUser.js";
 import SmallSpinner from "../Loading/SmallSpinner.jsx";
 import { useUpdateReview } from "../../hooks/reviews/useUpdateReview.js";
-import { useGetReviews } from "../../hooks/reviews/useGetReviews.js";
 import { currentDate } from "../../helpers/dateConvertor.js";
+import { useGetReviews } from "../../hooks/reviews/useGetReviews.js";
 
 const UpdateReviewItem = () => {
   const [rate, setRate] = useState(null);
@@ -27,6 +27,18 @@ const UpdateReviewItem = () => {
   const { reviews, reviewsLoading } = useGetReviews();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const specificReview = reviews?.filter(
+    (review) => review.id === Number(reviewId),
+  );
+
+  let getSpecificReviewText;
+  if (!reviewsLoading) {
+    getSpecificReviewText = specificReview[0]?.review;
+  }
+
+  useEffect(() => {
+    setReviewText(getSpecificReviewText);
+  }, [getSpecificReviewText]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

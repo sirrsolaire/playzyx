@@ -73,7 +73,7 @@ export const OrderFilter = () => {
             e.preventDefault();
           }}
         >
-          <Space className="flex w-44 justify-between rounded-xl border-2 border-gray-5 px-3 py-2 hover:border-red-5 tablet:w-48">
+          <Space className="durationAll flex w-44 justify-between rounded-xl border-2 px-3 py-2 hover:border-red-400 tablet:w-48">
             <div className="flex items-center gap-1">
               <span className="hidden text-sm tablet:flex">Order:</span>
               <span className="font-semibold">{ordering()}</span>

@@ -13,7 +13,9 @@ export const TopNavigation = ({ data }) => {
           GAMES /
         </span>
       </NavLink>
-      <span className="cursor-pointer uppercase">{data?.name}</span>
+      <NavLink to={`/games/details/${data?.slug}`}>
+        <span className="cursor-pointer uppercase">{data?.name}</span>
+      </NavLink>
     </div>
   );
 };

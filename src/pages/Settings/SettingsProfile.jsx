@@ -14,8 +14,10 @@ const SettingsProfile = () => {
   const getFirstLetter = username.charAt(0).toUpperCase();
   const [updateFullName, setUpdateFullName] = useState(userFullName);
   const [updateBio, setUpdateBio] = useState(userBio);
-  const [avatar, setAvatar] = useState(null);
+  const [avatar, setAvatar] = useState(userAvatar);
   const queryClient = useQueryClient();
+
+  console.log(userAvatar, avatar);
 
   const updatePayload = {
     fullName: updateFullName,
@@ -25,23 +27,24 @@ const SettingsProfile = () => {
 
   const { updateMutate, updateLoading } = useUpdateUser(updatePayload);
 
-  const notifyMessage = "You have updated your profile!";
-  const errorMessage = "You cannot update to the same username and bio.";
-
   const handleUpdate = (e) => {
     e.preventDefault();
-    if (userFullName !== updateFullName || userBio !== updateBio) {
+    if (
+      userFullName !== updateFullName ||
+      userBio !== updateBio ||
+      userAvatar !== avatar
+    ) {
       updateMutate(
         { updatePayload },
         {
           onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["user"] });
-            successNotify(notifyMessage);
+            successNotify("You have updated your profile!");
           },
         },
       );
     } else {
-      errorNotify(errorMessage);
+      errorNotify("You haven't changed anything!");
     }
   };
 
@@ -55,12 +58,16 @@ const SettingsProfile = () => {
               <span className="text-xl font-bold">{getFirstLetter}</span>
             </div>
           ) : (
-            <img src={userAvatar} alt="" className="h-11 w-11" />
+            <img
+              src={userAvatar}
+              alt=""
+              className="h-12 w-12 flex-shrink-0 rounded-full object-cover object-center"
+            />
           )}
           <input
             id="avatar"
             type="file"
-            className="input-file"
+            className="cursor-pointer rounded-xl border-2 border-button-color p-2 file:rounded-lg file:border-none file:bg-button-color file:px-2 file:py-1 file:text-white"
             accept="image/*"
             onChange={(e) => setAvatar(e.target.files[0])}
           />

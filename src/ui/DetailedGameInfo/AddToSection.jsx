@@ -174,7 +174,7 @@ export const AddToSection = ({ data }) => {
         getStatus={getStatus}
       >
         <div
-          className={`group flex w-56 cursor-pointer items-center justify-between rounded-lg  px-3 py-1 shadow-md transition-all duration-200 hover:bg-green-600 ${
+          className={`group flex w-52 cursor-pointer items-center justify-between rounded-lg  px-3  py-1 shadow-md transition-all duration-200 hover:bg-green-600 smallTb:w-56 ${
             isInLibrary ? "bg-green-600" : "bg-white"
           }`}
         >

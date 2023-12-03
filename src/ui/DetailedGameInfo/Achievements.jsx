@@ -22,7 +22,7 @@ export const Achievements = ({ data, achievementData }) => {
             <img
               src={item.image}
               alt=""
-              className="h-[48px] w-[48px] rounded-md"
+              className="h-[48px] w-[48px] rounded-md object-cover object-center"
             />
             <div className="flex flex-col">
               <span className="text-xs">{item.percent}%</span>

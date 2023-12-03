@@ -11,7 +11,7 @@ import { userReviewedGame } from "../../helpers/checkIfReviewed.js";
 const GameReviews = () => {
   const { slug } = useParams();
   const { data } = useDetailedGame(slug);
-  const { data: user } = useGetUser();
+  const { data: user, isLoading } = useGetUser();
   const gameSlug = data?.slug;
   const userId = user?.id;
   const navigate = useNavigate();
@@ -44,7 +44,11 @@ const GameReviews = () => {
   }
 
   const handleNavigate = () => {
-    navigate(`/reviews/create-review/${data?.id}/${slug}`);
+    if (!isLoading && user) {
+      navigate(`/reviews/create-review/${data?.id}/${slug}`);
+    } else {
+      navigate("/login");
+    }
   };
 
   return (

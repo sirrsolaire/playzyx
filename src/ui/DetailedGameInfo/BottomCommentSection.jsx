@@ -11,7 +11,7 @@ export const BottomCommentSection = ({
   screenShotsData,
   checkReviewed,
 }) => {
-  const { reviews, reviewsLoading } = useGetReviews();
+  const { reviews } = useGetReviews();
   const { data: user, isLoading } = useGetUser();
   const filterByDate = useSelector((state) => state.filtering.filterByDate);
   const navigate = useNavigate();

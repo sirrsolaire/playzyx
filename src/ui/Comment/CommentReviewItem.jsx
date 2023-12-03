@@ -12,7 +12,7 @@ import ReplyItem from "./ReplyItem.jsx";
 import { NavLink } from "react-router-dom";
 import SmallSpinner from "../Loading/SmallSpinner.jsx";
 
-function CommentReviewItem({ reviews, loading, checkReviewed }) {
+function CommentReviewItem({ reviews, loading }) {
   const { data: user } = useGetUser();
   const [replyInputs, setReplyInputs] = useState([]);
   const { postReplyLoading, postReplyMutate } = usePostReply();

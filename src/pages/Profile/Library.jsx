@@ -6,6 +6,10 @@ import CollapseLibrary from "../../ui/Profile/CollapseLibrary.jsx";
 import ProfileGameItem from "../../ui/Profile/ProfileGameItem.jsx";
 import { Spinner } from "../../ui/Loading/Spinner.jsx";
 import { useState } from "react";
+import { generalError, successNotify } from "../../helpers/toaster/toast.js";
+import { useGetUser } from "../../hooks/authentication/useGetUser.js";
+import { useQueryClient } from "@tanstack/react-query";
+import { useDeleteGame } from "../../hooks/library/useDeleteGame.js";
 
 const list = [
   {
@@ -38,6 +42,9 @@ const list = [
 const Library = () => {
   const { games, gamesLoading } = useGetAllGames();
   const [query, setQuery] = useState("");
+  const { data: user } = useGetUser();
+  const queryClient = useQueryClient();
+  const { deleteMutate, deleteLoading } = useDeleteGame();
 
   let filteredGames = games;
 
@@ -58,6 +65,24 @@ const Library = () => {
 
     categoryCounts[item.status] = categoryCount;
   });
+
+  const handleDeleteLibrary = (name) => {
+    deleteMutate(
+      {
+        name,
+        userId: user?.id,
+      },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries(["games"]);
+          successNotify(`You have removed ${name} from your library`);
+        },
+        onError: (err) => {
+          generalError(err.message);
+        },
+      },
+    );
+  };
 
   return (
     <div className="px-1">
@@ -104,6 +129,10 @@ const Library = () => {
                       meta={filteredGame.meta}
                       name={filteredGame.name}
                       added={filteredGame.added}
+                      handleDeleteGame={() =>
+                        handleDeleteLibrary(filteredGame.name)
+                      }
+                      libraryLoading={deleteLoading}
                     />
                   ))}
               </CollapseLibrary>

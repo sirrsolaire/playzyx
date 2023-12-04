@@ -6,12 +6,17 @@ import { Spinner } from "../../ui/Loading/Spinner.jsx";
 import { useGetUser } from "../../hooks/authentication/useGetUser.js";
 import { useDispatch } from "react-redux";
 import { setWishList } from "../../reducers/profileSlice.js";
+import { generalError, successNotify } from "../../helpers/toaster/toast.js";
+import { useQueryClient } from "@tanstack/react-query";
+import { useDeleteWishlist } from "../../hooks/wishlist/useDeleteWishlist.js";
 
 const Wishlist = () => {
   const { data: user } = useGetUser();
   const { wishlistedGames, wishlistedGamesLoading } = useGetWishlist();
   const [queryWishList, setQueryWishList] = useState("");
   const dispatch = useDispatch();
+  const queryClient = useQueryClient();
+  const { deleteWishMutate, deleteWishLoading } = useDeleteWishlist();
 
   let filteredWishList = wishlistedGames;
   if (filteredWishList) {
@@ -29,6 +34,24 @@ const Wishlist = () => {
   useEffect(() => {
     dispatch(setWishList(filteredWishList));
   }, [dispatch, filteredWishList]);
+
+  const handleDelete = (name) => {
+    deleteWishMutate(
+      {
+        name,
+        userId: user?.id,
+      },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries(["wishlist"]);
+          successNotify(`You have removed ${name} from your wishlist`);
+        },
+        onError: (err) => {
+          generalError(err.message);
+        },
+      },
+    );
+  };
 
   return (
     <div className="px-1">
@@ -52,6 +75,8 @@ const Wishlist = () => {
               meta={game.meta}
               name={game.name}
               added={game.added}
+              handleDeleteGame={() => handleDelete(game.name)}
+              wishLoading={deleteWishLoading}
             />
           ))}
         </div>

@@ -42,9 +42,9 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center px-6 lg:px-8">
+    <div className="mx-auto flex max-w-lg flex-col justify-center px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <h2 className=" mb-10 text-center text-3xl font-semibold text-white">
+        <h2 className=" mb-4 text-center text-3xl font-semibold text-white">
           Log in
         </h2>
         <form className="space-y-6" method="POST" onSubmit={handleLoginSubmit}>
@@ -77,14 +77,14 @@ const LoginForm = () => {
               >
                 Password
               </label>
-              {/*<div className="text-sm">*/}
-              {/*  <a*/}
-              {/*    href="#"*/}
-              {/*    className="font-semibold text-[#919090] transition-all duration-200 hover:text-indigo-400 hover:underline"*/}
-              {/*  >*/}
-              {/*    Forgot password?*/}
-              {/*  </a>*/}
-              {/*</div>*/}
+              <div className="text-sm">
+                <Link
+                  to="/password_recovery"
+                  className="font-semibold text-[#919090] transition-all duration-200 hover:text-indigo-400 hover:underline"
+                >
+                  Forgot password?
+                </Link>
+              </div>
             </div>
             <div className="mt-2">
               <input

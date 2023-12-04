@@ -47,6 +47,7 @@ import MoreAchievements from "./pages/ExtendedGameDetails/MoreAchievements.jsx";
 import UpdateReview from "./pages/UpdateReview.jsx";
 import FallBackPage from "./pages/FallBackPage.jsx";
 import ScrollToTop from "./pages/ScrollToTop.jsx";
+import PasswordRecovery from "./pages/Auth/PasswordRecovery.jsx";
 
 const router = createBrowserRouter([
   {
@@ -247,6 +248,7 @@ const router = createBrowserRouter([
           },
         ],
       },
+      { path: "/password_recovery", element: <PasswordRecovery /> },
       {
         path: "*",
         element: <FallBackPage />,

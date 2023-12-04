@@ -88,3 +88,11 @@ export async function updateEmail({ newEmail }) {
 
   if (error) throw new Error(error.message);
 }
+
+export async function recoverPassword({ email }) {
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: "http://example.com/account/update-password",
+  });
+
+  if (error) throw new Error(error.message);
+}

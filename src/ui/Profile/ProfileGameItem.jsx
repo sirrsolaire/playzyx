@@ -8,6 +8,8 @@ import { useGetAllGames } from "../../hooks/library/useGetAllGames.js";
 import SmallSpinner from "../Loading/SmallSpinner.jsx";
 import { useGetUser } from "../../hooks/authentication/useGetUser.js";
 import RemoveItem from "../General/RemoveItem.jsx";
+import { useLocation } from "react-router";
+import { NavLink } from "react-router-dom";
 
 const ProfileGameItem = ({
   image,
@@ -18,12 +20,15 @@ const ProfileGameItem = ({
   handleDeleteGame,
   wishLoading,
   libraryLoading,
+  slug,
 }) => {
   const { games } = useGetAllGames();
   const { updateMutate, updateLoading } = useUpdateGames();
   const queryClient = useQueryClient();
   const { data: user } = useGetUser();
   const getStatus = games?.find((game) => game.id === id)?.status;
+  const { pathname } = useLocation();
+  const isIncludeWishList = pathname.includes("wishlist");
 
   const handleUpdateGame = (currentStatus) => {
     if (currentStatus !== getStatus) {
@@ -62,24 +67,28 @@ const ProfileGameItem = ({
           ) : (
             <div />
           )}
-          <h2 className="truncate text-xl font-semibold text-white opacity-70">
-            {name}
-          </h2>
+          <NavLink to={`/games/details/${slug}`}>
+            <h2 className="truncate text-xl font-semibold text-white opacity-70">
+              {name}
+            </h2>
+          </NavLink>
         </div>
         <div className="mt-2 flex items-center gap-1">
-          <GameDetailsDropDown handleSetStatus={handleUpdateGame}>
-            <span className="group flex h-6 cursor-pointer items-center gap-1 rounded-[0.3rem] bg-second-color px-2 font-semibold text-white transition-all duration-200 hover:bg-white hover:text-black">
-              {updateLoading ? (
-                <SmallSpinner color="white" />
-              ) : (
-                <FontAwesomeIcon
-                  icon={faPlus}
-                  className="text-xs transition-all duration-200 group-hover:text-black"
-                />
-              )}
-              <span>{added}</span>
-            </span>
-          </GameDetailsDropDown>
+          {!isIncludeWishList && (
+            <GameDetailsDropDown handleSetStatus={handleUpdateGame}>
+              <span className="group flex h-6 cursor-pointer items-center gap-1 rounded-[0.3rem] bg-second-color px-2 font-semibold text-white transition-all duration-200 hover:bg-white hover:text-black">
+                {updateLoading ? (
+                  <SmallSpinner color="white" />
+                ) : (
+                  <FontAwesomeIcon
+                    icon={faPlus}
+                    className="text-xs transition-all duration-200 group-hover:text-black"
+                  />
+                )}
+                <span>{added}</span>
+              </span>
+            </GameDetailsDropDown>
+          )}
           <RemoveItem
             remove={handleDeleteGame}
             loading={wishLoading}
